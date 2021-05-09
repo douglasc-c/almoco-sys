@@ -1,0 +1,6 @@
+
+.navbar-horizontal .navbar-brand img {height:90px;}
+
+.navbar-vertical .navbar-brand-img, .navbar-vertical .navbar-brand > img {max-height:55px;}
+
+.sidenav-header {height:90px;text-align:left;}
