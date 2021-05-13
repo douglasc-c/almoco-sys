@@ -7,16 +7,16 @@
   @show
 </title>
 
-	<link rel="icon" href="/assets/theme2/images/favicon-32x32.png" type="image/png" />
+	<link rel="icon" href="assets/admin-theme/images/favicon-32x32.png" type="image/png" />
 	<!-- loader-->
-	<link href="/assets/theme2/css/pace.min.css" rel="stylesheet" />
-	<script src="/assets/theme2/js/pace.min.js"></script>
+	<link href="assets/admin-theme/css/pace.min.css" rel="stylesheet" />
+	<script src="assets/admin-theme/js/pace.min.js"></script>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="/assets/theme2/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="assets/admin-theme/css/bootstrap.min.css" />
 	<!-- Icons CSS -->
-	<link rel="stylesheet" href="/assets/theme2/css/icons.css" />
+	<link rel="stylesheet" href="assets/admin-theme/css/icons.css" />
 	<!-- App CSS -->
-	<link rel="stylesheet" href="/assets/theme2/css/app.css" />
+	<link rel="stylesheet" href="assets/admin-theme/css/app.css" />
 
 <style type="text/css">
 	.btn-language-auth{
@@ -32,8 +32,8 @@
 @yield('styles')
 
 @section('scripts_default')
-{{-- <script src="/assets/theme/ethplus/vendor/global/global.min.js"></script>
-<script src="/assets/theme/ethplus/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script src="/assets/theme/ethplus/js/custom.min.js"></script>
-<script src="/assets/theme/ethplus/js/deznav-init.js"></script> --}}
+{{-- <script src="assets/admin-theme/vendor/global/global.min.js"></script>
+<script src="assets/admin-theme/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+<script src="assets/admin-theme/js/custom.min.js"></script>
+<script src="assets/admin-theme/js/deznav-init.js"></script> --}}
 @stop
