@@ -310,13 +310,47 @@
                                                         <i class="fa fa-trash-o main-icon-size"></i>
                                                     </a>
                                                 </div>
-                                                {{-- <a href="">Cadastrar</a> --}}
                                             </div>
                                         </li>
                                     @endforeach
                                 </ul>
                             </div>
+                            <button type="button" class="btn btn-light m-1 px-5 card-border-theme2 btn-theme2" data-toggle="modal" data-target="#newFood{{$category['name']}}">Novo Alimento</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <!--   -->
+            <div class="modal fade" id="newFood{{$category['name']}}" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content radius-30">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">	<span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body p-5">
+                        <form method="POST" id="createProduct{{$category['name']}}" action="{{URL::action('Restaurant\FoodController@createFood')}}">
+                            {{ csrf_field() }}
+                        <h3 class="text-center">Cadastrar Novo Alimento</h3>
+                        <div class="form-group">
+                            <label>Nome do alimento</label>
+                            <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <input type="text" name="description" class="form-control form-control-lg radius-30" placeholder=""/>
+                        </div>
+                        <div class="form-group">
+                            <label>Categoria</label>
+                            <input type="text" name="category" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-light radius-30 btn-lg btn-block" onclick="newProduct('{{$category['name']}}')">Cadastrar</button>
+                        </div>
+            
+                        <hr/>
+                        </form>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -464,14 +498,28 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="_token" value=" {{ csrf_token() }} ">
 @endsection
 @section('scripts')
 <script>
-    function copyWallet() {
-      var copyText = document.getElementById("address_wallet");
-      copyText.select();
-      copyText.setSelectionRange(0, 99999)
-      document.execCommand("copy");
+    function newProduct(category){
+        var cat = category;
+        var name = $('#name_'+category).val();
+        var _token = $('#_token').val();
+
+        $.ajax({
+		    type: "POST",
+		    url: "{{URL::action('Restaurant\FoodController@createFood')}}",
+		    data: {
+                _token: _token,
+                name: name,
+                category: cat,
+            },
+		    success: function (result) {
+                location.reload();
+		    }
+		});
     }
-    </script>
+
+</script>
 @stop

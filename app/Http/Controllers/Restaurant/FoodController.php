@@ -47,6 +47,7 @@ class FoodController extends Controller
     }
 
     public function createFood(Request $request){
+        // dd('over here');
 
         $rules = array(
             'name' => ['required', 'string'],
@@ -54,7 +55,8 @@ class FoodController extends Controller
         );
 
         if ($request->validate($rules)){
-            $result = Food::createFood($request->name, $request->description, $request->category);
+            $cat = FoodCategory::where('name', $request->category)->first();
+            $result = Food::createFood($request->name, $request->description, $cat->id);
 
             if($result['status'] == true){
                 return redirect()->back()->with('success', 'Alimento criado com sucesso!');
