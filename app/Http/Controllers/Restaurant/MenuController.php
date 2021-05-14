@@ -64,13 +64,15 @@ class MenuController extends Controller
     public function createMenu(Request $request){
         // dd($request);
         $rules = array(
-            'month' => ['required'],
-            'day' => ['required'],
+            'day_value' => ['required'],
+            'month_value' => ['required'],
         );
         $date = new Carbon();   
         $year = $date->format('Y');
-        // dd($year);
-        $menu_day = $year.'-'.$request->month.'-'.$request->day;
+
+        $month_value = str_pad($request->month_value, 2, 0, STR_PAD_LEFT);
+
+        $menu_day = $year.'-'.$month_value.'-'.$request->day_value;
         // dd($menu_day);
         if ($request->validate($rules)){
 
@@ -80,7 +82,7 @@ class MenuController extends Controller
             }
 
             if(sizeof($foods_ids) == 0)   return redirect()->back()->with('danger', 'Não foi possível criar o menu');
-
+            // dd($menu_day);
             $menu_find = Menu::where('menu_day', 'LIKE', '%'.$menu_day.'%')->first();
 
             if(!$menu_find){

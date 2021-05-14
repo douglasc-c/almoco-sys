@@ -10,10 +10,10 @@
 <form method="POST" action="{{URL::action('Restaurant\MenuController@createMenu')}}">
     {{ csrf_field() }}
 <div class="row">
-    
+        
         <div class="col-xl-3">
             <div class="row">
-            
+                
                 <div class="col-xl-12">
                     <div class="accordion custom-card main-card-bg main-card-padding" id="accordion_select-month">
                         <div id="headingOne">
@@ -50,7 +50,7 @@
                 <div class="col-xl-12 custom-card-header-bloc">
                     <h6>Selecione o dia que deseja editar</h6>
                 </div>
-                <div class="col-xl-12" style="margin-top: 3%;">
+                {{-- <div class="col-xl-12" style="margin-top: 3%;">
                     <table class="main-calendar">
                         <tr>
                             <th>Seg</th>
@@ -257,7 +257,64 @@
                                 </div>
                             </td>
                     </table>
-                </div>
+                </div> --}}
+                @php 
+                $today = today();
+
+                echo '<h1 class="w3-text-teal"><center><span id="text_month">' . $today->format('F Y') . '</span></center></h1>';
+
+                $tempDate = Carbon\Carbon::createFromDate($today->year, $today->month, 1);
+
+
+
+                echo '<table border="1" class = "w3-table w3-boarder w3-striped">
+                    <thead><tr class="w3-theme">
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                    </tr></thead>';
+
+                $skip = $tempDate->dayOfWeek;
+
+
+                for($i = 0; $i < $skip; $i++)
+                {
+                    $tempDate->subDay();
+                }
+
+
+                //loops through month
+                do
+                {
+                    echo '<tr>';
+                    //loops through each week
+                    for($i=0; $i < 7; $i++)
+                    {
+                        // echo '<td><button type="button" class="date" onclick="teste(';
+                        // echo $tempDate->day, $tempDate->month;   
+                        // echo ')">';
+                        echo '<td><button type="button" class="date" onclick="teste(';
+                        echo $tempDate->day;
+                        echo ','; 
+                        echo $tempDate->month;   
+                        echo ')">';
+
+                        echo $tempDate->day;
+
+                        echo '</button></td>';
+
+                        $tempDate->addDay();
+                    }
+                    echo '</tr>';
+
+                }while($tempDate->month == $today->month);
+
+                echo '</table>';
+            @endphp
             </div>
         </div>
         <div class="col-xl-3">
@@ -355,6 +412,8 @@
                 </div>
             </div>
             @endforeach
+            <input type="hidden" id="month_value" name="month_value">
+            <input type="hidden" id="day_value" name="day_value">
             <div class="row">
                     <button type="submit">Enviar</button>
             </div>
@@ -520,6 +579,20 @@
 		    }
 		});
     }
+
+</script>
+<script>
+function teste(day, month){
+    $('#day_value').val(day);
+    $('#month_value').val(month);
+    // alert(month);
+    if(month == 6){
+        // alert('foi');
+        $('#text_month').text('Junho 2021');
+    }else if(month == 5){
+        $('#text_month').text('Maio 2021');
+    }
+}
 
 </script>
 @stop
