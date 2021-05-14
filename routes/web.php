@@ -46,17 +46,6 @@ Route::group(['middleware' => ['auth', 'needsRole:admin'], 'prefix' => 'admin'],
 	# Home
 	Route::get('/', 'Admin\HomeController@index')->name('admin');
 
-	# Users
-	Route::get('users/to-invest/{Id}', 'Admin\UsersController@toInvest');
-	Route::get('users/active/{Id}', 'Admin\UsersController@activeUser');
-	Route::get('users/position/{Id}', 'Admin\UsersController@positionUser');
-	Route::post('users/update-unilevel/{Id}', 'Admin\UsersController@updateUnilevel');
-	Route::post('users/update-security/{Id}', 'Admin\UsersController@updateSecurity');
-	Route::post('users/update-profile/{Id}', 'Admin\UsersController@updateProfile');
-	Route::get('users/access/{Id}', 'Admin\UsersController@accessAsUser');
-	Route::get('users/data', 'Admin\UsersController@dataUsers');
-	Route::get('users/two-fa-diseble/{Id}', 'Admin\UsersController@disableTwofa');
-	Route::resource('users', 'Admin\UsersController');
 
 });
 
