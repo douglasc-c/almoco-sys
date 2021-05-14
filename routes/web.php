@@ -11,6 +11,9 @@
 |
 */
 
+Route::get('/', function () {
+    return redirect()->to('login');
+});
 
 Route::get('changeLang/{locale}', function ($locale) {
 	if(in_array($locale, ['en', 'pt', 'es', 'kr', 'ch'])) {
@@ -25,9 +28,10 @@ Auth::routes();
 
 Route::get('profile/confirm-email/{token}', 'Dashboard\ProfileController@mailValidation');
 
+
 Route::group(['middleware' => ['auth', 'needsRole:user'], 'prefix' => '/'], function () {
 	# Home
-	Route::get('/', 'Dashboard\HomeController@index')->name('dashboardHome');
+	Route::get('/user', 'Dashboard\HomeController@index');
 
 	# Profile
 	Route::get('profile/backAdmin/', 'Dashboard\ProfileController@backToAdmin');
@@ -58,6 +62,7 @@ Route::group(['middleware' => ['auth', 'needsRole:admin'], 'prefix' => 'admin'],
 
 Route::group(['middleware' => ['auth', 'needsRole:superadmin'], 'prefix' => 'superadmin'], function () {
 	# Home
+
 
 	Route::get('/', 'SuperAdmin\HomeController@index')->name('superadmin');
 	Route::get('/usuarios', 'SuperAdmin\UsersController@index')->name('users');

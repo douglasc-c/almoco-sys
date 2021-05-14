@@ -32,7 +32,7 @@ class MenuController extends Controller
         $garnishs = Food::join('food_categories', 'food_categories.id', '=', 'foods.food_category_id')->where('food_categories.name', 'Acompanhamentos')->select('foods.*', 'food_categories.name as category_name')->get();
         $meets = Food::join('food_categories', 'food_categories.id', '=', 'foods.food_category_id')->where('food_categories.name', 'Carnes')->select('foods.*', 'food_categories.name as category_name')->get();
         $vegetables = Food::join('food_categories', 'food_categories.id', '=', 'foods.food_category_id')->where('food_categories.name', 'Verduras')->select('foods.*', 'food_categories.name as category_name')->get();
-
+        
         // return view('restaurant.menus.index', compact('title', 'garnishs', 'meets', 'vegetables'));
         return view('restaurant.menus.index', compact('title', 'category'));
     }
@@ -64,9 +64,14 @@ class MenuController extends Controller
     public function createMenu(Request $request){
         // dd($request);
         $rules = array(
-            'date_menu' => ['required'],
+            'month' => ['required'],
+            'day' => ['required'],
         );
-
+        $date = new Carbon();   
+        $year = $date->format('Y');
+        // dd($year);
+        $menu_day = $year.'-'.$request->month.'-'.$request->day;
+        // dd($menu_day);
         if ($request->validate($rules)){
 
             $foods_ids = [];
@@ -76,13 +81,17 @@ class MenuController extends Controller
 
             if(sizeof($foods_ids) == 0)   return redirect()->back()->with('danger', 'Não foi possível criar o menu');
 
-            $menu = Menu::create([
-                'menu_day' => $request->date_menu,
-                'foods_id' => json_encode($foods_ids)
-            ]);
+            $menu_find = Menu::where('menu_day', 'LIKE', '%'.$menu_day.'%')->first();
 
-            if($menu){
+            if(!$menu_find){
+                $menu = Menu::create([
+                    'menu_day' => $menu_day,
+                    'foods_id' => json_encode($foods_ids)
+                ]);
+
                 return redirect()->back()->with('success', 'Menu criado com sucesso!');
+            }else {
+                return redirect()->back()->with('danger', 'Cardapio já cadastrado para essa data!');
             }
 
         }

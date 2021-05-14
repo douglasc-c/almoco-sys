@@ -86,9 +86,16 @@ class HomeController extends Controller
             }
         }
 
+        $categories_all = FoodCategory::get();
 
-        return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day'));
+        // $category = [];
+        foreach($categories_all as $cat){
+            $categoriesAll[$cat->name]['name'] = $cat->name;
+            $categoriesAll[$cat->name]['itens'] = Food::join('food_categories', 'food_categories.id', '=', 'foods.food_category_id')->where('food_categories.name', $cat->name)->select('foods.*', 'food_categories.name as category_name')->get();
+        }
+        // dd($categoriesAll);
 
+        return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll'));
 
     }
 
