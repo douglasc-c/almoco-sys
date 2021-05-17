@@ -434,6 +434,22 @@
                 <div class="custom-card main-card-bg main-card-padding confirmed-card">
                     <div class="row">
                         <div class="col-xl-12">
+                            <p>{{Carbon\Carbon::today()->addDays(2)->format('d/m/Y')}}</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <div>
+                                <h6><i class="fa fa-circle active"></i> {{$orders['day+2']}} Confirmados</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="custom-card main-card-bg main-card-padding confirmed-card">
+                    <div class="row">
+                        <div class="col-xl-12">
                             <p>{{Carbon\Carbon::today()->addDays(1)->format('d/m/Y')}}</p>
                         </div>
                         <div class="col-xl-12">
@@ -477,12 +493,53 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="custom-card main-card-bg main-card-padding confirmed-card">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <p>{{Carbon\Carbon::today()->subDays(2)->format('d/m/Y')}}</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <div>
+                                <h6><i class="fa fa-circle inative"></i> {{$orders['day-2']}} Confirmados</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="col-xl-3">
         <div class="row">
             <div class="col-xl-12 custom-title-card-bloc">
                 <div class="custom-title-card grey-card-bg-2 custom-card-padding-2">
                     <h6>Menus confirmados</h6>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0402">
+                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-next-two_day" aria-expanded="true" aria-controls="collapse_menu-next-two_day">
+                        <div class="custom-card-min-header" id="headingOne">
+                            <h6>
+                                <i class="fa fa-circle active"></i> {{Carbon\Carbon::today()->addDays(2)->format('d/m/Y')}}
+                                <span class="custom-collapse-arrow"></span>
+                            </h6>
+                        </div>
+                    </a>
+                    <div id="collapse_menu-next-two_day" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                        <div class="card-body">
+                            <ul class="">
+                                @foreach($all_category_next_two_day as $category)
+                                <li>
+                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -526,6 +583,56 @@
                         <div class="card-body">
                             <ul class="">
                                 @foreach($all_category as $category)
+                                <li>
+                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0402">
+                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday">
+                        <div class="custom-card-min-header" id="headingOne">
+                            <h6>
+                                <i class="fa fa-circle active"></i> {{Carbon\Carbon::today()->subDays(1)->format('d/m/Y')}}
+                                <span class="custom-collapse-arrow"></span>
+                            </h6>
+                        </div>
+                    </a>
+                    <div id="collapse_menu-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                        <div class="card-body">
+                            <ul class="">
+                                @foreach($all_category_yesterday as $category)
+                                <li>
+                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0402">
+                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-before-yesterday" aria-expanded="true" aria-controls="collapse_menu-before-yesterday">
+                        <div class="custom-card-min-header" id="headingOne">
+                            <h6>
+                                <i class="fa fa-circle active"></i> {{Carbon\Carbon::today()->subDays(2)->format('d/m/Y')}}
+                                <span class="custom-collapse-arrow"></span>
+                            </h6>
+                        </div>
+                    </a>
+                    <div id="collapse_menu-before-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                        <div class="card-body">
+                            <ul class="">
+                                @foreach($all_category_before_yesterday as $category)
                                 <li>
                                     <p>{{$category['amount']}} - {{$category['name']}}</p>
                                 </li>

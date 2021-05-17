@@ -13,6 +13,7 @@ use Cache;
 use Validator;
 use App\FoodCategory;
 use App\Food;
+use App\Menu;
 
 class HomeController extends Controller
 {
@@ -50,6 +51,14 @@ class HomeController extends Controller
 
         $categories = FoodCategory::get();
         foreach($categories as $category){
+            $all_category_before_yesterday[$category->id]['name'] = $category->name;
+            $all_category_before_yesterday[$category->id]['amount']= 0;
+        }
+        foreach($categories as $category){
+            $all_category_yesterday[$category->id]['name'] = $category->name;
+            $all_category_yesterday[$category->id]['amount']= 0;
+        }
+        foreach($categories as $category){
             $all_category[$category->id]['name'] = $category->name;
             $all_category[$category->id]['amount']= 0;
         }
@@ -57,34 +66,72 @@ class HomeController extends Controller
             $all_category_next_day[$category->id]['name'] = $category->name;
             $all_category_next_day[$category->id]['amount']= 0;
         }
-
+        foreach($categories as $category){
+            $all_category_next_two_day[$category->id]['name'] = $category->name;
+            $all_category_next_two_day[$category->id]['amount']= 0;
+        }
         #Today
-        $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today())->get();
+        $foods_order_today = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today())->get();
 
-        $teste = [];
-        foreach($foods_order as $order){
+        // $teste = [];
+        foreach($foods_order_today as $order){
             $itens = json_decode($order->itens_selected);
             foreach($itens as $item){
                 $food = Food::find($item);
-                // array_push($teste, $food->name);
                 $all_category[$food->food_category_id]['amount']++;
 
             }
         }
 
-        #next day
-        $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(1))->get();
+        #day+1
+        $foods_order_tomorrow = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(1))->get();
 
-        $teste = [];
-        foreach($foods_order as $order){
+        foreach($foods_order_tomorrow as $order){
             $itens = json_decode($order->itens_selected);
             foreach($itens as $item){
                 $food = Food::find($item);
-                // array_push($teste, $food->name);
                 $all_category_next_day[$food->food_category_id]['amount']++;
 
             }
         }
+
+        #day+2
+        $foods_order_after_tomorrow = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(2))->get();
+        
+        foreach($foods_order_after_tomorrow as $order){
+            $itens = json_decode($order->itens_selected);
+            foreach($itens as $item){
+                $food = Food::find($item);
+                $all_category_next_two_day[$food->food_category_id]['amount']++;
+
+            }
+        }
+
+        #yesterday
+        $foods_order_yesterday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->subDays(1))->get();
+
+        foreach($foods_order_yesterday as $order){
+            $itens = json_decode($order->itens_selected);
+            foreach($itens as $item){
+                $food = Food::find($item);
+                $all_category_yesterday[$food->food_category_id]['amount']++;
+
+            }
+        }
+
+        #before yesterday
+        $foods_order_before_yesterday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->subDays(2))->get();
+
+        foreach($foods_order_before_yesterday as $order){
+            $itens = json_decode($order->itens_selected);
+            foreach($itens as $item){
+                $food = Food::find($item);
+                $all_category_before_yesterday[$food->food_category_id]['amount']++;
+
+            }
+        }
+
+
 
         $categories_all = FoodCategory::get();
 
@@ -93,9 +140,8 @@ class HomeController extends Controller
             $categoriesAll[$cat->name]['name'] = $cat->name;
             $categoriesAll[$cat->name]['itens'] = Food::join('food_categories', 'food_categories.id', '=', 'foods.food_category_id')->where('food_categories.name', $cat->name)->select('foods.*', 'food_categories.name as category_name')->get();
         }
-        // dd($categoriesAll);
 
-        return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll'));
+        return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday'));
 
     }
 
