@@ -83,5 +83,6 @@ Route::group(['middleware' => ['auth', 'needsRole:restaurantuser'], 'prefix' => 
         Route::post('/menu/new/', 'Restaurant\MenuController@createMenu');
         Route::get('/menus/data/', 'Restaurant\MenuController@dataMenu');
         Route::get('/menus/show/{Day}', 'Restaurant\MenuController@show');
+        Route::get('/menus/get-data/detail', 'Restaurant\MenuController@dataDetailMenu');
 
 });

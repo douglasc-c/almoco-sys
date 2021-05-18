@@ -26,21 +26,6 @@
                         </div>
                         <div id="select-month" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_select-month">
                             <div class="card-body">
-                                <select class="datefield month" name="month">
-                                    <option value="">Month</option>
-                                    <option value="01">Jan</option>
-                                    <option value="02">Feb</option>
-                                    <option value="03">Mar</option>
-                                    <option value="04">Apr</option>
-                                    <option value="05">May</option>
-                                    <option value="06">Jun</option>
-                                    <option value="07">Jul</option>
-                                    <option value="08">Aug</option>
-                                    <option value="09">Sep</option>
-                                    <option value="10">Oct</option>
-                                    <option value="11">Nov</option>
-                                    <option value="12">Dec</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -50,214 +35,6 @@
                 <div class="col-xl-12 custom-card-header-bloc">
                     <h6>Selecione o dia que deseja editar</h6>
                 </div>
-                {{-- <div class="col-xl-12" style="margin-top: 3%;">
-                    <table class="main-calendar">
-                        <tr>
-                            <th>Seg</th>
-                            <th>Ter</th>
-                            <th>Qua</th>
-                            <th>Qui</th>
-                            <th>Sex</th>
-                            <th>Sab</th>
-                            <th>Dom</th>
-                        </tr>
-                        <tr class="top-tr">
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day1" name="day" value="1">
-                                    <label for="day1">1</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day2" name="day" value="2">
-                                    <label for="day1">2</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day3" name="day" value="3">
-                                    <label for="day1">3</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day4" name="day" value="4">
-                                    <label for="day1">4</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day5" name="day" value="5">
-                                    <label for="day1">5</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day6" name="day" value="6">
-                                    <label for="day1">6</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day7" name="day" value="7">
-                                    <label for="day1">7</label><br>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day8" name="day" value="8">
-                                    <label for="day1">8</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day9" name="day" value="9">
-                                    <label for="day1">9</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day10" name="day" value="10">
-                                    <label for="day1">10</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day11" name="day" value="11">
-                                    <label for="day1">11</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day12" name="day" value="12">
-                                    <label for="day1">12</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day13" name="day" value="13">
-                                    <label for="day1">13</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day14" name="day" value="14">
-                                    <label for="day1">14</label><br>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day15" name="day" value="15">
-                                    <label for="day1">15</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day16" name="day" value="16">
-                                    <label for="day1">16</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day17" name="day" value="17">
-                                    <label for="day1">17</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day18" name="day" value="18">
-                                    <label for="day1">18</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day19" name="day" value="19">
-                                    <label for="day1">19</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day20" name="day" value="20">
-                                    <label for="day1">20</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day21" name="day" value="21">
-                                    <label for="day1">21</label><br>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day22" name="day" value="22">
-                                    <label for="day1">22</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day23" name="day" value="23">
-                                    <label for="day1">23</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day24" name="day" value="24">
-                                    <label for="day1">24</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day25" name="day" value="25">
-                                    <label for="day1">25</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day26" name="day" value="26">
-                                    <label for="day1">26</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day27" name="day" value="27">
-                                    <label for="day1">27</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day28" name="day" value="28">
-                                    <label for="day1">28</label><br>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day29" name="day" value="29">
-                                    <label for="day1">29</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day30" name="day" value="30">
-                                    <label for="day1">30</label><br>
-                                </div>
-                            </td>
-                            <td>
-                                <div class="calendar-bubble-day">
-                                    <input type="radio" id="day31" name="day" value="31">
-                                    <label for="day1">31</label><br>
-                                </div>
-                            </td>
-                    </table>
-                </div> --}}
                 @php 
                 $today = today();
 
@@ -530,15 +307,19 @@
                         </div>
                     </a>
                     <div id="collapse_menu-next-two_day" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                        
                         <div class="card-body">
-                            <ul class="">
-                                @foreach($all_category_next_two_day as $category)
-                                <li>
-                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                </li>
-                                @endforeach
-                            </ul>
+                            <a href="" class="" data-toggle="modal" data-target="#modal_next_two_day">
+                                <ul class="">
+                                    @foreach($all_category_next_two_day as $category)
+                                    <li>
+                                        <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_next_two_day">Detalhes</a>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -556,13 +337,14 @@
                     </a>
                     <div id="collapse_menu-dia-0402" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
                         <div class="card-body">
-                            <ul class="">
-                                @foreach($all_category_next_day as $category)
-                                <li>
-                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                </li>
-                                @endforeach
-                            </ul>
+                                <ul class="">
+                                    @foreach($all_category_next_day as $category)
+                                    <li>
+                                        <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_next_day">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -581,13 +363,14 @@
                     </a>
                     <div id="collapse_menu-dia-0502" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0502">
                         <div class="card-body">
-                            <ul class="">
-                                @foreach($all_category as $category)
-                                <li>
-                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                </li>
-                                @endforeach
-                            </ul>
+                                <ul class="">
+                                    @foreach($all_category as $category)
+                                    <li>
+                                        <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_today">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -613,6 +396,7 @@
                                 </li>
                                 @endforeach
                             </ul>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_yesterday">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -638,6 +422,7 @@
                                 </li>
                                 @endforeach
                             </ul>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_before_yesterday">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -664,6 +449,107 @@
             </div>
         </div>
     </div>
+
+    <!-- modal category before tomorrow -->
+    <div class="modal fade" id="modal_next_two_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="custom-modal-header">
+                    <h5></h5>
+                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div id="result_body_after_tomorrow"></div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal category resume -->
+    <!-- modal category tomorrow -->
+    <div class="modal fade" id="modal_next_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="custom-modal-header">
+                    <h5></h5>
+                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div id="result_body_tomorrow"></div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal category resume -->
+    <!-- modal category today -->
+    <div class="modal fade" id="modal_today" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="custom-modal-header">
+                    <h5></h5>
+                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div id="result_body_today"></div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal category resume -->
+    <!-- modal category yesterday -->
+    <div class="modal fade" id="modal_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="custom-modal-header">
+                    <h5></h5>
+                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div id="result_body_yesterday"></div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal category resume -->
+    <!-- modal category yesterday -->
+    <div class="modal fade" id="modal_before_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="custom-modal-header">
+                    <h5></h5>
+                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body">
+                    <div id="result_body_before_yesterday"></div>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal category resume -->
     <input type="hidden" id="_token" value=" {{ csrf_token() }} ">
 @endsection
 @section('scripts')
@@ -701,5 +587,127 @@ function teste(day, month){
     }
 }
 
+</script>
+<script>
+$(document).ready(function(){
+
+    var after_tomorrow = 'after_tomorrow';
+    var tomorrow = 'tomorrow';
+    var today = 'today';
+    var yesterday = 'yesterday';
+    var before_yesterday = 'before_yesterday';
+
+    $('#modal_next_two_day').on('show.bs.modal', function () {
+
+        $.ajax({
+		    type: "GET",
+		    url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
+		    data: {
+                day: after_tomorrow,
+            },
+		    success: function (data) {
+                // var re = result[0];
+                // console.log(re);
+                if(data.length > 0){
+                    $('#result_body_after_tomorrow').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_after_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                    });
+                }
+                console.log(result);
+		    }
+		});
+
+    });
+
+    $('#modal_next_day').on('show.bs.modal', function () {
+
+        $.ajax({
+		    type: "GET",
+		    url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
+		    data: {
+                day: tomorrow,
+            },
+		    success: function (data) {
+                // var re = result[0];
+                // console.log(re);
+                if(data.length > 0){
+                    $('#result_body_tomorrow').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                    });
+                }
+                console.log(result);
+		    }
+		});
+
+    });
+    
+    $('#modal_today').on('show.bs.modal', function () {
+
+        $.ajax({
+		    type: "GET",
+		    url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
+		    data: {
+                day: today,
+            },
+		    success: function (data) {
+                console.log(data);
+                if(data.length > 0){
+                    $('#result_body_today').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_today').append("<p>"+item.amount+" - "+item.name+"</p>");
+                    });
+                }
+                console.log(result);
+		    }
+		});
+
+    });
+
+    $('#modal_yesterday').on('show.bs.modal', function () {
+
+        $.ajax({
+            type: "GET",
+            url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
+            data: {
+                day: yesterday,
+            },
+            success: function (data) {
+                console.log(data);
+                if(data.length > 0){
+                    $('#result_body_yesterday').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                    });
+                }
+                console.log(result);
+            }
+        });
+
+    });
+    $('#modal_before_yesterday').on('show.bs.modal', function () {
+
+        $.ajax({
+            type: "GET",
+            url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
+            data: {
+                day: before_yesterday,
+            },
+            success: function (data) {
+                console.log(data);
+                if(data.length > 0){
+                    $('#result_body_before_yesterday').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_before_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                    });
+                }
+                console.log(result);
+            }
+        });
+
+    });
+    
+});
 </script>
 @stop

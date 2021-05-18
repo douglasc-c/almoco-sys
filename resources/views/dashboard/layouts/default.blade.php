@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx" class="js">
 <head>
-	@include('dashboard/layouts/head', array('title'=>'Npocoin Wallet'))
+	@include('dashboard/layouts/head', array('title'=>'Meu almoço'))
 </head>
 <body class="bg-theme bg-theme1">
 
