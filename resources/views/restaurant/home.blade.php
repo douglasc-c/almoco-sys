@@ -607,9 +607,7 @@
 function select_day(day, month){
     $('#day_value').val(day);
     $('#month_value').val(month);
-    // alert(day);
     if(month == 6){
-        // alert('foi');
         $('#text_month').text('Junho 2021');
     }else if(month == 5){
         $('#text_month').text('Maio 2021');
@@ -635,15 +633,12 @@ $(document).ready(function(){
                 day: after_tomorrow,
             },
 		    success: function (data) {
-                // var re = result[0];
-                // console.log(re);
                 if(data.length > 0){
                     $('#result_body_after_tomorrow').empty();
                     $.each(data[0], function(index, item){
                         $('#result_body_after_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
                     });
                 }
-                console.log(result);
 		    }
 		});
 
@@ -658,15 +653,14 @@ $(document).ready(function(){
                 day: tomorrow,
             },
 		    success: function (data) {
-                // var re = result[0];
-                // console.log(re);
+                
                 if(data.length > 0){
                     $('#result_body_tomorrow').empty();
                     $.each(data[0], function(index, item){
                         $('#result_body_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
                     });
                 }
-                console.log(result);
+
 		    }
 		});
 
@@ -681,14 +675,12 @@ $(document).ready(function(){
                 day: today,
             },
 		    success: function (data) {
-                console.log(data);
                 if(data.length > 0){
                     $('#result_body_today').empty();
                     $.each(data[0], function(index, item){
                         $('#result_body_today').append("<p>"+item.amount+" - "+item.name+"</p>");
                     });
                 }
-                console.log(result);
 		    }
 		});
 
@@ -703,14 +695,12 @@ $(document).ready(function(){
                 day: yesterday,
             },
             success: function (data) {
-                console.log(data);
                 if(data.length > 0){
                     $('#result_body_yesterday').empty();
                     $.each(data[0], function(index, item){
                         $('#result_body_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
                     });
                 }
-                console.log(result);
             }
         });
 
@@ -724,17 +714,14 @@ $(document).ready(function(){
                 day: before_yesterday,
             },
             success: function (data) {
-                console.log(data);
                 if(data.length > 0){
                     $('#result_body_before_yesterday').empty();
                     $.each(data[0], function(index, item){
                         $('#result_body_before_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
                     });
                 }
-                console.log(result);
             }
         });
-
     });
     
 });
