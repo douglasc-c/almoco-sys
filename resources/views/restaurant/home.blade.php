@@ -74,11 +74,20 @@
                         // echo '<td><button type="button" class="date" onclick="teste(';
                         // echo $tempDate->day, $tempDate->month;   
                         // echo ')">';
-                        echo '<td><button type="button" class="date" onclick="teste(';
+                        echo '<td><button type="button" class="date" onclick="select_day(';
                         echo $tempDate->day;
                         echo ','; 
                         echo $tempDate->month;   
-                        echo ')">';
+                        echo ')"';
+                        echo 'id="date-';
+                        echo $tempDate->year; 
+                        echo '-'; 
+                        if($tempDate->month < 10) echo '0';
+                        echo $tempDate->month;
+                        echo '-'; 
+                        if($tempDate->day < 10) echo '0';
+                        echo $tempDate->day;
+                        echo  '">';
 
                         echo $tempDate->day;
 
@@ -552,7 +561,27 @@
     <!-- end modal category resume -->
     <input type="hidden" id="_token" value=" {{ csrf_token() }} ">
 @endsection
+
+@section('styles')
+<style type="text/css">
+  /* #date-2021-05-20{
+    background-color: green;
+  } */
+
+
+</style>
+@stop
+
+
 @section('scripts')
+<script>
+    $(document).ready(function(){
+    var dates = {!! json_encode($confirmed_menus->toArray()) !!};
+        $.each(dates, function(index, item){
+            $("#date-"+item).css("background-color", "green");
+        });
+    });
+</script>
 <script>
     function newProduct(category){
         var cat = category;
@@ -575,10 +604,10 @@
 
 </script>
 <script>
-function teste(day, month){
+function select_day(day, month){
     $('#day_value').val(day);
     $('#month_value').val(month);
-    // alert(month);
+    // alert(day);
     if(month == 6){
         // alert('foi');
         $('#text_month').text('Junho 2021');

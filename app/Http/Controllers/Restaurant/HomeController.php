@@ -141,7 +141,15 @@ class HomeController extends Controller
             $categoriesAll[$cat->name]['itens'] = Food::join('food_categories', 'food_categories.id', '=', 'foods.food_category_id')->where('food_categories.name', $cat->name)->select('foods.*', 'food_categories.name as category_name')->get();
         }
 
-        return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday'));
+        $array = [];
+        $confirmed_menus = Menu::pluck('menu_day');
+        // $confirmed_menus = Menu::all();
+        // dd($confirmed_menus);
+        // $names = array_pluck($confirmed_menus, 'menu_day');
+
+        // dd($names);
+
+        return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus'));
 
     }
 
