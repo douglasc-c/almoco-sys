@@ -318,15 +318,14 @@
                     <div id="collapse_menu-next-two_day" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
                         
                         <div class="card-body">
-                            <a href="" class="" data-toggle="modal" data-target="#modal_next_two_day">
-                                <ul class="">
-                                    @foreach($all_category_next_two_day as $category)
-                                    <li>
-                                        <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                    </li>
-                                    @endforeach
-                                </ul>
-                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_next_two_day">Detalhes</a>
+                            <ul class="">
+                                @foreach($all_category_next_two_day as $category)
+                                <li>
+                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                </li>
+                                @endforeach
+                            </ul>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_next_two_day">Detalhes</a>
                         </div>
                         
                     </div>
@@ -636,7 +635,9 @@ $(document).ready(function(){
                 if(data.length > 0){
                     $('#result_body_after_tomorrow').empty();
                     $.each(data[0], function(index, item){
-                        $('#result_body_after_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        if(item.amount > 0){
+                            $('#result_body_after_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        }
                     });
                 }
 		    }
@@ -657,7 +658,9 @@ $(document).ready(function(){
                 if(data.length > 0){
                     $('#result_body_tomorrow').empty();
                     $.each(data[0], function(index, item){
-                        $('#result_body_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        if(item.amount > 0){
+                            $('#result_body_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        }
                     });
                 }
 
@@ -678,7 +681,10 @@ $(document).ready(function(){
                 if(data.length > 0){
                     $('#result_body_today').empty();
                     $.each(data[0], function(index, item){
-                        $('#result_body_today').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        if(item.amount > 0){
+                            $('#result_body_today').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        }
+                        
                     });
                 }
 		    }
@@ -698,7 +704,9 @@ $(document).ready(function(){
                 if(data.length > 0){
                     $('#result_body_yesterday').empty();
                     $.each(data[0], function(index, item){
-                        $('#result_body_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        if(item.amount > 0){
+                            $('#result_body_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        }
                     });
                 }
             }
@@ -717,7 +725,9 @@ $(document).ready(function(){
                 if(data.length > 0){
                     $('#result_body_before_yesterday').empty();
                     $.each(data[0], function(index, item){
-                        $('#result_body_before_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        if(item.amount > 0){
+                            $('#result_body_before_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                        }
                     });
                 }
             }
