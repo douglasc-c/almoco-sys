@@ -15,6 +15,7 @@
 	<link href="/assets/admin-theme/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
 	<link href="/assets/admin-theme/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
 	<link href="/assets/admin-theme/plugins/metismenu/css/metisMenu.min.css" rel="stylesheet" />
+	<link href="/assets/admin-theme/plugins/animate/animate.min.css" rel="stylesheet" />
 	<!-- loader-->
 	<link href="/assets/admin-theme/css/pace.min.css" rel="stylesheet" />
 	<script src="/assets/admin-theme/js/pace.min.js"></script>

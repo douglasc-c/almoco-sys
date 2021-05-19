@@ -2,9 +2,9 @@
 <html lang="en" class="h-100">
 
 <head>
-  @include('auth/layouts/head', array('title'=>'Meu ALmoço'))
+  @include('auth/layouts/head', array('title'=>'Meu Almoço'))
 </head>
-<body class="bg-theme bg-theme1">
+<body class="bg-theme auth-bg">
         <!-- wrapper -->
         <div class="wrapper">
             <div class="section-authentication-login d-flex align-items-center justify-content-center">
