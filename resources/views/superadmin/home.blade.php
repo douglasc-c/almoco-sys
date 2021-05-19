@@ -468,7 +468,11 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <div id="result_body_after_tomorrow"></div>
+                    @foreach($categories_all as $category)
+                        <h4>{{$category->name}}</h4>
+                        <div id="result_body_after_tomorrow_{{$category->id}}"></div>
+                    @endforeach
+                    {{-- <div id="result_body_after_tomorrow"></div> --}}
                 </div>
                 <div class="modal-footer">
 
@@ -488,7 +492,10 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <div id="result_body_tomorrow"></div>
+                    @foreach($categories_all as $category)
+                        <h4>{{$category->name}}</h4>
+                        <div id="result_body_tomorrow_{{$category->id}}"></div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
 
@@ -508,7 +515,10 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <div id="result_body_today"></div>
+                    @foreach($categories_all as $category)
+                        <h4>{{$category->name}}</h4>
+                        <div id="result_body_today_{{$category->id}}"></div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
 
@@ -528,7 +538,10 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <div id="result_body_yesterday"></div>
+                    @foreach($categories_all as $category)
+                        <h4>{{$category->name}}</h4>
+                        <div id="result_body_yesterday_{{$category->id}}"></div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
 
@@ -548,7 +561,10 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <div id="result_body_before_yesterday"></div>
+                    @foreach($categories_all as $category)
+                        <h4>{{$category->name}}</h4>
+                        <div id="result_body_before_yesterday_{{$category->id}}"></div>
+                    @endforeach
                 </div>
                 <div class="modal-footer">
 
@@ -611,11 +627,13 @@ $(document).ready(function(){
                 day: after_tomorrow,
             },
 		    success: function (data) {
+                // $('#result_body_after_tomorrow_title').append("<p>"+item.category+"</p>");
                 if(data.length > 0){
                     $('#result_body_after_tomorrow').empty();
                     $.each(data[0], function(index, item){
+                        console.log(item);
                         if(item.amount > 0){
-                            $('#result_body_after_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_after_tomorrow_'+item.category_id).append("<p class='ml-4'>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -638,7 +656,7 @@ $(document).ready(function(){
                     $('#result_body_tomorrow').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_tomorrow_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -661,7 +679,7 @@ $(document).ready(function(){
                     $('#result_body_today').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_today').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_today_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                         
                     });
@@ -684,7 +702,7 @@ $(document).ready(function(){
                     $('#result_body_yesterday').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_yesterday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -705,7 +723,7 @@ $(document).ready(function(){
                     $('#result_body_before_yesterday').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_before_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_before_yesterday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }

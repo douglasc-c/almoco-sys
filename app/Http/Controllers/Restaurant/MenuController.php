@@ -158,6 +158,7 @@ class MenuController extends Controller
         if($day == 'after_tomorrow'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');
@@ -178,6 +179,7 @@ class MenuController extends Controller
         }elseif($day == 'tomorrow'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');
@@ -199,6 +201,7 @@ class MenuController extends Controller
 
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->format('d/m/Y');
@@ -218,6 +221,7 @@ class MenuController extends Controller
         }elseif($day == 'yesterday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');
@@ -238,6 +242,7 @@ class MenuController extends Controller
         }elseif($day == 'before_yesterday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');

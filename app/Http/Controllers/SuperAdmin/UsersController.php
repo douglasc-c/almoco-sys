@@ -20,8 +20,8 @@ class UsersController extends Controller
         $name = 'william moraes';
         $password = '654321';
         $cpf = '07552897902';
-        $compralo_code = 'B45HDF67';
-        $new_user = User::completeRegister($user_id, $name, $password, $cpf, $compralo_code);
+        $billing_code = 'B45HDF67';
+        $new_user = User::completeRegister($user_id, $name, $password, $cpf, $billing_code);
 
         $title = 'Usuários';
         $total['users_super_admin'] = User::join('role_user', 'role_user.user_id', '=', 'users.id')->where('role_id', 1)->count();
@@ -36,7 +36,7 @@ class UsersController extends Controller
         $users = User::select([
             'users.id',
             'users.name',
-            'users.compralo_code',
+            'users.billing_code',
             'users.email',
             'users.cpf',
             'users.created_at',

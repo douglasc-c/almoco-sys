@@ -144,7 +144,7 @@ class HomeController extends Controller
         // dd($names);
 
 
-        return view('superadmin.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus'));
+        return view('superadmin.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all'));
     }
 
     public function dataDetailMenu(Request $request){
@@ -155,6 +155,7 @@ class HomeController extends Controller
         if($day == 'after_tomorrow'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');
@@ -175,6 +176,7 @@ class HomeController extends Controller
         }elseif($day == 'tomorrow'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');
@@ -196,6 +198,7 @@ class HomeController extends Controller
 
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->format('d/m/Y');
@@ -215,6 +218,7 @@ class HomeController extends Controller
         }elseif($day == 'yesterday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');
@@ -235,6 +239,7 @@ class HomeController extends Controller
         }elseif($day == 'before_yesterday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
+                $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
             $date = Carbon::today()->addDays(1)->format('d/m/Y');

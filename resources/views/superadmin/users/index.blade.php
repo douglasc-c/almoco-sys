@@ -144,7 +144,7 @@ Users -
                 { data: 'id', name: 'users.id' },
                 { data: 'name', name: 'users.name' },
                 { data: 'email', name: 'users.email' },
-                { data: 'compralo_code', name: 'users.compralo_code' },
+                { data: 'billing_code', name: 'users.billing_code' },
                 { data: 'cpf', name: 'users.cpf' },
                 { data: 'created_at', name: 'users.created_at' },
 

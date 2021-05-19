@@ -24,7 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'cpf',
-        'compralo_code',
+        'billing_code',
         'remember_tokem',
         'email_token',
     ];
@@ -42,14 +42,14 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    public static function completeRegister($user_id, $name, $password, $cpf, $compralo_code){
+    public static function completeRegister($user_id, $name, $password, $cpf, $billing_code){
         $user = User::find($user_id);
         if($user){
             $user->update([
                 'name' => $name,
                 'password' => bcrypt($password),
                 'cpf' => $cpf,
-                'compralo_code' => $compralo_code,
+                'billing_code' => $billing_code,
             ]);
 
             return $user;

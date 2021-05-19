@@ -23,7 +23,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'superadmin@meualmoco.dev',
             'password' => Hash::make('admin'),
             'cpf' => '11111111111',
-            'compralo_code' => 'BRC9776DD',
+            'billing_code' => 'BRC9776DD',
             'email_token' => 'superadmintoken'
         ]);
 
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@meualmoco.dev',
             'password' => Hash::make('admin'),
             'cpf' => '22222222222',
-            'compralo_code' => 'CCC6776DD',
+            'billing_code' => 'CCC6776DD',
             'email_token' => 'admintoken'
         ]);
 
@@ -41,7 +41,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@meualmoco.dev',
             'password' => Hash::make('user'),
             'cpf' => '33333333333',
-            'compralo_code' => 'MKC277655',
+            'billing_code' => 'MKC277655',
             'email_token' => 'usertoken'
         ]);
 
@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'restaurantuser@meualmoco.dev',
             'password' => Hash::make('user'),
             'cpf' => '44444444444',
-            'compralo_code' => 'TYC2C46P0',
+            'billing_code' => 'TYC2C46P0',
             'email_token' => 'restaurantusertoken'
         ]);
 

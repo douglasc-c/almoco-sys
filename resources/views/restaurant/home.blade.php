@@ -458,106 +458,122 @@
         </div>
     </div>
 
-    <!-- modal category before tomorrow -->
-    <div class="modal fade" id="modal_next_two_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="custom-modal-header">
-                    <h5></h5>
-                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <div id="result_body_after_tomorrow"></div>
-                </div>
-                <div class="modal-footer">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end modal category resume -->
-    <!-- modal category tomorrow -->
-    <div class="modal fade" id="modal_next_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="custom-modal-header">
-                    <h5></h5>
-                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <div id="result_body_tomorrow"></div>
-                </div>
-                <div class="modal-footer">
-
+        <!-- modal category before tomorrow -->
+        <div class="modal fade" id="modal_next_two_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="custom-modal-header">
+                            <h5></h5>
+                            <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            @foreach($categories_all as $category)
+                                <h4>{{$category->name}}</h4>
+                                <div id="result_body_after_tomorrow_{{$category->id}}"></div>
+                            @endforeach
+                            {{-- <div id="result_body_after_tomorrow"></div> --}}
+                        </div>
+                        <div class="modal-footer">
+        
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- end modal category resume -->
-    <!-- modal category today -->
-    <div class="modal fade" id="modal_today" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="custom-modal-header">
-                    <h5></h5>
-                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <div id="result_body_today"></div>
-                </div>
-                <div class="modal-footer">
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end modal category resume -->
-    <!-- modal category yesterday -->
-    <div class="modal fade" id="modal_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="custom-modal-header">
-                    <h5></h5>
-                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <div id="result_body_yesterday"></div>
-                </div>
-                <div class="modal-footer">
-
+            <!-- end modal category resume -->
+            <!-- modal category tomorrow -->
+            <div class="modal fade" id="modal_next_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="custom-modal-header">
+                            <h5></h5>
+                            <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            @foreach($categories_all as $category)
+                                <h4>{{$category->name}}</h4>
+                                <div id="result_body_tomorrow_{{$category->id}}"></div>
+                            @endforeach
+                        </div>
+                        <div class="modal-footer">
+        
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- end modal category resume -->
-    <!-- modal category yesterday -->
-    <div class="modal fade" id="modal_before_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="custom-modal-header">
-                    <h5></h5>
-                    <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
-                </div>
-                <div class="modal-body">
-                    <div id="result_body_before_yesterday"></div>
-                </div>
-                <div class="modal-footer">
-
+            <!-- end modal category resume -->
+            <!-- modal category today -->
+            <div class="modal fade" id="modal_today" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="custom-modal-header">
+                            <h5></h5>
+                            <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            @foreach($categories_all as $category)
+                                <h4>{{$category->name}}</h4>
+                                <div id="result_body_today_{{$category->id}}"></div>
+                            @endforeach
+                        </div>
+                        <div class="modal-footer">
+        
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- end modal category resume -->
+            <!-- end modal category resume -->
+            <!-- modal category yesterday -->
+            <div class="modal fade" id="modal_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="custom-modal-header">
+                            <h5></h5>
+                            <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            @foreach($categories_all as $category)
+                                <h4>{{$category->name}}</h4>
+                                <div id="result_body_yesterday_{{$category->id}}"></div>
+                            @endforeach
+                        </div>
+                        <div class="modal-footer">
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end modal category resume -->
+            <!-- modal category yesterday -->
+            <div class="modal fade" id="modal_before_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="custom-modal-header">
+                            <h5></h5>
+                            <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </a>
+                        </div>
+                        <div class="modal-body">
+                            @foreach($categories_all as $category)
+                                <h4>{{$category->name}}</h4>
+                                <div id="result_body_before_yesterday_{{$category->id}}"></div>
+                            @endforeach
+                        </div>
+                        <div class="modal-footer">
+        
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end modal category resume -->
     <input type="hidden" id="_token" value=" {{ csrf_token() }} ">
 @endsection
 
@@ -636,7 +652,7 @@ $(document).ready(function(){
                     $('#result_body_after_tomorrow').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_after_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_after_tomorrow_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -659,7 +675,7 @@ $(document).ready(function(){
                     $('#result_body_tomorrow').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_tomorrow').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_tomorrow_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -682,7 +698,7 @@ $(document).ready(function(){
                     $('#result_body_today').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_today').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_today_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                         
                     });
@@ -705,7 +721,7 @@ $(document).ready(function(){
                     $('#result_body_yesterday').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_yesterday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -726,7 +742,7 @@ $(document).ready(function(){
                     $('#result_body_before_yesterday').empty();
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_before_yesterday').append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_before_yesterday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
