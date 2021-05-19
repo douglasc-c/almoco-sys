@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth', 'needsRole:superadmin'], 'prefix' => 'sup
 	Route::get('/usuarios/data', 'SuperAdmin\UsersController@dataUsers')->name('users-data');
     Route::post('/usuarios/criar/usuario/', 'SuperAdmin\UsersController@createUser')->name('create-user');
 
+    #Dashboard
+    Route::get('/home/get-data/detail', 'SuperAdmin\HomeController@dataDetailMenu');
+
     # Foods
     Route::get('/food-categories', 'SuperAdmin\FoodController@foodCategoriesIndex')->name('foodCategories');
     Route::get('/food-categories/data/', 'SuperAdmin\FoodController@dataFoodsCategories')->name('food-categorties-data');

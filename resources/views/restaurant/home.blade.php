@@ -113,7 +113,7 @@
                     </div>
                 </div>
             </div>
-<!-- bloco de menu, pode ser adicionado através do modal -->
+    <!-- bloco de menu, pode ser adicionado através do modal -->
             @foreach($categoriesAll as $category)
             <div class="row">
                 <div class="col-xl-12">

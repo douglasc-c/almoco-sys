@@ -23,6 +23,8 @@
 	<link rel="stylesheet" href="/assets/admin-theme/css/icons.css" />
 	<!-- App CSS -->
 	<link rel="stylesheet" href="/assets/admin-theme/css/app.css" />
+	<link rel="stylesheet" href="/assets/admin-theme/css/custom.css" />
+	<link rel="stylesheet" href="/assets/admin-theme/plugins/font-awesome/css/font-awesome.css" />
 
  <meta name="csrf_token" content="{{ csrf_token() }}" />
 

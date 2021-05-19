@@ -3,29 +3,20 @@
 <head>
 	@include('superadmin/layouts/head', array('title'=>'Meu almoço'))
 </head>
-<body class="bg-theme bg-theme1">
-
-    <div id="wrapper">
-
-            @include('superadmin/layouts/sidebar')
-            @include('superadmin/layouts/header')
-
+<body class="bg-theme main-bg">
+        @include('superadmin/layouts/header')
         <div class="page-wrapper">
-
-            <div class="page-content-wrapper">
-                    <div class="page-content">
-                        @include('partials.flash-messages')
-                        @include('partials.error-block')
-                        @yield('content')
-
-                    </div>
+            <div class="page-content">
+                @include('partials.flash-messages')
+                @include('partials.error-block')
+                @yield('content')
+    
             </div>
         </div>
-    </div>
-
-  @yield('styles')
-  @yield('scripts_default')
-  @yield('scripts')
-
-</body>
+    
+      @yield('styles')
+      @yield('scripts_default')
+      @yield('scripts')
+    
+    </body>
 </html>
