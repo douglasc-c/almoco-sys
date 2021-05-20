@@ -7,7 +7,7 @@
   @show
 </title>
 	<!--favicon-->
-	<link rel="icon" href="/assets/admin-theme/images/favicon-32x32.png" type="image/png" />
+	<link rel="icon" href="assets/admin-theme/images/global/main-logo-pt-1.png" type="image/png" />
 	<!-- Vector CSS -->
 	<link href="/assets/admin-theme/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
 	<!--plugins-->

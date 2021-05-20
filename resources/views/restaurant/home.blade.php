@@ -1,8 +1,7 @@
 @extends('restaurant.layouts.default')
 
 @section('title')
-
-
+Home -
 @parent
 @stop
 
@@ -128,18 +127,8 @@
                                                         <label for="{{$item->name}}"></label>
                                                     </div>
                                                 </div>
-                                                <div class="col-xl-8 zeroed-col">
+                                                <div class="col-xl-10 zeroed-col">
                                                     <label for="{{$item->name}}" class="menu-list-title">{{$item->name}}</label>
-                                                </div>
-                                                <div class="col-xl-1 zeroed-col">
-                                                    <a href="" class="menu-list-edit-item">
-                                                        <i class="fa fa-pencil-square main-icon-size"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="col-xl-1 zeroed-col">
-                                                    <a href="" class="menu-list-delete-item">
-                                                        <i class="fa fa-trash-o main-icon-size"></i>
-                                                    </a>
                                                 </div>
                                             </div>
                                         </li>

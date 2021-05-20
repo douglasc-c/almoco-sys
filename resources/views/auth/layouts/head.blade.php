@@ -7,7 +7,7 @@
   @show
 </title>
 
-	<link rel="icon" href="assets/admin-theme/images/favicon-32x32.png" type="image/png" />
+	<link rel="icon" href="assets/admin-theme/images/global/main-logo-pt-1.png" type="image/png" />
 	<!-- loader-->
 	<link href="assets/admin-theme/css/pace.min.css" rel="stylesheet" />
 	<script src="assets/admin-theme/js/pace.min.js"></script>
