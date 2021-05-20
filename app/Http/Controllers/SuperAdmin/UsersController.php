@@ -69,9 +69,6 @@ class UsersController extends Controller
                 $role = Defender::findRole('user');
                 $user->attachRole($role);
 
-
-                // $url = 'http://127.0.0.1:8000/profile/confirm-email/'.$token;
-                // dd($random_password);
                 Mail::to($user->email)->send(new UserRegister($user, $random_password));
 
                 return redirect()->back()->with('success', 'Usuário criado com sucesso!');

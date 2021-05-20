@@ -19,8 +19,8 @@ Login -
             <div class="col-12 col-lg-12 mx-auto">
                 <div class="auth-logo-bloc">
                     <!-- <img src="assets/admin-theme/images/global/header-logo.svg"> -->
-                    <img class="main-logo-pt-1 animated rotateIn" src="assets/admin-theme/images/global/main-logo-pt-1.png">
-                    <img class="main-logo-pt-2" src="assets/admin-theme/images/global/main-logo-pt-2.png">
+                    <img class="main-logo-pt-1 animated rotateIn" src="/assets/admin-theme/images/global/main-logo-pt-1.png">
+                    <img class="main-logo-pt-2" src="/assets/admin-theme/images/global/main-logo-pt-2.png">
                 </div>
                 <div class="radius-15">
                     <div class="row no-gutters">
