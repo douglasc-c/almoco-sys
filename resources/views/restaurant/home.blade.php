@@ -12,22 +12,10 @@
 <div class="row">
         
         <div class="col-xl-3">
-            <div class="row">
-                
-                <div class="col-xl-12">
-                    <div class="accordion custom-card main-card-bg main-card-padding" id="accordion_select-month">
-                        <div id="headingOne">
-                            <a class="custom-card-header" data-toggle="collapse" data-target="#select-month" aria-expanded="true" aria-controls="select-month">
-                                <h6>
-                                    selecione o mês que deseja editar
-                                    <span class="custom-collapse-arrow"></span>
-                                </h6>
-                            </a>
-                        </div>
-                        <div id="select-month" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_select-month">
-                            <div class="card-body">
-                            </div>
-                        </div>
+            <div class="custom-card dark-card-bg main-card-padding">
+                <div class="row">
+                    <div class="col-xl-12 custom-card-header-bloc">
+                        <h6>Selecione o dia que deseja incluir o menu</h6>
                     </div>
                 </div>
             </div>
@@ -44,7 +32,7 @@
 
 
 
-                echo '<table border="1" class = "w3-table w3-boarder w3-striped">
+                echo '<table border="1" class = "w3-table w3-boarder w3-striped main-calendar">
                     <thead><tr class="w3-theme">
                     <th>Sun</th>
                     <th>Mon</th>
@@ -71,10 +59,10 @@
                     //loops through each week
                     for($i=0; $i < 7; $i++)
                     {
-                        // echo '<td><button type="button" class="date" onclick="teste(';
+                        // echo '<td><button type="button" class="date calendar-bubble-day" onclick="teste(';
                         // echo $tempDate->day, $tempDate->month;   
                         // echo ')">';
-                        echo '<td><button type="button" class="date" onclick="select_day(';
+                        echo '<td><button type="button" class="date calendar-bubble-day" onclick="select_day(';
                         echo $tempDate->day;
                         echo ','; 
                         echo $tempDate->month;   

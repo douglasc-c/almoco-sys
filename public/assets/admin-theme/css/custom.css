@@ -228,6 +228,7 @@ background: linear-gradient(45deg, rgba(187,199,239,1) 35%, rgba(255,255,255,1) 
 /*calendar*/
 .main-calendar {
 	width: 100%;
+  border-color: transparent;
 }
 .main-calendar th {
 	text-align: center;
@@ -242,8 +243,7 @@ background: linear-gradient(45deg, rgba(187,199,239,1) 35%, rgba(255,255,255,1) 
 .main-calendar .top-tr td {
 	padding-top: 7.5%;
 }
-.main-calendar .calendar-bubble-day {
-	padding: 5%;
+.calendar-bubble-day {
 	background-color: #7989BF;
 	border-radius: 50px;
 	width: 32px;
@@ -256,12 +256,18 @@ background: linear-gradient(45deg, rgba(187,199,239,1) 35%, rgba(255,255,255,1) 
     place-content: center;
     cursor: pointer;
     transition: .2s;
+    border: none;
+    margin-right: 0px;
+    color: #fff;
 }
 .calendar-bubble-day:hover {
 	background-color: #28B43C;
 	-webkit-transform: scale(1.04);
 	-ms-transform: scale(1.04);
 	transform: scale(1.04);
+}
+.calendar-bubble-day:focus {
+  outline: none;
 }
 /*accompaniment*/
 .zeroed-col { padding: 0px; }
