@@ -735,4 +735,15 @@ $(document).ready(function(){
     
 });
 </script>
+<script type="text/javascript">
+$('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('.accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            e.stopPropagation();
+        }
+    }
+});
+
+</script>
 @stop
