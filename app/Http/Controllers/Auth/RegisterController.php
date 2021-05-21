@@ -60,8 +60,6 @@ class RegisterController extends Controller
     {
         $user_token = str_random(15);
 
-        // $reffer = User::where('code', $data['reffer'])->first();
-
         $reffer = (isset($data['reffer'])) ? User::where('code', $data['reffer'])->first() : null;
         // dd($data['reffer']);
         $user = User::create([
@@ -75,7 +73,7 @@ class RegisterController extends Controller
         $role = Defender::findRole('user');
         $user->attachRole($role);
 
-        Mail::to($user)->send(new UserRegister($user));
+        Mail::to($user)->send(new UserRegister($user, $data['password']));
 
         return $user;
     }

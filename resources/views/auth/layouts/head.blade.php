@@ -7,18 +7,18 @@
   @show
 </title>
 
-	<link rel="icon" href="assets/admin-theme/images/global/main-logo-pt-1.png" type="image/png" />
+	<link rel="icon" href="/assets/admin-theme/images/global/main-logo-pt-1.png" type="image/png" />
 	<!-- loader-->
-	<link href="assets/admin-theme/css/pace.min.css" rel="stylesheet" />
-	<script src="assets/admin-theme/js/pace.min.js"></script>
+	<link href="/assets/admin-theme/css/pace.min.css" rel="stylesheet" />
+	<script src="/assets/admin-theme/js/pace.min.js"></script>
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="assets/admin-theme/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/assets/admin-theme/css/bootstrap.min.css" />
 	<!-- Icons CSS -->
-	<link rel="stylesheet" href="assets/admin-theme/css/icons.css" />
+	<link rel="stylesheet" href="/assets/admin-theme/css/icons.css" />
 	<!-- App CSS -->
 	<link href="/assets/admin-theme/plugins/animate/animate.min.css" rel="stylesheet" />
-	<link rel="stylesheet" href="assets/admin-theme/css/app.css" />
-	<link rel="stylesheet" href="assets/admin-theme/css/custom.css" />
+	<link rel="stylesheet" href="/assets/admin-theme/css/app.css" />
+	<link rel="stylesheet" href="/assets/admin-theme/css/custom.css" />
 
 <style type="text/css">
 	.btn-language-auth{

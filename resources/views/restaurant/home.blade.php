@@ -25,7 +25,7 @@ Home -
                 @php 
                 $today = today();
 
-                echo '<h1 class="w3-text-teal"><center><span id="text_month">' . $today->format('F Y') . '</span></center></h1>';
+                echo '<h3 class="w3-text-teal calendar-month"><span id="text_month">' . $today->format('F Y') . '</span></h3>';
 
                 $tempDate = Carbon\Carbon::createFromDate($today->year, $today->month, 1);
 
@@ -135,7 +135,11 @@ Home -
                                     @endforeach
                                 </ul>
                             </div>
-                            <button type="button" class="btn btn-light m-1 px-5 card-border-theme2 btn-theme2" data-toggle="modal" data-target="#newFood{{$category['name']}}">Novo Alimento</button>
+                            <div class="row">
+                                <div class="col-lg-12 collapse-btn-bloc">
+                                    <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Adicionar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,16 +182,18 @@ Home -
             <input type="hidden" id="month_value" name="month_value">
             <input type="hidden" id="day_value" name="day_value">
             <div class="row">
-                    <button type="submit">Enviar</button>
+                <div class="col-lg-12 text-center">
+                    <button type="submit" class="main-btn main-btn-color main-btn-width">Enviar</button>
+                </div>
             </div>
         </form>
         </div>
         
 
     <div class="col-xl-3">
-        <div class="row">
-            <div class="col-xl-12 custom-title-card-bloc">
-                <div class="custom-title-card grey-card-bg custom-card-padding-2">
+        <div class="custom-card dark-card-bg main-card-padding">
+            <div class="row">
+                <div class="col-xl-12 custom-card-header-bloc">
                     <h6>Número de confirmações</h6>
                 </div>
             </div>
@@ -570,7 +576,7 @@ Home -
     $(document).ready(function(){
     var dates = {!! json_encode($confirmed_menus->toArray()) !!};
         $.each(dates, function(index, item){
-            $("#date-"+item).css("background-color", "green");
+            $("#date-"+item).css("background-color", "#28B43C");
         });
     });
 </script>
@@ -728,5 +734,16 @@ $(document).ready(function(){
     });
     
 });
+</script>
+<script type="text/javascript">
+$('[data-toggle="collapse"]').on('click',function(e){
+    if ( $(this).parents('.accordion').find('.collapse.show') ){
+        var idx = $(this).index('[data-toggle="collapse"]');
+        if (idx == $('.collapse.show').index('.collapse')) {
+            e.stopPropagation();
+        }
+    }
+});
+
 </script>
 @stop

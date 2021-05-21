@@ -10,10 +10,9 @@
             @include('partials.flash-messages')
             @include('partials.error-block')
             @yield('content')
-
         </div>
+        @include('restaurant/layouts.footer')
     </div>
-
   @yield('styles')
   @yield('scripts_default')
   @yield('scripts')

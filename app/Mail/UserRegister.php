@@ -13,15 +13,17 @@ class UserRegister extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+    public $random_password;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct(User $user, $random_password)
     {
         $this->user = $user;
+        $this->random_password = $random_password;
     }
 
     /**
@@ -31,6 +33,6 @@ class UserRegister extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.register')->subject('Your Neeva Wallet is Ready!');
+        return $this->view('emails.register')->subject('Bem vindo ao meu almoço');
     }
 }
