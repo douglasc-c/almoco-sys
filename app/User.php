@@ -5,12 +5,13 @@ namespace App;
 use Artesaos\Defender\Traits\HasDefender;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
 use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasDefender;
 
@@ -42,7 +43,7 @@ class User extends Authenticatable
         $this->notify(new ResetPasswordNotification($token));
     }
 
-    public static function completeRegister($user_id, $name, $password, $cpf, $billing_code){
+    public static function completeRegister($user_id, $name, $password, $cpf, $billing_code) {
         $user = User::find($user_id);
         if($user){
             $user->update([
@@ -58,4 +59,11 @@ class User extends Authenticatable
         }
     }
 
+    public function getJWTIdentifier() {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims() {
+        return [];
+    }
 }

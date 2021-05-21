@@ -181,6 +181,7 @@ return [
         Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
         PragmaRX\Google2FALaravel\ServiceProvider::class,
 
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
     ],
 
     /*
@@ -233,7 +234,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         'Google2FA' => PragmaRX\Google2FALaravel\Facade::class,
-
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class, 
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
     ],
 
 ];

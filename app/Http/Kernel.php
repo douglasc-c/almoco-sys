@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'needsRole' => \Artesaos\Defender\Middlewares\NeedsRoleMiddleware::class,
 
         'userValidated' => \App\Http\Middleware\CheckIsUserValidate::class,
+        'jwt.verify' => \App\Http\Middleware\JwtMiddleware::class,
     ];
 
     /**

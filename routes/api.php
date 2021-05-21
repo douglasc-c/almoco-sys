@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,22 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('login', 'Mobile\AuthController@login');
+Route::post('forgot', 'Mobile\AuthController@forgot')->name('password.reset');
 
-Route::any('payment/cryptoapis/check-payment/{order_id}/{address_coin}', function($order_id, $address_coin){
-  header('Access-Control-Allow-Origin: *');
-  App\Repositories\CryptoApisRepository::checkPayment($order_id, $address_coin);
-});
+Route::group(['middleware' => ['jwt.verify']], function () {
+    // Auth
+    Route::post('logout', 'Mobile\AuthController@logout');
+    Route::get('refresh', 'Mobile\AuthController@refresh');
+    Route::get('me', 'Mobile\AuthController@me');    
 
-
-Route::any('payment/tulus/check/{order_id}', function($order_id){
-    header('Access-Control-Allow-Origin: *');
-    App\Repositories\TulusPaymentRepository::checkStatus($order_id);
-});
-
-Route::any('payment/tulus/check-payment/{order_id}/{address_coin}', function($order_id, $address_coin){
-    header('Access-Control-Allow-Origin: *');
-    App\Repositories\TulusPaymentRepository::checkPayment($order_id, $address_coin);
+    
 });
