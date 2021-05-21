@@ -21,6 +21,7 @@ Route::group(['middleware' => ['jwt.verify']], function () {
     Route::post('logout', 'Mobile\AuthController@logout');
     Route::get('refresh', 'Mobile\AuthController@refresh');
     Route::get('me', 'Mobile\AuthController@me');    
-
+    
+    Route::put('user/update', 'Mobile\UserController@update');
     
 });

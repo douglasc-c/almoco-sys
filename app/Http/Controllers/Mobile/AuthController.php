@@ -30,6 +30,12 @@ class AuthController extends Controller
             return response()->json(['error' => 'Não foi possível entrar, tente novamente mais tarde'], 500);
         }
 
+        $user = auth('api')->user();
+
+        if ($user->hasRole('restaurantuser') || $user->hasRole('superadmin')) {
+            return response()->json(["error" => "Ops, algo de errado", "message" => "Seu usúario não possui permissão para acessar o aplicativo"], 401);
+        }
+
         return $this->respondWithToken($token);
     }
 
