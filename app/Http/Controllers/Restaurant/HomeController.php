@@ -39,16 +39,15 @@ class HomeController extends Controller
 
         $user = Auth::user();
 
+         #Contagem de confirmados
         $one_days = Carbon::now()->subDays(1)->format('Y-m-d H:i:s');
         $orders['today'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today())->count();
         $orders['day-1'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->subDays(1))->count();
         $orders['day-2'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->subDays(2))->count();
         $orders['day+1'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(1))->count();
         $orders['day+2'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(2))->count();
-        // dd(Carbon::today());
 
-
-
+         #Carrega os objetos de cada dia separado por categoria
         $categories = FoodCategory::get();
         foreach($categories as $category){
             $all_category_before_yesterday[$category->id]['name'] = $category->name;
@@ -70,10 +69,11 @@ class HomeController extends Controller
             $all_category_next_two_day[$category->id]['name'] = $category->name;
             $all_category_next_two_day[$category->id]['amount']= 0;
         }
+
+        #Faz a contagem dos itens por categoria
         #Today
         $foods_order_today = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today())->get();
 
-        // $teste = [];
         foreach($foods_order_today as $order){
             $itens = json_decode($order->itens_selected);
             foreach($itens as $item){
@@ -97,7 +97,7 @@ class HomeController extends Controller
 
         #day+2
         $foods_order_after_tomorrow = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(2))->get();
-        
+
         foreach($foods_order_after_tomorrow as $order){
             $itens = json_decode($order->itens_selected);
             foreach($itens as $item){
@@ -143,11 +143,9 @@ class HomeController extends Controller
 
         $array = [];
         $confirmed_menus = Menu::pluck('menu_day');
-        // $confirmed_menus = Menu::all();
-        // dd($confirmed_menus);
-        // $names = array_pluck($confirmed_menus, 'menu_day');
-
-        // dd($names);
+       
+        // dd($all_category_before_yesterday);
+        // dd($all_category_next_two_day);
 
         return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all'));
 
