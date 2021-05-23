@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Justification extends Model
 {
-    protected $table = 'foods';
+    protected $table = 'justifications';
         /**
      * The attributes that are mass assignable.
      *

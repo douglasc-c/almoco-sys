@@ -13,6 +13,7 @@ use Cache;
 use Validator;
 use App\FoodCategory;
 use App\Food;
+use App\Justification;
 use App\Menu;
 
 class HomeController extends Controller

@@ -6,6 +6,7 @@ use App\Food;
 use App\FoodCategory;
 use App\FoodOrder;
 use App\Http\Controllers\Controller;
+use App\Justification;
 use App\Menu;
 use App\User;
 use Carbon\Carbon;
@@ -33,133 +34,96 @@ class HomeController extends Controller
     {   
         $title = 'Super Admin';
 
-        // $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d'); //Week of the month
+        $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d'); //Week of the month
 
-        // $endOfWeek = Carbon::now()->endOfWeek()->subDays(2)->format('Y-m-d');
+        $endOfWeek = Carbon::now()->endOfWeek()->subDays(2)->format('Y-m-d');
 
-        //  //Week of the month
-        // $menus = Menu::whereBetween('menu_day', [$startOfWeek, $endOfWeek])->get();
-        // // dd($teste);
-
-        // $categories = FoodCategory::get();
-        // foreach($categories as $category){
-        //     $all_category_before_yesterday[$category->id]['name'] = $category->name;
-        //     $all_category_before_yesterday[$category->id]['amount']= 0;
-        // }
-        // foreach($categories as $category){
-        //     $all_category_yesterday[$category->id]['name'] = $category->name;
-        //     $all_category_yesterday[$category->id]['amount']= 0;
-        // }
-        // foreach($categories as $category){
-        //     $all_category[$category->id]['name'] = $category->name;
-        //     $all_category[$category->id]['amount']= 0;
-        // }
-        // foreach($categories as $category){
-        //     $all_category_next_day[$category->id]['name'] = $category->name;
-        //     $all_category_next_day[$category->id]['amount']= 0;
-        // }
-        // foreach($categories as $category){
-        //     $all_category_next_two_day[$category->id]['name'] = $category->name;
-        //     $all_category_next_two_day[$category->id]['amount']= 0;
-        // }
-
+        $menus = Menu::whereBetween('menu_day', [$startOfWeek, $endOfWeek])->get();
 
         #Contagem de confirmados
-        $one_days = Carbon::now()->subDays(1)->format('Y-m-d H:i:s');
-        $orders['today'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today())->count();
-        $orders['day-1'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->subDays(1))->count();
-        $orders['day-2'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->subDays(2))->count();
-        $orders['day+1'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(1))->count();
-        $orders['day+2'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->where('status', 1)->whereDate('menus.menu_day', Carbon::today()->addDays(2))->count();
-
+        $orders_confirmed['monday'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->format('Y-m-d'))->count();
+        $orders_confirmed['tuesday'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(1)->format('Y-m-d'))->count();
+        $orders_confirmed['wednesday'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(2)->format('Y-m-d'))->count();
+        $orders_confirmed['thursday'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(3)->format('Y-m-d'))->count();
+        $orders_confirmed['friday'] = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(4)->format('Y-m-d'))->count();
+        // dd($orders_confirmed);
 
         #Carrega os objetos de cada dia separado por categoria
         $categories = FoodCategory::get();
         foreach($categories as $category){
-            $all_category_before_yesterday[$category->id]['name'] = $category->name;
-            $all_category_before_yesterday[$category->id]['amount']= 0;
+            $monday[$category->id]['name'] = $category->name;
+            $monday[$category->id]['amount']= 0;
         }
         foreach($categories as $category){
-            $all_category_yesterday[$category->id]['name'] = $category->name;
-            $all_category_yesterday[$category->id]['amount']= 0;
+            $tuesday[$category->id]['name'] = $category->name;
+            $tuesday[$category->id]['amount']= 0;
         }
         foreach($categories as $category){
-            $all_category[$category->id]['name'] = $category->name;
-            $all_category[$category->id]['amount']= 0;
+            $wednesday[$category->id]['name'] = $category->name;
+            $wednesday[$category->id]['amount']= 0;
         }
         foreach($categories as $category){
-            $all_category_next_day[$category->id]['name'] = $category->name;
-            $all_category_next_day[$category->id]['amount']= 0;
+            $thursday[$category->id]['name'] = $category->name;
+            $thursday[$category->id]['amount']= 0;
         }
         foreach($categories as $category){
-            $all_category_next_two_day[$category->id]['name'] = $category->name;
-            $all_category_next_two_day[$category->id]['amount']= 0;
+            $friday[$category->id]['name'] = $category->name;
+            $friday[$category->id]['amount']= 0;
         }
 
         #Faz a contagem dos itens por categoria
-        #Today
-        $foods_order_today = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today())->get();
-
-        // $teste = [];
-        foreach($foods_order_today as $order){
+        
+        $foods_order_monday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->format('Y-m-d'))->get();
+        $foods_order_tuesday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(1)->format('Y-m-d'))->get();
+        $foods_order_wednesday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(2)->format('Y-m-d'))->get();
+        $foods_order_thursday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(3)->format('Y-m-d'))->get();
+        $foods_order_friday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(4)->format('Y-m-d'))->get();
+        #Segunda
+        foreach($foods_order_monday as $order){
             $itens = json_decode($order->itens_selected);
             foreach($itens as $item){
                 $food = Food::find($item);
-                $all_category[$food->food_category_id]['amount']++;
+                $monday[$food->food_category_id]['amount']++;
+
+            }
+        }
+         #Terça
+        foreach($foods_order_tuesday as $order){
+            $itens = json_decode($order->itens_selected);
+            foreach($itens as $item){
+                $food = Food::find($item);
+                $tuesday[$food->food_category_id]['amount']++;
+
+            }
+        }
+        #Quarta
+        foreach($foods_order_wednesday as $order){
+            $itens = json_decode($order->itens_selected);
+            foreach($itens as $item){
+                $food = Food::find($item);
+                $wednesday[$food->food_category_id]['amount']++;
+
+            }
+        }
+        #Quinta
+        foreach($foods_order_thursday as $order){
+            $itens = json_decode($order->itens_selected);
+            foreach($itens as $item){
+                $food = Food::find($item);
+                $thursday[$food->food_category_id]['amount']++;
+
+            }
+        }
+        #Sexta
+        foreach($foods_order_friday as $order){
+            $itens = json_decode($order->itens_selected);
+            foreach($itens as $item){
+                $food = Food::find($item);
+                $friday[$food->food_category_id]['amount']++;
 
             }
         }
 
-        #day+1
-        $foods_order_tomorrow = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->addDays(1))->get();
-
-        foreach($foods_order_tomorrow as $order){
-            $itens = json_decode($order->itens_selected);
-            foreach($itens as $item){
-                $food = Food::find($item);
-                $all_category_next_day[$food->food_category_id]['amount']++;
-
-            }
-        }
-
-        #day+2
-        $foods_order_after_tomorrow = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->addDays(2))->get();
-
-        foreach($foods_order_after_tomorrow as $order){
-            $itens = json_decode($order->itens_selected);
-            foreach($itens as $item){
-                $food = Food::find($item);
-                $all_category_next_two_day[$food->food_category_id]['amount']++;
-
-            }
-        }
-
-        #yesterday
-        $foods_order_yesterday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->subDays(1))->get();
-
-        foreach($foods_order_yesterday as $order){
-            $itens = json_decode($order->itens_selected);
-            foreach($itens as $item){
-                $food = Food::find($item);
-                $all_category_yesterday[$food->food_category_id]['amount']++;
-
-            }
-        }
-
-        #before yesterday
-        $foods_order_before_yesterday = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->subDays(2))->get();
-
-        foreach($foods_order_before_yesterday as $order){
-            $itens = json_decode($order->itens_selected);
-            foreach($itens as $item){
-                $food = Food::find($item);
-                $all_category_before_yesterday[$food->food_category_id]['amount']++;
-
-            }
-        }
-
-
-        #categorias para separar no modal
         $categories_all = FoodCategory::get();
 
         foreach($categories_all as $cat){
@@ -170,7 +134,13 @@ class HomeController extends Controller
         $array = [];
         $confirmed_menus = Menu::pluck('menu_day');
 
-        return view('superadmin.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all'));
+        #Justificativas
+        $justifications = Justification::join('users', 'users.id', '=', 'justifications.user_id')->whereDate('justifications.created_at', Carbon::today())->select('users.*', 'justifications.*')->get();
+
+
+
+        // return view('superadmin.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all'));
+        return view('superadmin.home', compact( 'confirmed_menus','categoriesAll', 'categories_all','orders_confirmed', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'justifications'));
     }
 
     public function dataDetailMenu(Request $request){
@@ -178,60 +148,51 @@ class HomeController extends Controller
         
         $day = $request->day;        
 
-        if($day == 'after_tomorrow'){
+        if($day == 'monday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
                 $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
-            $date = Carbon::today()->addDays(1)->format('d/m/Y');
-             #Today
-             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->addDays(2))->get();
-            // dd($foods_order);
-             $teste = [];
+
+             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->format('Y-m-d'))->get();
              foreach($foods_order as $order){
                  $itens = json_decode($order->itens_selected);
                  foreach($itens as $item){
                      $food = Food::find($item);
-                     // array_push($teste, $food->name);
                      $all_foods[$food->id]['amount']++;
 
                  }
              }
              return response()->json( [$all_foods] );
-        }elseif($day == 'tomorrow'){
+        }elseif($day == 'tuesday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
                 $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
-            $date = Carbon::today()->addDays(1)->format('d/m/Y');
-             #Today
-             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->addDays(1))->get();
-            // dd($foods_order);
-             $teste = [];
+
+             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(1)->format('Y-m-d'))->get();
+
              foreach($foods_order as $order){
                  $itens = json_decode($order->itens_selected);
                  foreach($itens as $item){
                      $food = Food::find($item);
-                     // array_push($teste, $food->name);
                      $all_foods[$food->id]['amount']++;
 
                  }
              }
              return response()->json( [$all_foods] );
-        }elseif($day == 'today'){
+        }elseif($day == 'wednesday'){
 
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
                 $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
-            $date = Carbon::today()->format('d/m/Y');
-             #Today
-            $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today())->get();
+            
+            $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(2)->format('Y-m-d'))->get();
 
-            $teste = [];
             foreach($foods_order as $order){
                 $itens = json_decode($order->itens_selected);
                 foreach($itens as $item){
@@ -241,17 +202,15 @@ class HomeController extends Controller
                 }
             }
             return response()->json( [$all_foods] );
-        }elseif($day == 'yesterday'){
+        }elseif($day == 'thursday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
                 $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
-            $date = Carbon::today()->addDays(1)->format('d/m/Y');
-             #Today
-             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->subDays(1))->get();
 
-             $teste = [];
+             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(3)->format('Y-m-d'))->get();
+            
              foreach($foods_order as $order){
                  $itens = json_decode($order->itens_selected);
                  foreach($itens as $item){
@@ -261,22 +220,19 @@ class HomeController extends Controller
                  }
              }
              return response()->json( [$all_foods] );
-        }elseif($day == 'before_yesterday'){
+        }elseif($day == 'friday'){
             foreach($foods as $food){
                 $all_foods[$food->id]['name'] = $food->name;
                 $all_foods[$food->id]['category_id'] = $food->food_category_id;
                 $all_foods[$food->id]['amount']= 0;
             }
-            $date = Carbon::today()->addDays(1)->format('d/m/Y');
+          
+             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::now()->startOfWeek()->addDays(4)->format('Y-m-d'))->get();
 
-             $foods_order = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')->whereDate('menus.menu_day', Carbon::today()->subDays(2))->get();
-
-             $teste = [];
              foreach($foods_order as $order){
                  $itens = json_decode($order->itens_selected);
                  foreach($itens as $item){
                      $food = Food::find($item);
-                     // array_push($teste, $food->name);
                      $all_foods[$food->id]['amount']++;
 
                  }
@@ -284,6 +240,7 @@ class HomeController extends Controller
              return response()->json( [$all_foods] );
         }
         return response()->json("Error");
+
     }
 
 }
