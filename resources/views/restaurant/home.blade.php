@@ -137,7 +137,7 @@ Home -
                             </div>
                             <div class="row">
                                 <div class="col-lg-12 collapse-btn-bloc">
-                                    <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Adicionar</button>
+                                    <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Criar novo item</button>
                                 </div>
                             </div>
                         </div>
@@ -203,11 +203,11 @@ Home -
                 <div class="custom-card main-card-bg main-card-padding confirmed-card">
                     <div class="row">
                         <div class="col-xl-12">
-                            <p>{{Carbon\Carbon::today()->addDays(2)->format('d/m/Y')}}</p>
+                            <p>{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - Segunda-Feira</p>
                         </div>
                         <div class="col-xl-12">
                             <div>
-                                <h6><i class="fa fa-circle active"></i> {{$orders['day+2']}} Confirmados</h6>
+                                <h6></i> {{$orders_confirmed['monday']}} Confirmados</h6>
                             </div>
                         </div>
                     </div>
@@ -219,11 +219,11 @@ Home -
                 <div class="custom-card main-card-bg main-card-padding confirmed-card">
                     <div class="row">
                         <div class="col-xl-12">
-                            <p>{{Carbon\Carbon::today()->addDays(1)->format('d/m/Y')}}</p>
+                            <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(1)->format('d/m/Y')}}  - Terça-Feira</p>
                         </div>
                         <div class="col-xl-12">
                             <div>
-                                <h6><i class="fa fa-circle active"></i> {{$orders['day+1']}} Confirmados</h6>
+                                <h6></i> {{$orders_confirmed['tuesday']}} Confirmados</h6>
                             </div>
                         </div>
                     </div>
@@ -235,11 +235,11 @@ Home -
                 <div class="custom-card main-card-bg main-card-padding confirmed-card">
                     <div class="row">
                         <div class="col-xl-12">
-                            <p>{{Carbon\Carbon::today()->format('d/m/Y')}}</p>
+                            <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y')}}  - Quarta-Feira</p>
                         </div>
                         <div class="col-xl-12">
                             <div>
-                                <h6><i class="fa fa-circle pending"></i> {{$orders['today']}} Confirmados</h6>
+                                <h6></i> {{$orders_confirmed['wednesday']}} Confirmados</h6>
                             </div>
                         </div>
                     </div>
@@ -251,11 +251,11 @@ Home -
                 <div class="custom-card main-card-bg main-card-padding confirmed-card">
                     <div class="row">
                         <div class="col-xl-12">
-                            <p>{{Carbon\Carbon::today()->subDays(1)->format('d/m/Y')}}</p>
+                            <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}}  - Quinta-Feira</p>
                         </div>
                         <div class="col-xl-12">
                             <div>
-                                <h6><i class="fa fa-circle inative"></i> {{$orders['day-1']}} Confirmados</h6>
+                                <h6></i> {{$orders_confirmed['thursday']}} Confirmados</h6>
                             </div>
                         </div>
                     </div>
@@ -267,11 +267,11 @@ Home -
                 <div class="custom-card main-card-bg main-card-padding confirmed-card">
                     <div class="row">
                         <div class="col-xl-12">
-                            <p>{{Carbon\Carbon::today()->subDays(2)->format('d/m/Y')}}</p>
+                            <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(4)->format('d/m/Y')}}  - Sexta-Feira</p>
                         </div>
                         <div class="col-xl-12">
                             <div>
-                                <h6><i class="fa fa-circle inative"></i> {{$orders['day-2']}} Confirmados</h6>
+                                <h6></i> {{$orders_confirmed['friday']}} Confirmados</h6>
                             </div>
                         </div>
                     </div>
@@ -289,26 +289,27 @@ Home -
         </div>
         <div class="row">
             <div class="col-xl-12">
-                <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0402">
-                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-next-two_day" aria-expanded="true" aria-controls="collapse_menu-next-two_day">
+                <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-monday">
+                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-monday" aria-expanded="true" aria-controls="accordion_menu-monday">
                         <div class="custom-card-min-header" id="headingOne">
                             <h6>
-                                <i class="fa fa-circle active"></i> {{Carbon\Carbon::today()->addDays(2)->format('d/m/Y')}}
+                                {{-- <i class="fa fa-circle active"></i>  --}}
+                                {{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - Segunda-Feira
                                 <span class="custom-collapse-arrow"></span>
                             </h6>
                         </div>
                     </a>
-                    <div id="collapse_menu-next-two_day" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                    <div id="collapse_menu-monday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-monday">
                         
                         <div class="card-body">
                             <ul class="">
-                                @foreach($all_category_next_two_day as $category)
+                                @foreach($monday as $category)
                                 <li>
                                     <p>{{$category['amount']}} - {{$category['name']}}</p>
                                 </li>
                                 @endforeach
                             </ul>
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_next_two_day">Detalhes</a>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_monday">Detalhes</a>
                         </div>
                         
                     </div>
@@ -321,7 +322,7 @@ Home -
                     <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0402" aria-expanded="true" aria-controls="accordion_menu-dia-0402">
                         <div class="custom-card-min-header" id="headingOne">
                             <h6>
-                                <i class="fa fa-circle active"></i> {{Carbon\Carbon::today()->addDays(1)->format('d/m/Y')}}
+                                {{Carbon\Carbon::now()->startOfWeek()->addDays(1)->format('d/m/Y')}}  - Terça-Feira
                                 <span class="custom-collapse-arrow"></span>
                             </h6>
                         </div>
@@ -329,13 +330,13 @@ Home -
                     <div id="collapse_menu-dia-0402" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
                         <div class="card-body">
                                 <ul class="">
-                                    @foreach($all_category_next_day as $category)
+                                    @foreach($tuesday as $category)
                                     <li>
                                         <p>{{$category['amount']}} - {{$category['name']}}</p>
                                     </li>
                                     @endforeach
                                 </ul>
-                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_next_day">Detalhes</a>
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_tuesday">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -347,7 +348,7 @@ Home -
                     <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0502" aria-expanded="true" aria-controls="accordion_menu-dia-0502">
                         <div class="custom-card-min-header" id="headingOne">
                             <h6>
-                                {{Carbon\Carbon::today()->format('d/m/Y')}}
+                                {{Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y')}}  - Quarta-Feira
                                 <span class="custom-collapse-arrow"></span>
                             </h6>
                         </div>
@@ -355,13 +356,13 @@ Home -
                     <div id="collapse_menu-dia-0502" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0502">
                         <div class="card-body">
                                 <ul class="">
-                                    @foreach($all_category as $category)
+                                    @foreach($wednesday as $category)
                                     <li>
                                         <p>{{$category['amount']}} - {{$category['name']}}</p>
                                     </li>
                                     @endforeach
                                 </ul>
-                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_today">Detalhes</a>
+                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_wednesday">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -373,7 +374,7 @@ Home -
                     <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday">
                         <div class="custom-card-min-header" id="headingOne">
                             <h6>
-                                <i class="fa fa-circle active"></i> {{Carbon\Carbon::today()->subDays(1)->format('d/m/Y')}}
+                                {{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}}  - Quinta-Feira
                                 <span class="custom-collapse-arrow"></span>
                             </h6>
                         </div>
@@ -381,13 +382,13 @@ Home -
                     <div id="collapse_menu-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
                         <div class="card-body">
                             <ul class="">
-                                @foreach($all_category_yesterday as $category)
+                                @foreach($thursday as $category)
                                 <li>
                                     <p>{{$category['amount']}} - {{$category['name']}}</p>
                                 </li>
                                 @endforeach
                             </ul>
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_yesterday">Detalhes</a>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_thursday">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -399,7 +400,7 @@ Home -
                     <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-before-yesterday" aria-expanded="true" aria-controls="collapse_menu-before-yesterday">
                         <div class="custom-card-min-header" id="headingOne">
                             <h6>
-                                <i class="fa fa-circle active"></i> {{Carbon\Carbon::today()->subDays(2)->format('d/m/Y')}}
+                                {{Carbon\Carbon::now()->startOfWeek()->addDays(4)->format('d/m/Y')}}  - Sexta-Feira
                                 <span class="custom-collapse-arrow"></span>
                             </h6>
                         </div>
@@ -407,13 +408,13 @@ Home -
                     <div id="collapse_menu-before-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
                         <div class="card-body">
                             <ul class="">
-                                @foreach($all_category_before_yesterday as $category)
+                                @foreach($friday as $category)
                                 <li>
                                     <p>{{$category['amount']}} - {{$category['name']}}</p>
                                 </li>
                                 @endforeach
                             </ul>
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_before_yesterday">Detalhes</a>
+                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_friday">Detalhes</a>
                         </div>
                     </div>
                 </div>
@@ -442,7 +443,7 @@ Home -
     </div>
 
         <!-- modal category before tomorrow -->
-        <div class="modal fade" id="modal_next_two_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+        <div class="modal fade" id="modal_monday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="custom-modal-header">
@@ -452,11 +453,12 @@ Home -
                             </a>
                         </div>
                         <div class="modal-body">
+
                             @foreach($categories_all as $category)
                                 <h4>{{$category->name}}</h4>
-                                <div id="result_body_after_tomorrow_{{$category->id}}"></div>
+                                <div id="result_body_monday_{{$category->id}}"></div>
                             @endforeach
-                            {{-- <div id="result_body_after_tomorrow"></div> --}}
+
                         </div>
                         <div class="modal-footer">
         
@@ -466,7 +468,7 @@ Home -
             </div>
             <!-- end modal category resume -->
             <!-- modal category tomorrow -->
-            <div class="modal fade" id="modal_next_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_tuesday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="custom-modal-header">
@@ -478,7 +480,7 @@ Home -
                         <div class="modal-body">
                             @foreach($categories_all as $category)
                                 <h4>{{$category->name}}</h4>
-                                <div id="result_body_tomorrow_{{$category->id}}"></div>
+                                <div id="result_body_tuesday_{{$category->id}}"></div>
                             @endforeach
                         </div>
                         <div class="modal-footer">
@@ -489,7 +491,7 @@ Home -
             </div>
             <!-- end modal category resume -->
             <!-- modal category today -->
-            <div class="modal fade" id="modal_today" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_wednesday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="custom-modal-header">
@@ -501,7 +503,7 @@ Home -
                         <div class="modal-body">
                             @foreach($categories_all as $category)
                                 <h4>{{$category->name}}</h4>
-                                <div id="result_body_today_{{$category->id}}"></div>
+                                <div id="result_body_wednesday_{{$category->id}}"></div>
                             @endforeach
                         </div>
                         <div class="modal-footer">
@@ -512,7 +514,7 @@ Home -
             </div>
             <!-- end modal category resume -->
             <!-- modal category yesterday -->
-            <div class="modal fade" id="modal_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_thursday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="custom-modal-header">
@@ -524,7 +526,7 @@ Home -
                         <div class="modal-body">
                             @foreach($categories_all as $category)
                                 <h4>{{$category->name}}</h4>
-                                <div id="result_body_yesterday_{{$category->id}}"></div>
+                                <div id="result_body_thursday_{{$category->id}}"></div>
                             @endforeach
                         </div>
                         <div class="modal-footer">
@@ -535,7 +537,7 @@ Home -
             </div>
             <!-- end modal category resume -->
             <!-- modal category yesterday -->
-            <div class="modal fade" id="modal_before_yesterday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+            <div class="modal fade" id="modal_friday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="custom-modal-header">
@@ -547,7 +549,7 @@ Home -
                         <div class="modal-body">
                             @foreach($categories_all as $category)
                                 <h4>{{$category->name}}</h4>
-                                <div id="result_body_before_yesterday_{{$category->id}}"></div>
+                                <div id="result_body_friday_{{$category->id}}"></div>
                             @endforeach
                         </div>
                         <div class="modal-footer">
@@ -616,26 +618,29 @@ function select_day(day, month){
 <script>
 $(document).ready(function(){
 
-    var after_tomorrow = 'after_tomorrow';
-    var tomorrow = 'tomorrow';
-    var today = 'today';
-    var yesterday = 'yesterday';
-    var before_yesterday = 'before_yesterday';
+    var monday = 'monday';
+    var tuesday = 'tuesday';
+    var wednesday = 'wednesday';
+    var thursday = 'thursday';
+    var friday = 'friday';
+    
 
-    $('#modal_next_two_day').on('show.bs.modal', function () {
+    $('#modal_monday').on('show.bs.modal', function () {
 
         $.ajax({
 		    type: "GET",
 		    url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
 		    data: {
-                day: after_tomorrow,
+                day: monday,
             },
 		    success: function (data) {
                 if(data.length > 0){
-                    $('#result_body_after_tomorrow').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_monday_'+item.category_id).empty();
+                    });
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_after_tomorrow_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_monday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -644,21 +649,23 @@ $(document).ready(function(){
 
     });
 
-    $('#modal_next_day').on('show.bs.modal', function () {
+    $('#modal_tuesday').on('show.bs.modal', function () {
 
         $.ajax({
 		    type: "GET",
 		    url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
 		    data: {
-                day: tomorrow,
+                day: tuesday,
             },
 		    success: function (data) {
                 
                 if(data.length > 0){
-                    $('#result_body_tomorrow').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_tuesday_'+item.category_id).empty();
+                    });
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_tomorrow_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_tuesday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -668,20 +675,22 @@ $(document).ready(function(){
 
     });
     
-    $('#modal_today').on('show.bs.modal', function () {
+    $('#modal_wednesday').on('show.bs.modal', function () {
 
         $.ajax({
 		    type: "GET",
 		    url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
 		    data: {
-                day: today,
+                day: wednesday,
             },
 		    success: function (data) {
                 if(data.length > 0){
-                    $('#result_body_today').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_wednesday_'+item.category_id).empty();
+                    });
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_today_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_wednesday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                         
                     });
@@ -691,20 +700,22 @@ $(document).ready(function(){
 
     });
 
-    $('#modal_yesterday').on('show.bs.modal', function () {
+    $('#modal_thursday').on('show.bs.modal', function () {
 
         $.ajax({
             type: "GET",
             url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
             data: {
-                day: yesterday,
+                day: thursday,
             },
             success: function (data) {
                 if(data.length > 0){
-                    $('#result_body_yesterday').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_thursday_'+item.category_id).empty();
+                    });
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_yesterday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_thursday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }
@@ -712,20 +723,22 @@ $(document).ready(function(){
         });
 
     });
-    $('#modal_before_yesterday').on('show.bs.modal', function () {
+    $('#modal_friday').on('show.bs.modal', function () {
 
         $.ajax({
             type: "GET",
             url: "{{URL::action('Restaurant\MenuController@dataDetailMenu')}}",
             data: {
-                day: before_yesterday,
+                day: friday,
             },
             success: function (data) {
                 if(data.length > 0){
-                    $('#result_body_before_yesterday').empty();
+                    $.each(data[0], function(index, item){
+                        $('#result_body_friday_'+item.category_id).empty();
+                    });
                     $.each(data[0], function(index, item){
                         if(item.amount > 0){
-                            $('#result_body_before_yesterday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
+                            $('#result_body_friday_'+item.category_id).append("<p>"+item.amount+" - "+item.name+"</p>");
                         }
                     });
                 }

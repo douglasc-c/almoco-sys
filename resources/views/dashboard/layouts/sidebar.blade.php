@@ -1,4 +1,4 @@
-<div class="sidebar-wrapper" data-simplebar="true">
+<div class="sidebar-wrapper" data-simplebar="true" style="display: none;">
     <div class="sidebar-header">
         <div class="">
             <img src="assets/images/logo-icon.png" class="logo-icon-2" alt="" />

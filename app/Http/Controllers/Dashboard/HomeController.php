@@ -35,6 +35,7 @@ class HomeController extends Controller
         #Get Menus
         $menus = Menu::getMenu();
         // dd($menus);
+        // dd($menus);
         return view('dashboard.home', compact('menus'));
 
     }

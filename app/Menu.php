@@ -20,27 +20,25 @@ class Menu extends Model
 
     public static function getMenu(){
         $menus_selected = Menu::orderBy('menu_day', 'DESC')->limit(6)->get();
-
+        // dd($menus_selected);
         foreach($menus_selected as $menu){
+            // dd($menu);
             $menus[$menu->menu_day]['day'] = $menu->menu_day;
             $menus[$menu->menu_day]['id'] = $menu->id;
             $foods = json_decode($menu->foods_id);
-            $foods_name = [];
-            $foods_id = [];
+
             foreach($foods as $food){
-                // $food_find = Food::find($food);
-                // $food_name = array_push($foods_name, $food_find->name);
-                // $food_id = array_push($foods_id, $food_find->id);
+               
                 $food_find = Food::find($food);
                 $foods_result[$food_find->id]['id'] = $food_find->id;
                 $foods_result[$food_find->id]['name'] = $food_find->name;
-                // $food_name = array_push($foods_name, $food_find->name);
-                // $food_id = array_push($foods_id, $food_find->id);
+              
             }
             $menus[$menu->menu_day]['itens'] = $foods_result;
-            // $menus[$menu->menu_day]['itens_name'] = $foods_name;
-            // $menus[$menu->menu_day]['itens_id'] = $foods_id;
+            $foods_result = [];
+           
         }
+        
 
         return $menus;
     }
