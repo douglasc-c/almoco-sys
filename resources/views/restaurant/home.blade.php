@@ -58,9 +58,6 @@ Home -
                     //loops through each week
                     for($i=0; $i < 7; $i++)
                     {
-                        // echo '<td><button type="button" class="date calendar-bubble-day" onclick="teste(';
-                        // echo $tempDate->day, $tempDate->month;   
-                        // echo ')">';
                         echo '<td><button type="button" class="date calendar-bubble-day" onclick="select_day(';
                         echo $tempDate->day;
                         echo ','; 
