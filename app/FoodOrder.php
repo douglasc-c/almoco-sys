@@ -18,4 +18,8 @@ class FoodOrder extends Model
         'user_id',
         'menu_id',
     ];
+
+    public function menu() {
+        return $this->hasOne(Menu::class, 'id', 'menu_id');
+    }
 }

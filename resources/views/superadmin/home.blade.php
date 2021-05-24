@@ -33,13 +33,13 @@ Home -
 
                 echo '<table border="1" class = "w3-table w3-boarder w3-striped main-calendar">
                     <thead><tr class="w3-theme">
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
+                    <th>Sed</th>
+                    <th>Ter</th>
+                    <th>Qua</th>
+                    <th>Qui</th>
+                    <th>Sex</th>
+                    <th>Sáb</th>
+                    <th>Dom</th>
                     </tr></thead>';
 
                 $skip = $tempDate->dayOfWeek;
@@ -61,7 +61,9 @@ Home -
                         echo '<td><button type="button" class="date calendar-bubble-day" onclick="select_day(';
                         echo $tempDate->day;
                         echo ','; 
-                        echo $tempDate->month;   
+                        echo $tempDate->month;
+                        echo ','; 
+                        echo $tempDate->year;    
                         echo ')"';
                         echo 'id="date-';
                         echo $tempDate->year; 
@@ -97,45 +99,23 @@ Home -
                     </div>
                 </div>
             </div>
+            <div id="justifications">
     <!-- bloco de menu, pode ser adicionado através do modal -->
             @foreach($justifications as $justification)
             <div class="row">
                 <div class="col-xl-12">
                     <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_add-acompanhamento">
-                        <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_add-{{$justification['name']}}" aria-expanded="true" aria-controls="collapse_add-acompanhamento">
+                        <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_add-{{$justification['id']}}" aria-expanded="true" aria-controls="collapse_add-acompanhamento">
                             <div class="custom-card-min-header" id="headingOne">
-                            
                                 <h6>
-                                    {{$justification['name']}}
+                                    {{$justification['user']['email']}}
                                     <span class="custom-collapse-arrow"></span>
                                 </h6>
                             </div>
                         </a>
-                        <div id="collapse_add-{{$justification['name']}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_add-acompanhamento">
+                        <div id="collapse_add-{{$justification['id']}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_add-acompanhamento">
                             <div class="card-body">
-                                <ul class="menu-ul">
-                                    <!-- list item -->
-                                    {{-- @foreach($category['itens'] as $item)
-                                        <li>
-                                            <div class="row menu-list-row">
-                                                <div class="col-xl-2 zeroed-col menu-list-checkbox-bloc">
-                                                    <div class="rounded-checkbox">
-                                                        <input type="checkbox" id="{{$item->name}}" name="checkbox[{{$item->name}}]"/>
-                                                        <label for="{{$item->name}}"></label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-xl-10 zeroed-col">
-                                                    <label for="{{$item->name}}" class="menu-list-title">{{$item->name}}</label>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    @endforeach --}}
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12 collapse-btn-bloc">
-                                    {{-- <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Criar novo item</button> --}}
-                                </div>
+                                <p>{{$justification['description']}}</p>
                             </div>
                         </div>
                     </div>
@@ -144,13 +124,10 @@ Home -
             <!--   -->
            
             @endforeach
+            </div>
             <input type="hidden" id="month_value" name="month_value">
             <input type="hidden" id="day_value" name="day_value">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <button type="submit" class="main-btn main-btn-color main-btn-width">Enviar</button>
-                </div>
-            </div>
+           
 
         </div>
         
@@ -549,7 +526,7 @@ Home -
 </script>
 
 <script>
-function select_day(day, month){
+function select_day(day, month, year){
     $('#day_value').val(day);
     $('#month_value').val(month);
     if(month == 6){
@@ -557,6 +534,33 @@ function select_day(day, month){
     }else if(month == 5){
         $('#text_month').text('Maio 2021');
     }
+
+    
+    // alert(day);
+    if(month < 10) month = '0'+month;
+    if(day < 10) day = '0'+day; 
+    // $( "#date-"+year+"-"+month+"-"+day ).addClass( "menu-selected" );
+    var date = year+'-'+month+'-'+day;
+    $('#justifications').empty();
+    $.ajax({
+        type: "GET",
+        url: "{{URL::action('SuperAdmin\HomeController@getJustifications')}}",
+        data: {
+            date: date,
+        },
+        success: function (data) {
+            if(data.length > 0){
+                $.each(data[0], function(index, item){
+
+                    $('#justifications').append(
+                        "<div class='row'><div class='col-xl-12'><div class='accordion custom-card main-card-bg custom-card-padding-1' id='accordion_add-acompanhamento'><a class='custom-card-header' data-toggle='collapse' data-target='#collapse_add-"+item.id+"' aria-expanded='true' aria-controls='collapse_add-acompanhamento'><div class='custom-card-min-header' id='headingOne'><h6>"+item.user.email+"<span class='custom-collapse-arrow'></span></h6></div></a><div class='collapse_add-"+item.id+"' class='collapse' aria-labelledby='headingOne' data-parent='#accordion_add-acompanhamento'><div class='card-body'><p>"+item.description+"</p></div></div></div></div></div>" 
+                    );
+
+                });
+            }
+        }
+    });
+
 }
 
 </script>

@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth', 'needsRole:superadmin'], 'prefix' => 'sup
     Route::get('/foods', 'SuperAdmin\FoodController@foodIndex');
     Route::get('/food/data/', 'SuperAdmin\FoodController@dataFoods');
 
+    #justifications
+    Route::get('/menu/justifications/', 'SuperAdmin\HomeController@getJustifications');
+    
+
 
 });
 

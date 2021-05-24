@@ -135,8 +135,20 @@ class HomeController extends Controller
         $confirmed_menus = Menu::pluck('menu_day');
 
         #Justificativas
-        $justifications = Justification::join('users', 'users.id', '=', 'justifications.user_id')->whereDate('justifications.created_at', Carbon::today())->select('users.*', 'justifications.*')->get();
-
+        // $justifications = Justification::join('users', 'users.id', '=', 'justifications.user_id')->join('menus', 'menus.id', '=', 'justifications.menu_id')->whereDate('menus.menu_day', Carbon::today())->select('users.name', 'users.email', 'justifications.*')->get();
+        $justifications = Justification::with([
+            'user:id,name,email',
+            'food_order' => function($q) {
+                return $q->with(['menu:id'])->select('id', 'menu_id');
+            }
+        ])
+            ->whereHas('food_order', function ($q) {
+                return $q->whereHas('menu', function ($query) {
+                    return $query->whereDate('menu_day', Carbon::today());
+                });
+            })
+            ->get();
+        // dd($justifications);
 
 
         // return view('superadmin.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all'));
@@ -241,6 +253,30 @@ class HomeController extends Controller
         }
         return response()->json("Error");
 
+    }
+
+    public function getJustifications(Request $request){
+        $date = $request->date;
+        // $justifications = Justification::join('users', 'users.id', '=', 'justifications.user_id')
+        //                     ->join('menus', 'menus.id', '=', 'justifications.menu_id')
+        //                     ->whereDate('menus.menu_day', $date)
+        //                     ->select('users.name', 'users.email', 'justifications.*')
+        //                     ->get();
+
+        $justifications = Justification::with([
+            'user:id,name,email',
+            'food_order' => function($q) use ($date) {
+                return $q->with(['menu:id'])->select('id', 'menu_id');
+            }
+        ])
+            ->whereHas('food_order', function ($q) use ($date) {
+                return $q->whereHas('menu', function ($query) use ($date) {
+                    return $query->whereDate('menu_day', $date);
+                });
+            })
+            ->get();
+
+        return response()->json( [$justifications] );
     }
 
 }

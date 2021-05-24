@@ -62,6 +62,10 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         }
     }
 
+    public function justifications() {
+        return $this->hasMany(Justification::class, 'user_id', 'id');
+    }
+
     public function getJWTIdentifier() {
         return $this->getKey();
     }

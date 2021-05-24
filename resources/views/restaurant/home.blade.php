@@ -33,13 +33,13 @@ Home -
 
                 echo '<table border="1" class = "w3-table w3-boarder w3-striped main-calendar">
                     <thead><tr class="w3-theme">
-                    <th>Sun</th>
-                    <th>Mon</th>
-                    <th>Tue</th>
-                    <th>Wed</th>
-                    <th>Thu</th>
-                    <th>Fri</th>
-                    <th>Sat</th>
+                    <th>Sed</th>
+                    <th>Ter</th>
+                    <th>Qua</th>
+                    <th>Qui</th>
+                    <th>Sex</th>
+                    <th>Sáb</th>
+                    <th>Dom</th>
                     </tr></thead>';
 
                 $skip = $tempDate->dayOfWeek;

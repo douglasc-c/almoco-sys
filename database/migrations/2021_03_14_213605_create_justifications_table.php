@@ -18,8 +18,8 @@ class CreateJustificationsTable extends Migration
             $table->integer('status');
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('user_head_id')->unsigned()->index();
-            $table->foreign('user_head_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('user_arm_id')->unsigned()->index();
+            $table->foreign('user_arm_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('food_orders_id')->unsigned()->index();
             $table->foreign('food_orders_id')->references('id')->on('food_orders')->onDelete('cascade');
             $table->text('description');
