@@ -277,9 +277,9 @@ Home -
         </div>
     </div>
     <div class="col-xl-3">
-        <div class="row">
-            <div class="col-xl-12 custom-title-card-bloc">
-                <div class="custom-title-card grey-card-bg-2 custom-card-padding-2">
+        <div class="custom-card dark-card-bg main-card-padding">
+            <div class="row">
+                <div class="col-xl-12 custom-card-header-bloc">
                     <h6>Menus confirmados</h6>
                 </div>
             </div>
@@ -306,7 +306,12 @@ Home -
                                 </li>
                                 @endforeach
                             </ul>
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_monday">Detalhes</a>
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_monday">Detalhes</a>
+                                </div>
+                            </div>
+
                         </div>
                         
                     </div>
@@ -333,7 +338,11 @@ Home -
                                     </li>
                                     @endforeach
                                 </ul>
-                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_tuesday">Detalhes</a>
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_tuesday">Detalhes</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -359,7 +368,11 @@ Home -
                                     </li>
                                     @endforeach
                                 </ul>
-                                <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_wednesday">Detalhes</a>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center">
+                                        <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_wednesday">Detalhes</a>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -385,7 +398,11 @@ Home -
                                 </li>
                                 @endforeach
                             </ul>
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_thursday">Detalhes</a>
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_thursday">Detalhes</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -411,7 +428,11 @@ Home -
                                 </li>
                                 @endforeach
                             </ul>
-                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_friday">Detalhes</a>
+                            <div class="row">
+                                <div class="col-lg-12 text-center">
+                                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_friday">Detalhes</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
