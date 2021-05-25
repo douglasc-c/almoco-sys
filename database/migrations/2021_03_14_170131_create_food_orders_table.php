@@ -16,7 +16,9 @@ class CreateFoodOrdersTable extends Migration
         Schema::create('food_orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('itens_selected')->nullable();
-            $table->integer('status')->default(0);
+            
+            $table->bigInteger('status_id')->unsigned()->nullable();
+            $table->foreign('status_id')->references('id')->on('status')->onDelete('SET NULL');
 
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

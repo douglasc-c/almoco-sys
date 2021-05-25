@@ -13,9 +13,9 @@ class Justification extends Model
      * @var array
      */
     protected $fillable = [
-        'status',
+        'status_id',
         'user_id',
-        'user_arm_id',
+        'arm_id',
         'food_orders_id',
         'description',
         'justification_img_link',

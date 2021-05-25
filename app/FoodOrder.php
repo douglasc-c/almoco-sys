@@ -14,7 +14,7 @@ class FoodOrder extends Model
      */
     protected $fillable = [
         'itens_selected',
-        'status',
+        'status_id',
         'user_id',
         'menu_id',
     ];

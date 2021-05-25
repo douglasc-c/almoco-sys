@@ -22,6 +22,8 @@ class CreateUsersTable extends Migration
             $table->string('cpf')->nullable();
             $table->string('compralo_code')->unique()->nullable();
             $table->string('email_token')->unique();
+            $table->integer('arm_id')->unsigned()->nullable();
+            $table->foreign('arm_id')->references('id')->on('users')->onDelete('SET NULL');
             $table->timestamps();
         });
     }
