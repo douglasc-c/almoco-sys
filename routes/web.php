@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'needsRole:superadmin'], 'prefix' => 'sup
 
 
 	Route::get('/', 'SuperAdmin\HomeController@index')->name('superadmin');
+	Route::get('/teste', 'SuperAdmin\HomeController@teste')->name('superadmin');
 	Route::get('/usuarios', 'SuperAdmin\UsersController@index')->name('users');
 	Route::get('/usuarios/data', 'SuperAdmin\UsersController@dataUsers')->name('users-data');
     Route::post('/usuarios/criar/usuario/', 'SuperAdmin\UsersController@createUser')->name('create-user');
