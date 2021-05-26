@@ -31,6 +31,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'billing_code',
         'remember_tokem',
         'email_token',
+        'first_access',
     ];
 
     /**

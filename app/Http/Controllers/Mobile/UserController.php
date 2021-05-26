@@ -4,16 +4,14 @@ namespace App\Http\Controllers\Mobile;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Psr\Http\Message\ResponseInterface;
-use GuzzleHttp\Exception\RequestException;
 
 class UserController extends Controller
 {
     public function update(Request $request) {
         $client = new \GuzzleHttp\Client();
-        $result = $client->post('http://a5946f03dfc0.ngrok.io/api/mobile/v1/checkCode', [
+        $result = $client->post('http://67.207.95.144/api/mobile/v1/checkCode', [
             'json' => [
-                'document_number' => $request->document_number,
+                'document_number' => $request->cpf,
                 'billing_code' => $request->billing_code,
             ]
         ]);
@@ -28,9 +26,12 @@ class UserController extends Controller
                     'password' => bcrypt($request->password),
                     'cpf' => $request->cpf,
                     'billing_code' => $request->billing_code,
+                    'first_access' => 0,
                 ]);
 
                 $user = auth('api')->user();
+
+                $user->role_id = $user->roles->first()->id;
 
                 return response()->json([ 'user' => $user ]);
             } else {

@@ -55,6 +55,8 @@ class AuthController extends Controller
     {
         $user = auth('api')->user();
 
+        $user->role_id = $user->roles->first()->id;
+        
         return response()->json([
             'access_token' => auth('api')->refresh(),
             'user' => $user,
@@ -93,6 +95,8 @@ class AuthController extends Controller
     protected function respondWithToken($token)
     {
         $user = auth('api')->user();
+
+        $user->role_id = $user->roles->first()->id;
 
         return response()->json([
             'access_token' => $token,
