@@ -71,7 +71,9 @@ Route::group(['middleware' => ['auth', 'needsRole:superadmin'], 'prefix' => 'sup
 
     #justifications
     Route::get('/menu/justifications/', 'SuperAdmin\HomeController@getJustifications');
-    
+
+    #Report
+    Route::get('/home/get-data/report', 'SuperAdmin\HomeController@getReportData');
 
 
 });
