@@ -73,7 +73,8 @@
   .auth-form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */color: #3C3C3B !important;}
   .auth-form-control::-moz-placeholder { /* Firefox 19+ */ color: #3C3C3B !important; }.auth-form-control:-ms-input-placeholder { /* IE 10+ */ color: #3C3C3B!important; }
   .auth-form-control:-moz-placeholder { /* Firefox 18- */ color: #3C3C3B !important; }
-
+  .tab-link-icon-1 { width: 15%; }
+  .tab-link-icon-2 { width: 20%; }
 /*btn style*/
 .auth-btn-custom-bloc {
   text-align: -webkit-center;
@@ -133,11 +134,12 @@
 }
 .auth-logo-bloc {
   text-align: center;
-  margin-bottom: 5%;
+  margin-bottom: 5%;R
 }
 /*header*/
+.navbar { padding: 2% 0; }
 .main-navbar { 
-  padding: .5% 2%; 
+  padding: .5% 5% 0%; 
   background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(207,216,234,1) 10%, rgba(174,188,224,1) 30%, rgba(161,178,227,1) 50%, rgba(138,162,232,1) 85%, rgba(187,199,239,1) 100%); 
 }
 .header-logo { 
@@ -145,6 +147,24 @@
 }
 .header-exit-link { color: #6271A8; }
 .header-exit-icon { font-size: 26px; color: #6271A8; }
+.main-navbar .nav-tabs .nav-link { 
+  background-color: #DEE1F5;
+  color: #ADADAD;
+  border-bottom: none;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  padding: .5rem 2rem;
+}
+.main-navbar .nav-tabs .nav-link img { filter: brightness(1) invert(.5);}
+.nav-tabs .nav-link:focus img{ filter: brightness(1) invert(0); }
+.main-navbar .nav-tabs .nav-link:hover img{ filter: brightness(1) invert(0); }
+.main-navbar .nav-tabs .active img{ filter: brightness(1) invert(0); }
+.main-navbar .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus { background-color: #fff; color: #6271A8;}
+.main-navbar .nav-tabs .active { background-color: #fff; color: #6271A8;}
+.nav-link-tab:nth-child(2n) {
+  margin-left: 10px;
+}
+.nav-tabs { border-bottom: none; }
 /*content*/
 .main-bg { background-color: #fff; }
 .custom-card {
@@ -161,7 +181,7 @@
     min-width: 0;
     word-wrap: break-word;
     background-clip: border-box;
-    border-radius: 12px;
+    border-radius: 10px;
 }
 .custom-title-card {
 	/*custom*/
@@ -202,9 +222,17 @@
 .custom-card-header-bloc {
 	text-align: center;
 }
-.custom-card-header-bloc h6{
+.custom-card-header-bloc p {
 	margin-bottom: 0px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
+.custom-card-header-title {
+ font-weight: bold;
+ text-transform: uppercase;
+ font-size: 14px;  
+}
+
 .custom-card-min-header {
 	padding: 5% 0.5%;
     margin-bottom: 0;
@@ -227,6 +255,20 @@
     font-family: "FontAwesome"
 }
 .custom-card-header[aria-expanded="true"] .custom-collapse-arrow::after {
+  content: "\f107";
+}
+.custom-collapse-arrow-2 {
+  font-size: 28px;
+    position: absolute;
+    right: 7.3%;
+}
+.custom-collapse-arrow-2::after {
+    content: "\f106";
+    color: #fff;
+    float: right;
+    font-family: "FontAwesome"
+}
+.collapse-calendar-btn[aria-expanded="true"] .custom-collapse-arrow-2::after {
   content: "\f107";
 }
 /*calendar*/
@@ -284,7 +326,43 @@
 .calendar-bubble-day:focus {
   outline: none;
 }
+.calendar-header-box { 
+  padding: 2%;
+  background-color: #6271A8;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.main-icon-card-header { 
+  position: absolute;
+  left: 15%;
+  width: 24px;
+}
+.collapse-show-month-body {
+  background-color: #A5B2E1;
+  padding-top: 5%;
+}
+.calendar-month-wrapper {
+  background-color: #A5B2E1;
+  padding-bottom: 10%;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  margin-bottom: 10%;
+}
+.summary-card { 
+  padding: 5%;
+  background-color: #6271A8;
+  border-radius: 12px;
+}
+.summary-card p {
+  margin-bottom: 0px;
+  color: #fff;
+}
 /*accompaniment*/
+.main-card-wrapper { 
+  background-color: #D3DCFF;
+}
 .zeroed-col { padding: 0px; }
 .menu-ul { padding: 0px; list-style: none; }
 .main-icon-size { font-size: 19px !important; color: #fff; }
@@ -311,7 +389,11 @@
 }
 .menu-ul li { margin-top: 2%; }
 /**/
-
+.calendar-card-wrapper {
+  background-color: #D3DCFF;
+  padding-bottom: 5%;
+  border-radius: 13px;
+}
 .rounded-checkbox {
   position: relative;
 }
@@ -375,9 +457,9 @@
 .confirmed-card {
 	text-align: center;
 }
-.active { color: #28B43C; }
+/*.active { color: #28B43C; }
 .inative { color: #FF5448; }
-.pending { color: #ECCC77; }
+.pending { color: #ECCC77; }*/
 .main-btn {
     display: inline-block;
     font-weight: 400;
@@ -677,4 +759,14 @@ Sidebar Page Navigations
 .main-footer {
   background-color: #BBC7EF;
   padding: 1.5%;
+}
+/*status*/
+.status-yellow {
+  color: #FFFE00;
+}
+.status-sucess { 
+  color: #28B43C;
+}
+.status-danger { 
+  color: #B42828;
 }

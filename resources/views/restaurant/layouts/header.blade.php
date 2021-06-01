@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg main-navbar">
+<header class="main-navbar">
+<nav class="navbar navbar-expand-lg">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -23,3 +24,14 @@
     </div>
   </div>
 </nav>
+<nav class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-link active nav-link-tab" id="main-menu-tab" data-toggle="tab" href="#main-menu" role="tab" aria-controls="main-menu" aria-selected="true">
+          <img class="tab-link-icon-1" src="assets/admin-theme/images/restaurant/home/menu-icon.svg">
+          Adicionar menu
+      </a>
+      <a class="nav-link nav-link-tab" id="graph-menu-tab" data-toggle="tab" href="#main-graph" role="tab" aria-controls="main-graph" aria-selected="false">
+          <img class="tab-link-icon-2" src="assets/admin-theme/images/restaurant/home/graph-icon.svg">
+          Relatório
+      </a>
+    </nav>
+</header>
