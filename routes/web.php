@@ -95,4 +95,7 @@ Route::group(['middleware' => ['auth', 'needsRole:restaurantuser'], 'prefix' => 
         Route::get('/menus/show/{Day}', 'Restaurant\MenuController@show');
         Route::get('/menus/get-data/detail', 'Restaurant\MenuController@dataDetailMenu');
 
+        #Report
+        Route::get('/home/get-data/report', 'Restaurant\MenuController@getReportData');
+
 });

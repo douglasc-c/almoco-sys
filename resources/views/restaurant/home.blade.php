@@ -36,13 +36,13 @@ Home -
 
                                 echo '<table border="1" class = "w3-table w3-boarder w3-striped main-calendar">
                                     <thead><tr class="w3-theme">
-                                    <th>Sed</th>
+                                    <th>Dom</th>
+                                    <th>Seg</th>
                                     <th>Ter</th>
                                     <th>Qua</th>
                                     <th>Qui</th>
                                     <th>Sex</th>
                                     <th>Sáb</th>
-                                    <th>Dom</th>
                                     </tr></thead>';
 
                                 $skip = $tempDate->dayOfWeek;
@@ -452,7 +452,40 @@ Home -
         </div>
     </div>
     <div class="tab-pane fade" id="main-graph" role="tabpanel" aria-labelledby="graph-menu-tab">
-      
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="wd-200 mg-b-20" style="width: 100%">
+                        <p>Início</p>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                </div>
+                            </div>
+                            <input type="date" class="form-control fc-datepicker" id="from_date" name="from_date" autocomplete="off" placeholder="MM/DD/AAAA" style="border: 1px solid #93A8E5">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="wd-200 mg-b-20" style="width: 100%">
+                        <p>Final</p>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                </div>
+                            </div>
+                            <input type="date" class="form-control" id="to_date" name="to_date" autocomplete="off" placeholder="MM/DD/AAAA" style="border: 1px solid #93A8E5">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" id="get_filter" class="main-btn main-btn-color main-btn-width" style="margin-top: 34px">Filtrar</button>
+                </div>
+            </div>
+        <div class="row">
+                <canvas id="mycanvas" style="max-width: 800px;"></canvas>
+        </div>
     </div>
 </div>
 
@@ -608,6 +641,66 @@ section for modals
 
 
 @section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script>
+        $("#get_filter").on('click', function(){
+            
+            var from_date = $("#from_date").val();
+            var to_date = $("#to_date").val();
+    
+            var ctx_live = document.getElementById("mycanvas");
+            var myChart = new Chart(ctx_live, {
+            type: 'bar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                    data: [],
+                    borderWidth: 1,
+                    borderColor:'#ADBBE0',
+                    label: 'liveCount',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    title: {
+                    display: true,
+                    text: "",
+                    },
+                    legend: {
+                    display: false
+                    },
+                    scales: {
+                    yAxes: [{
+                        ticks: {
+                        beginAtZero: true,
+                        }
+                    }]
+                    }
+                }
+                });
+                // end graph
+            $.ajax({
+                type: "GET",
+                url: "{{URL::action('Restaurant\MenuController@getReportData')}}",
+                data: {
+                    from_date: from_date,
+                    to_date: to_date,
+                },
+                success: function (data) {
+
+                    $.each(data[0], function(index, item){
+                        myChart.data.labels.push(item);
+                    });
+                    $.each(data[1], function(index, item){
+                        myChart.data.datasets[0].data.push(item);
+                    });
+                    // re-render the chart
+                    myChart.update();
+                }
+            });
+        });
+            
+</script>
 <script>
     $(document).ready(function(){
     var dates = {!! json_encode($confirmed_menus->toArray()) !!};
@@ -793,4 +886,6 @@ $('[data-toggle="collapse"]').on('click',function(e){
 });
 
 </script>
+
+
 @stop

@@ -249,4 +249,43 @@ class MenuController extends Controller
         return response()->json("Error");
     }
 
+    public function getReportData(Request $request){
+
+        $from_date = $request->from_date;
+        $to_date = $request->to_date;
+        $dates = [];
+        $amount = [];
+        
+
+        // $menus = FoodOrder::with([
+        //     'menu:id,menu_day'
+        // ])
+        // ->get();
+
+        $menus = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')
+                            ->whereBetween('menu_day', [$from_date, $to_date])
+                            ->select('menus.menu_day')
+                            ->get();
+
+        foreach($menus as $menu){
+            if(!in_array($menu->menu_day, $dates, true)){
+                array_push($dates, $menu->menu_day);
+            }
+        }
+
+        foreach($dates as $date){
+            $orders_day_amount = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')
+            ->whereDate('menus.menu_day', $date)
+            ->select('menus.menu_day')
+            ->count();
+            if($orders_day_amount > 0){
+                array_push($amount, $orders_day_amount);
+            }
+            $orders_day_amount = 0;
+            
+        }
+        
+        return response()->json( [$dates, $amount] );
+    }
+
 }
