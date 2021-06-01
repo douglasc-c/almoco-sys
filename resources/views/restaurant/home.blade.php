@@ -14,7 +14,7 @@ Home -
             <div class="row">
                 <div class="col-xl-3">
                     <div class="calendar-card-wrapper">
-                        <div class="custom-card dark-card-bg main-card-padding">
+                        <div class="custom-card dark-card-bg main-card-padding main-card-header">
                             <div class="row">
                                 <div class="col-xl-12 custom-card-header-bloc">
                                     <h6 class="custom-card-header-title">dia em que deseja incluir o menu</h6>
@@ -103,7 +103,7 @@ Home -
                 </div>
                 <div class="col-xl-3">
                     <div class="main-card-wrapper">
-                        <div class="custom-card dark-card-bg main-card-padding">
+                        <div class="custom-card dark-card-bg main-card-padding main-card-header">
                             <div class="row">
                                 <div class="col-xl-12 custom-card-header-bloc">
                                     <h6 class="custom-card-header-title">Adicionar menu</h6>
@@ -113,31 +113,32 @@ Home -
                         @foreach($categoriesAll as $category)
                         <div class="row">
                             <div class="col-xl-12">
-                                <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_add-acompanhamento">
+                                <div class="accordion custom-card main-card-bg-secondary custom-card-padding-1 main-category-card" id="accordion_add-acompanhamento">
                                     <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_add-{{$category['name']}}" aria-expanded="true" aria-controls="collapse_add-acompanhamento">
                                         <div class="custom-card-min-header" id="headingOne">
-                                        
                                             <h6>
+                                                <img class="main-icon-card-header" src="assets/admin-theme/images/restaurant/menu/{{$category['name']}}.svg">
                                                 {{$category['name']}}
                                                 <span class="custom-collapse-arrow"></span>
                                             </h6>
                                         </div>
                                     </a>
                                     <div id="collapse_add-{{$category['name']}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_add-acompanhamento">
-                                        <div class="card-body">
+                                        <div class="card-body card-body-menu">
                                             <ul class="menu-ul">
                                                 <!-- list item -->
                                                 @foreach($category['itens'] as $item)
                                                     <li>
                                                         <div class="row menu-list-row">
-                                                            <div class="col-xl-2 zeroed-col menu-list-checkbox-bloc">
+                                                            <div class="col-xl-2 zeroed-col menu-list-checkbox-bloc" style="align-self: center;">
                                                                 <div class="rounded-checkbox">
                                                                     <input type="checkbox" id="{{$item->name}}" name="checkbox[{{$item->name}}]"/>
                                                                     <label for="{{$item->name}}"></label>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-xl-10 zeroed-col">
+                                                            <div class="col-xl-6 zeroed-col">
                                                                 <label for="{{$item->name}}" class="menu-list-title">{{$item->name}}</label>
+                                                                <p class="mb-0">Descrição</p>
                                                             </div>
                                                         </div>
                                                     </li>
@@ -146,7 +147,7 @@ Home -
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12 collapse-btn-bloc">
-                                                <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Criar novo item</button>
+                                                <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Adicionar Novo</button>
                                             </div>
                                         </div>
                                     </div>
@@ -191,14 +192,14 @@ Home -
                         <input type="hidden" id="day_value" name="day_value">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <button type="submit" class="main-btn main-btn-color main-btn-width">Enviar</button>
+                                <button type="submit" class="main-btn main-save-btn-green">Salvar Menu</button>
                             </div>
                         </div>
                     </div>
         </form>
                 </div>
             <div class="col-xl-3">
-                <div class="custom-card dark-card-bg main-card-padding">
+                <div class="custom-card dark-card-bg main-card-padding main-card-header">
                     <div class="row">
                         <div class="col-xl-12 custom-card-header-bloc">
                             <h6 class="custom-card-header-title">Número de confirmações</h6>
@@ -287,7 +288,7 @@ Home -
                 </div>
             </div>
             <div class="col-xl-3">
-                <div class="custom-card dark-card-bg main-card-padding">
+                <div class="custom-card dark-card-bg main-card-padding main-card-header">
                     <div class="row">
                         <div class="col-xl-12 custom-card-header-bloc">
                             <h6 class="custom-card-header-title">Menus confirmados</h6>

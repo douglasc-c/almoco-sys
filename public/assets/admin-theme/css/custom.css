@@ -181,7 +181,9 @@
     min-width: 0;
     word-wrap: break-word;
     background-clip: border-box;
-    border-radius: 10px;
+}
+.main-card-header { 
+  border-radius: 12px;
 }
 .custom-title-card {
 	/*custom*/
@@ -205,6 +207,7 @@
     color: #7989BF;
 }
 .main-card-bg { background-color: #6271A8; }
+.main-card-bg-secondary { background-color: #A5B2E1; }
 .dark-card-bg { background-color: #333F68; }
 .grey-card-bg { background-color: #F7F7F8; }
 .grey-card-bg-2 { background-color: #EDEEF0; }
@@ -218,6 +221,8 @@
 }
 .custom-card-header h6 {
 	margin-bottom: 0px;
+  text-transform: uppercase;
+  font-size: 14px;
 }
 .custom-card-header-bloc {
 	text-align: center;
@@ -234,19 +239,20 @@
 }
 
 .custom-card-min-header {
-	padding: 5% 0.5%;
+	padding: 8% 0.5%;
     margin-bottom: 0;
     background-color: transparent;
     font-size: 16px;
     text-transform: capitalize;
     box-shadow: 0 4px 2px -2px #4e5f9e;
-    border-radius: 13px;
+    border-radius: 32px;
+    background-color: #6271A8;
 }
 .custom-collapse-arrow {
 	font-size: 28px;
     position: absolute;
     right: 3.3%;
-    top: 8.5px;
+    top: 17.5px;
 }
 .custom-collapse-arrow::after {
     content: "\f106";
@@ -311,6 +317,9 @@
     margin-right: 0px;
     color: #fff;
 }
+.card-body-menu { 
+  padding: 5% 1.25rem;
+}
 .menu-added {
   background-color: #28B43C;
 }
@@ -362,6 +371,11 @@
 /*accompaniment*/
 .main-card-wrapper { 
   background-color: #D3DCFF;
+  border-radius: 13px;
+  padding-bottom: 5%;
+}
+.main-category-card { 
+  border-radius: 35px;
 }
 .zeroed-col { padding: 0px; }
 .menu-ul { padding: 0px; list-style: none; }
@@ -369,7 +383,7 @@
 .main-icon-size:hover { font-size: 19px !important; color: #333F68;; }
 .menu-list-checkbox-bloc { text-align: -webkit-center; }
 .menu-list-title { margin-bottom: 0px; font-size: 1rem; cursor: pointer;}
-.menu-list-row { transition: .1s;}
+.menu-list-row { transition: .1s; justify-content: center;}
 .menu-list-row:hover {
 	-webkit-transform: scale(1.01);
 	-ms-transform: scale(1.01);
@@ -378,9 +392,9 @@
 .menu-list-row:hover:after { 
 	content: " ";
 	position:absolute;
-	left: 6%;
+	left: 25%;
 	bottom: 0;
-	width: 90%;
+	width: 50%;
 	height: 5px;
 	z-index:-1;
 	-moz-box-shadow: 4px 2px -2px #4e5f9e;
@@ -475,7 +489,7 @@
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0.25rem;
+    border-radius: 20px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .main-btn-color {
@@ -487,6 +501,14 @@
 }
 .main-btn-width {
   width: 50%;
+}
+.main-save-btn-green {
+  background-color: #28B43C;
+  width: 180px;
+  height: 45px;
+}
+.main-save-btn-green:hover {
+  background-color: #39D34F;
 }
 .collapse-btn-bloc {
   text-align: center;
