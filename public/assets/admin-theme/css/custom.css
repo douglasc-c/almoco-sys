@@ -2,6 +2,34 @@
 /*43538A DARK*/
 /*#43538A MED*/
 /*#7989BF LOW*/
+/*fonts*/
+@font-face {
+  font-family: 'raleway-black';
+  src:  url('../fonts/raleway/raleway-black.ttf') format('ttf'),
+}
+@font-face {
+  font-family: 'raleway-bold';
+  src:  url('../fonts/raleway/raleway-bold.ttf') format('ttf'),
+}
+@font-face {
+  font-family: 'raleway-medium';
+  src:  url('../fonts/raleway/raleway-medium.ttf') format('ttf'),
+}
+@font-face {
+  font-family: 'raleway-regular';
+  src:  url('../fonts/raleway/raleway-regular.ttf') format('ttf'),
+}
+@font-face {
+  font-family: 'raleway-light';
+  src:  url('../fonts/raleway/raleway-light.ttf') format('ttf'),
+}
+@font-face {
+  font-family: 'raleway-extraLight';
+  src:  url('../fonts/raleway/raleway-extraLight.ttf') format('ttf'),
+}
+body {
+  font-family: raleway-medium, sans-serif;
+}
 /*auth page*/
 .auth-bg {
   background: linear-gradient(45deg, rgba(187,199,239,1) 35%, rgba(255,255,255,1) 65%);
@@ -169,7 +197,7 @@
 .main-bg { background-color: #fff; }
 .custom-card {
 	/*custom*/
-	box-shadow: 0 0.1rem 0.7rem rgb(0 0 0 / 18%);
+    filter: drop-shadow(2px 2px 5px rgb(0 0 0 / 18%));
     border: 1px solid rgba(0, 0, 0, 0);
     margin-bottom: 30px;
     /*bootstrap config*/
@@ -206,6 +234,10 @@
 .custom-title-card h6 {
     color: #7989BF;
 }
+.accordion-confirmed-menu {
+  background-color: #A5B2E1;
+  border-radius: 35px;
+}
 .main-card-bg { background-color: #6271A8; }
 .main-card-bg-secondary { background-color: #A5B2E1; }
 .dark-card-bg { background-color: #333F68; }
@@ -239,7 +271,7 @@
 }
 
 .custom-card-min-header {
-	padding: 8% 0.5%;
+	padding: 6% 0.5%;
     margin-bottom: 0;
     background-color: transparent;
     font-size: 16px;
@@ -252,7 +284,7 @@
 	font-size: 28px;
     position: absolute;
     right: 3.3%;
-    top: 17.5px;
+    top: 10.5px;
 }
 .custom-collapse-arrow::after {
     content: "\f106";
@@ -345,6 +377,14 @@
   position: absolute;
   left: 15%;
   width: 24px;
+  height: 24px;
+  margin-top: -4px;
+}
+.main-icon-card-header-calendar { 
+  position: absolute;
+  left: 15%;
+  width: 24px;
+  height: 24px;
 }
 .collapse-show-month-body {
   background-color: #A5B2E1;
@@ -471,6 +511,45 @@
 .confirmed-card {
 	text-align: center;
 }
+.confirmation-main-box {
+    display: flex;
+    background-color: #A5B2E1;
+    border-radius: 23px;
+    margin-top: 5%;
+}
+.confirmation-box-1 {
+    background-color: #6271A8;
+    border-radius: 23px;
+    width: 49%;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+.confirmation-box-2 {
+    border-top-right-radius: 23px;
+    border-bottom-right-radius: 23px;
+    width: 49%;
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+.confirmation-box-1, .confirmation-box-2 {
+    align-self: center;
+}
+.confirmation-box-1 p {
+    margin-bottom: 0px;
+}
+.confirmation-box-2 p {
+    margin-bottom: 0px;
+    color: #333F68;
+} 
+.confirmation-box-2 span {
+    font-weight: bold;
+    font-family: raleway-bold, sans-serif;
+    font-size: 22px;
+}
 /*.active { color: #28B43C; }
 .inative { color: #FF5448; }
 .pending { color: #ECCC77; }*/
@@ -491,6 +570,9 @@
     line-height: 1.5;
     border-radius: 20px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.main-btn:focus { 
+  outline: none;
 }
 .main-btn-color {
   background-color: #333F68;

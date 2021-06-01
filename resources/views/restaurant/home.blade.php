@@ -27,7 +27,7 @@ Home -
                                 <div class="calendar-header-box">
                         @php 
                             $today = today();
-                                    echo '<h5 class="w3-text-teal calendar-month"><img class="main-icon-card-header" src="assets/admin-theme/images/restaurant/home/calendar-icon.svg"><span id="text_month">' . $today->format('F Y') . '<span class="custom-collapse-arrow-2"></span></span></h5>
+                                    echo '<h5 class="w3-text-teal calendar-month"><img class="main-icon-card-header-calendar" src="assets/admin-theme/images/restaurant/home/calendar-icon.svg"><span id="text_month">' . $today->format('F Y') . '<span class="custom-collapse-arrow-2"></span></span></h5>
                                 </div>
                             </a>
                             <div class="collapse collapse-show-month-body show" id="collapseMonth">';
@@ -199,249 +199,228 @@ Home -
         </form>
                 </div>
             <div class="col-xl-3">
-                <div class="custom-card dark-card-bg main-card-padding main-card-header">
-                    <div class="row">
-                        <div class="col-xl-12 custom-card-header-bloc">
-                            <h6 class="custom-card-header-title">Número de confirmações</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="custom-card main-card-bg main-card-padding confirmed-card">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <p>{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - Segunda-Feira</p>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div>
-                                        <h6></i> {{$orders_confirmed['monday']}} Confirmados</h6>
-                                    </div>
-                                </div>
+                <div class="main-card-wrapper">
+                    <div class="custom-card dark-card-bg main-card-padding main-card-header">
+                        <div class="row">
+                            <div class="col-xl-12 custom-card-header-bloc">
+                                <h6 class="custom-card-header-title">Número de confirmações</h6>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="custom-card main-card-bg main-card-padding confirmed-card">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(1)->format('d/m/Y')}}  - Terça-Feira</p>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div>
-                                        <h6></i> {{$orders_confirmed['tuesday']}} Confirmados</h6>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- confirmation -->
+                    <div class="confirmation-main-box">
+                        <div class="confirmation-box-1">
+                            <p>{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} <i class="fa fa-circle active"></i></p>
+                        </div>
+                        <div class="confirmation-box-2">
+                            <p><span> {{$orders_confirmed['monday']}} </span> Confirmados</p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="custom-card main-card-bg main-card-padding confirmed-card">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y')}}  - Quarta-Feira</p>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div>
-                                        <h6></i> {{$orders_confirmed['wednesday']}} Confirmados</h6>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- confirmation -->
+                    <div class="confirmation-main-box">
+                        <div class="confirmation-box-1">
+                            <p> {{Carbon\Carbon::now()->startOfWeek()->addDays(1)->format('d/m/Y')}} <i class="fa fa-circle active"></i></p>
+                        </div>
+                        <div class="confirmation-box-2">
+                            <p><span> {{$orders_confirmed['tuesday']}} </span> Confirmados</p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="custom-card main-card-bg main-card-padding confirmed-card">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}}  - Quinta-Feira</p>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div>
-                                        <h6></i> {{$orders_confirmed['thursday']}} Confirmados</h6>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- confirmation -->
+                    <div class="confirmation-main-box">
+                        <div class="confirmation-box-1">
+                            <p> {{Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y')}} <i class="fa fa-circle active"></i></p>
+                        </div>
+                        <div class="confirmation-box-2">
+                            <p><span> {{$orders_confirmed['wednesday']}} </span> Confirmados</p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="custom-card main-card-bg main-card-padding confirmed-card">
-                            <div class="row">
-                                <div class="col-xl-12">
-                                    <p>{{Carbon\Carbon::now()->startOfWeek()->addDays(4)->format('d/m/Y')}}  - Sexta-Feira</p>
-                                </div>
-                                <div class="col-xl-12">
-                                    <div>
-                                        <h6></i> {{$orders_confirmed['friday']}} Confirmados</h6>
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- confirmation -->
+                    <div class="confirmation-main-box">
+                        <div class="confirmation-box-1">
+                            <p> {{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}} <i class="fa fa-circle active"></i></p>
+                        </div>
+                        <div class="confirmation-box-2">
+                            <p><span> {{$orders_confirmed['thursday']}} </span> Confirmados</p>
+                        </div>
+                    </div>
+                    <!-- confirmation -->
+                    <div class="confirmation-main-box">
+                        <div class="confirmation-box-1">
+                            <p> {{Carbon\Carbon::now()->startOfWeek()->addDays(4)->format('d/m/Y')}} <i class="fa fa-circle active"></i></p>
+                        </div>
+                        <div class="confirmation-box-2">
+                            <p><span> {{$orders_confirmed['friday']}} </span> Confirmados</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-xl-3">
-                <div class="custom-card dark-card-bg main-card-padding main-card-header">
+                <div class="main-card-wrapper">
+                    <div class="custom-card dark-card-bg main-card-padding main-card-header">
+                        <div class="row">
+                            <div class="col-xl-12 custom-card-header-bloc">
+                                <h6 class="custom-card-header-title">Menus confirmados</h6>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
-                        <div class="col-xl-12 custom-card-header-bloc">
-                            <h6 class="custom-card-header-title">Menus confirmados</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-monday">
-                            <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-monday" aria-expanded="true" aria-controls="accordion_menu-monday">
-                                <div class="custom-card-min-header" id="headingOne">
-                                    <h6>
-                                        {{-- <i class="fa fa-circle active"></i>  --}}
-                                        {{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - Segunda-Feira
-                                        <span class="custom-collapse-arrow"></span>
-                                    </h6>
-                                </div>
-                            </a>
-                            <div id="collapse_menu-monday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-monday">
-                                
-                                <div class="card-body">
-                                    <ul class="">
-                                        @foreach($monday as $category)
-                                        <li>
-                                            <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_monday">Detalhes</a>
+                        <div class="col-xl-12">
+                            <div class="accordion-confirmed-menu">
+                                <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-monday">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-monday" aria-expanded="true" aria-controls="accordion_menu-monday">
+                                        <div class="custom-card-min-header" id="headingOne">
+                                            <h6>
+                                                {{-- <i class="fa fa-circle active"></i>  --}}
+                                                {{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - Segunda
+                                                <span class="custom-collapse-arrow"></span>
+                                            </h6>
                                         </div>
-                                    </div>
+                                    </a>
+                                    <div id="collapse_menu-monday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-monday">
+                                        
+                                        <div class="card-body">
+                                            <ul class="">
+                                                @foreach($monday as $category)
+                                                <li>
+                                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center">
+                                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_monday">Ver Detalhes</a>
+                                                </div>
+                                            </div>
 
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0402">
-                            <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0402" aria-expanded="true" aria-controls="accordion_menu-dia-0402">
-                                <div class="custom-card-min-header" id="headingOne">
-                                    <h6>
-                                        {{Carbon\Carbon::now()->startOfWeek()->addDays(1)->format('d/m/Y')}}  - Terça-Feira
-                                        <span class="custom-collapse-arrow"></span>
-                                    </h6>
-                                </div>
-                            </a>
-                            <div id="collapse_menu-dia-0402" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
-                                <div class="card-body">
-                                        <ul class="">
-                                            @foreach($tuesday as $category)
-                                            <li>
-                                                <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_tuesday">Detalhes</a>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0502">
-                            <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0502" aria-expanded="true" aria-controls="accordion_menu-dia-0502">
-                                <div class="custom-card-min-header" id="headingOne">
-                                    <h6>
-                                        {{Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y')}}  - Quarta-Feira
-                                        <span class="custom-collapse-arrow"></span>
-                                    </h6>
-                                </div>
-                            </a>
-                            <div id="collapse_menu-dia-0502" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0502">
-                                <div class="card-body">
-                                        <ul class="">
-                                            @foreach($wednesday as $category)
-                                            <li>
-                                                <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                            </li>
-                                            @endforeach
-                                        </ul>
-                                        <div class="row">
-                                            <div class="col-lg-12 text-center">
-                                                <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_wednesday">Detalhes</a>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0402">
+                                <div class="accordion-confirmed-menu">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0402" aria-expanded="true" aria-controls="accordion_menu-dia-0402">
+                                        <div class="custom-card-min-header" id="headingOne">
+                                            <h6>
+                                                {{Carbon\Carbon::now()->startOfWeek()->addDays(1)->format('d/m/Y')}}  - Terça
+                                                <span class="custom-collapse-arrow"></span>
+                                            </h6>
+                                        </div>
+                                    </a>
+                                    <div id="collapse_menu-dia-0402" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                                        <div class="card-body">
+                                                <ul class="">
+                                                    @foreach($tuesday as $category)
+                                                    <li>
+                                                        <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                                    </li>
+                                                    @endforeach
+                                                </ul>
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center">
+                                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_tuesday">Ver Detalhes</a>
+                                                </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0402">
-                            <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday">
-                                <div class="custom-card-min-header" id="headingOne">
-                                    <h6>
-                                        {{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}}  - Quinta-Feira
-                                        <span class="custom-collapse-arrow"></span>
-                                    </h6>
-                                </div>
-                            </a>
-                            <div id="collapse_menu-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
-                                <div class="card-body">
-                                    <ul class="">
-                                        @foreach($thursday as $category)
-                                        <li>
-                                            <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_thursday">Detalhes</a>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0502">
+                                <div class="accordion-confirmed-menu">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0502" aria-expanded="true" aria-controls="accordion_menu-dia-0502">
+                                        <div class="custom-card-min-header" id="headingOne">
+                                            <h6>
+                                                {{Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y')}}  - Quarta
+                                                <span class="custom-collapse-arrow"></span>
+                                            </h6>
+                                        </div>
+                                    </a>
+                                    <div id="collapse_menu-dia-0502" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0502">
+                                        <div class="card-body">
+                                            <ul class="">
+                                                @foreach($wednesday as $category)
+                                                <li>
+                                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center">
+                                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_wednesday">Ver Detalhes</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_menu-dia-0402">
-                            <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-before-yesterday" aria-expanded="true" aria-controls="collapse_menu-before-yesterday">
-                                <div class="custom-card-min-header" id="headingOne">
-                                    <h6>
-                                        {{Carbon\Carbon::now()->startOfWeek()->addDays(4)->format('d/m/Y')}}  - Sexta-Feira
-                                        <span class="custom-collapse-arrow"></span>
-                                    </h6>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0402">
+                                <div class="accordion-confirmed-menu">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday">
+                                        <div class="custom-card-min-header" id="headingOne">
+                                            <h6>
+                                                {{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}}  - Quinta
+                                                <span class="custom-collapse-arrow"></span>
+                                            </h6>
+                                        </div>
+                                    </a>
+                                    <div id="collapse_menu-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                                        <div class="card-body">
+                                            <ul class="">
+                                                @foreach($thursday as $category)
+                                                <li>
+                                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center">
+                                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_thursday">Ver Detalhes</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
-                            <div id="collapse_menu-before-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
-                                <div class="card-body">
-                                    <ul class="">
-                                        @foreach($friday as $category)
-                                        <li>
-                                            <p>{{$category['amount']}} - {{$category['name']}}</p>
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="row">
-                                        <div class="col-lg-12 text-center">
-                                            <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_friday">Detalhes</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0402">
+                                <div class="accordion-confirmed-menu">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-before-yesterday" aria-expanded="true" aria-controls="collapse_menu-before-yesterday">
+                                        <div class="custom-card-min-header" id="headingOne">
+                                            <h6>
+                                                {{Carbon\Carbon::now()->startOfWeek()->addDays(4)->format('d/m/Y')}}  - Sexta
+                                                <span class="custom-collapse-arrow"></span>
+                                            </h6>
+                                        </div>
+                                    </a>
+                                    <div id="collapse_menu-before-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                                        <div class="card-body">
+                                            <ul class="">
+                                                @foreach($friday as $category)
+                                                <li>
+                                                    <p>{{$category['amount']}} - {{$category['name']}}</p>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center">
+                                                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_friday">Ver Detalhes</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
