@@ -158,14 +158,15 @@ Home -
                         <div class="modal fade" id="newFood{{$category['name']}}" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content radius-30">
-                                    <div class="modal-header border-bottom-0">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">    <span aria-hidden="true">&times;</span>
-                                        </button>
+                                    <div class="modal-header border-bottom-0" style="align-self: center;">
+                                        <h3 class="text-center">Cadastrar Novo Alimento</h3>
+                                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </a>
                                     </div>
                                     <div class="modal-body p-5">
                                         <form method="POST" id="createProduct{{$category['name']}}" action="{{URL::action('Restaurant\FoodController@createFood')}}">
                                             {{ csrf_field() }}
-                                            <h3 class="text-center">Cadastrar Novo Alimento</h3>
                                             <div class="form-group">
                                                 <label>Nome do alimento</label>
                                                 <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
@@ -192,6 +193,7 @@ Home -
                         <input type="hidden" id="day_value" name="day_value">
                         <div class="row">
                             <div class="col-lg-12 text-center">
+                                <script src="https://vivirenremoto.github.io/doomcaptcha/script.js?version=16" countdown="on" label="Captcha" enemies="4"></script>
                                 <button type="submit" class="main-btn main-save-btn-green">Salvar Menu</button>
                             </div>
                         </div>
@@ -303,7 +305,7 @@ Home -
                         <div class="col-xl-12">
                             <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0402">
                                 <div class="accordion-confirmed-menu">
-                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0402" aria-expanded="true" aria-controls="accordion_menu-dia-0402">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0402" aria-expanded="true" aria-controls="accordion_menu-dia-0402" data-target="#collapse_menu-dia-0402">
                                         <div class="custom-card-min-header" id="headingOne">
                                             <h6>
                                                 {{Carbon\Carbon::now()->startOfWeek()->addDays(1)->format('d/m/Y')}}  - Terça
@@ -335,7 +337,7 @@ Home -
                         <div class="col-xl-12">
                             <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0502">
                                 <div class="accordion-confirmed-menu">
-                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0502" aria-expanded="true" aria-controls="accordion_menu-dia-0502">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-dia-0502" aria-expanded="true" aria-controls="accordion_menu-dia-0502" data-target="collapse_menu-dia-0502">
                                         <div class="custom-card-min-header" id="headingOne">
                                             <h6>
                                                 {{Carbon\Carbon::now()->startOfWeek()->addDays(2)->format('d/m/Y')}}  - Quarta
@@ -367,7 +369,7 @@ Home -
                         <div class="col-xl-12">
                             <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0402">
                                 <div class="accordion-confirmed-menu">
-                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday" data-target="collapse_menu-yesterday">
                                         <div class="custom-card-min-header" id="headingOne">
                                             <h6>
                                                 {{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}}  - Quinta

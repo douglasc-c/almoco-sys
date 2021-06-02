@@ -36,7 +36,10 @@ body {
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
 }
-
+.modal-header .close {
+  position: absolute;
+  right: 13px;
+}
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
