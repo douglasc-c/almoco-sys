@@ -359,7 +359,8 @@ body {
   background-color: #28B43C;
 }
 .menu-selected {
-  background-color: #FFFF00;
+  background-color: #FFFF00 !important;
+  color: #000 !important;
 }
 .calendar-bubble-day:hover {
 	background-color: #28B43C;

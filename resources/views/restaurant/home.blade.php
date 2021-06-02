@@ -61,10 +61,12 @@ Home -
                                     //loops through each week
                                     for($i=0; $i < 7; $i++)
                                     {
-                                        echo '<td><button type="button" class="date calendar-bubble-day" onclick="select_day(';
+                                        echo '<td><button type="button" class="date calendar-bubble-day" onclick="selectBubble(this.id);select_day(';
                                         echo $tempDate->day;
                                         echo ','; 
-                                        echo $tempDate->month;   
+                                        echo $tempDate->month;
+                                        echo ','; 
+                                        echo $tempDate->year;
                                         echo ')"';
                                         echo 'id="date-';
                                         echo $tempDate->year; 
@@ -715,7 +717,7 @@ section for modals
 
 </script>
 <script>
-function select_day(day, month){
+function select_day(day, month, year){
     $('#day_value').val(day);
     $('#month_value').val(month);
     if(month == 6){
@@ -723,8 +725,16 @@ function select_day(day, month){
     }else if(month == 5){
         $('#text_month').text('Maio 2021');
     }
+    $('#date-'+year+'-'+month+'-'+day).addClass("menu-selected");
 }
 
+function selectBubble(id) {
+    var bubbles = document.getElementsByClassName('calendar-bubble-day');
+    for (var i = 0; i < bubbles.length; i++) {
+      bubbles[i].classList.remove('menu-selected');
+    }
+    document.getElementById(id).classList.add('menu-selected');
+}
 </script>
 <script>
 $(document).ready(function(){
