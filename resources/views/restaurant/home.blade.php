@@ -110,85 +110,87 @@ Home -
                                 </div>
                             </div>
                         </div>
-                        @foreach($categoriesAll as $category)
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="accordion custom-card main-card-bg-secondary custom-card-padding-1 main-category-card" id="accordion_add-acompanhamento">
-                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_add-{{$category['name']}}" aria-expanded="true" aria-controls="collapse_add-acompanhamento">
-                                        <div class="custom-card-min-header" id="headingOne">
-                                            <h6>
-                                                <img class="main-icon-card-header" src="assets/admin-theme/images/restaurant/menu/{{$category['name']}}.svg">
-                                                {{$category['name']}}
-                                                <span class="custom-collapse-arrow"></span>
-                                            </h6>
-                                        </div>
-                                    </a>
-                                    <div id="collapse_add-{{$category['name']}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_add-acompanhamento">
-                                        <div class="card-body card-body-menu">
-                                            <ul class="menu-ul">
-                                                <!-- list item -->
-                                                @foreach($category['itens'] as $item)
-                                                    <li>
-                                                        <div class="row menu-list-row">
-                                                            <div class="col-xl-2 zeroed-col menu-list-checkbox-bloc" style="align-self: center;">
-                                                                <div class="rounded-checkbox">
-                                                                    <input type="checkbox" id="{{$item->name}}" name="checkbox[{{$item->name}}]"/>
-                                                                    <label for="{{$item->name}}"></label>
+                        
+                            <div class="row">
+                                <div class="col-xl-12" id="wrapper-categories">
+                                    @foreach($categoriesAll as $category)
+                                    <div class="accordion custom-card main-card-bg-secondary custom-card-padding-1 main-category-card">
+                                        <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_add-{{$category['name']}}" aria-expanded="true">
+                                            <div class="custom-card-min-header" id="headingOne">
+                                                <h6>
+                                                    <img class="main-icon-card-header" src="assets/admin-theme/images/restaurant/menu/{{$category['name']}}.svg">
+                                                    {{$category['name']}}
+                                                    <span class="custom-collapse-arrow"></span>
+                                                </h6>
+                                            </div>
+                                        </a>
+                                        <div id="collapse_add-{{$category['name']}}" class="collapse" aria-labelledby="headingOne" data-parent="#wrapper-categories">
+                                            <div class="card-body card-body-menu">
+                                                <ul class="menu-ul">
+                                                    <!-- list item -->
+                                                    @foreach($category['itens'] as $item)
+                                                        <li>
+                                                            <div class="row menu-list-row">
+                                                                <div class="col-xl-2 zeroed-col menu-list-checkbox-bloc" style="align-self: center;">
+                                                                    <div class="rounded-checkbox">
+                                                                        <input type="checkbox" id="{{$item->name}}" name="checkbox[{{$item->name}}]"/>
+                                                                        <label for="{{$item->name}}"></label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-xl-6 zeroed-col">
+                                                                    <label for="{{$item->name}}" class="menu-list-title">{{$item->name}}</label>
+                                                                    <p class="mb-0">Descrição</p>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-xl-6 zeroed-col">
-                                                                <label for="{{$item->name}}" class="menu-list-title">{{$item->name}}</label>
-                                                                <p class="mb-0">Descrição</p>
-                                                            </div>
-                                                        </div>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-12 collapse-btn-bloc">
-                                                <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Adicionar Novo</button>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
                                             </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 collapse-btn-bloc">
+                                                    <button type="button" class="main-btn main-btn-color" data-toggle="modal" data-target="#newFood{{$category['name']}}">Adicionar Novo</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            <!-- modal add food  -->
+                            <div class="modal fade" id="newFood{{$category['name']}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content radius-30">
+                                        <div class="modal-header border-bottom-0" style="align-self: center;">
+                                            <h3 class="text-center">Cadastrar Novo Alimento</h3>
+                                            <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </a>
+                                        </div>
+                                        <div class="modal-body p-5">
+                                            <form method="POST" id="createProduct{{$category['name']}}" action="{{URL::action('Restaurant\FoodController@createFood')}}">
+                                                {{ csrf_field() }}
+                                                <div class="form-group">
+                                                    <label>Nome do alimento</label>
+                                                    <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Descrição</label>
+                                                    <input type="text" name="description" class="form-control form-control-lg radius-30" placeholder=""/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Categoria</label>
+                                                    <input type="text" name="category" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-light radius-30 btn-lg btn-block" onclick="newProduct('{{$category['name']}}')">Cadastrar</button>
+                                                </div>
+                                                <hr/>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- modal add food  -->
-                        <div class="modal fade" id="newFood{{$category['name']}}" tabindex="-1" role="dialog" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content radius-30">
-                                    <div class="modal-header border-bottom-0" style="align-self: center;">
-                                        <h3 class="text-center">Cadastrar Novo Alimento</h3>
-                                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </a>
-                                    </div>
-                                    <div class="modal-body p-5">
-                                        <form method="POST" id="createProduct{{$category['name']}}" action="{{URL::action('Restaurant\FoodController@createFood')}}">
-                                            {{ csrf_field() }}
-                                            <div class="form-group">
-                                                <label>Nome do alimento</label>
-                                                <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Descrição</label>
-                                                <input type="text" name="description" class="form-control form-control-lg radius-30" placeholder=""/>
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Categoria</label>
-                                                <input type="text" name="category" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
-                                            </div>
-                                            <div class="form-group">
-                                                <button type="button" class="btn btn-light radius-30 btn-lg btn-block" onclick="newProduct('{{$category['name']}}')">Cadastrar</button>
-                                            </div>
-                                            <hr/>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
+
                         <input type="hidden" id="month_value" name="month_value">
                         <input type="hidden" id="day_value" name="day_value">
                         <div class="row">
@@ -257,7 +259,7 @@ Home -
                 </div>
             </div>
             <div class="col-xl-3">
-                <div class="main-card-wrapper">
+                <div class="main-card-wrapper" id="collapse-wrapper">
                     <div class="custom-card dark-card-bg main-card-padding main-card-header">
                         <div class="row">
                             <div class="col-xl-12 custom-card-header-bloc">
@@ -278,7 +280,7 @@ Home -
                                             </h6>
                                         </div>
                                     </a>
-                                    <div id="collapse_menu-monday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-monday">
+                                    <div id="collapse_menu-monday" class="collapse" aria-labelledby="headingOne" data-parent="#collapse-wrapper">
                                         
                                         <div class="card-body">
                                             <ul class="">
@@ -313,7 +315,7 @@ Home -
                                             </h6>
                                         </div>
                                     </a>
-                                    <div id="collapse_menu-dia-0402" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                                    <div id="collapse_menu-dia-0402" class="collapse" aria-labelledby="headingOne" data-parent="#collapse-wrapper">
                                         <div class="card-body">
                                                 <ul class="">
                                                     @foreach($tuesday as $category)
@@ -345,7 +347,7 @@ Home -
                                             </h6>
                                         </div>
                                     </a>
-                                    <div id="collapse_menu-dia-0502" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0502">
+                                    <div id="collapse_menu-dia-0502" class="collapse" aria-labelledby="headingOne" data-parent="#collapse-wrapper">
                                         <div class="card-body">
                                             <ul class="">
                                                 @foreach($wednesday as $category)
@@ -369,7 +371,7 @@ Home -
                         <div class="col-xl-12">
                             <div class="accordion custom-card custom-card-padding-1" id="accordion_menu-dia-0402">
                                 <div class="accordion-confirmed-menu">
-                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday" data-target="collapse_menu-yesterday">
+                                    <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_menu-yesterday" aria-expanded="true" aria-controls="collapse_menu-yesterday">
                                         <div class="custom-card-min-header" id="headingOne">
                                             <h6>
                                                 {{Carbon\Carbon::now()->startOfWeek()->addDays(3)->format('d/m/Y')}}  - Quinta
@@ -377,7 +379,7 @@ Home -
                                             </h6>
                                         </div>
                                     </a>
-                                    <div id="collapse_menu-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                                    <div id="collapse_menu-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#collapse-wrapper">
                                         <div class="card-body">
                                             <ul class="">
                                                 @foreach($thursday as $category)
@@ -409,7 +411,7 @@ Home -
                                             </h6>
                                         </div>
                                     </a>
-                                    <div id="collapse_menu-before-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_menu-dia-0402">
+                                    <div id="collapse_menu-before-yesterday" class="collapse" aria-labelledby="headingOne" data-parent="#collapse-wrapper">
                                         <div class="card-body">
                                             <ul class="">
                                                 @foreach($friday as $category)
@@ -420,7 +422,7 @@ Home -
                                             </ul>
                                             <div class="row">
                                                 <div class="col-lg-12 text-center">
-                                                    <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modal_friday">Ver Detalhes</a>
+                                                    <a href="" class="main-btn main-btn-color main-btn-width" data-toggle="modal" data-target="#modal_friday">Ver Detalhes</a>
                                                 </div>
                                             </div>
                                         </div>
