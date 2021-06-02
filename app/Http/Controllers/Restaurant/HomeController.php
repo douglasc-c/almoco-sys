@@ -41,7 +41,10 @@ class HomeController extends Controller
         $user = Auth::user();
 
         $startOfWeek = Carbon::now()->startOfWeek()->format('Y-m-d'); //Week of the month
-
+        $date['day'] = today()->format('d');
+        $date['month'] = today()->format('m');
+        $date['year'] = today()->format('Y');
+        
         $endOfWeek = Carbon::now()->endOfWeek()->subDays(2)->format('Y-m-d');
 
         $menus = Menu::whereBetween('menu_day', [$startOfWeek, $endOfWeek])->get();
@@ -141,7 +144,7 @@ class HomeController extends Controller
         $confirmed_menus = Menu::pluck('menu_day');
 
         // return view('restaurant.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all', 'orders_confirmed', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'));
-        return view('restaurant.home', compact( 'confirmed_menus','categoriesAll', 'categories_all','orders_confirmed', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'));
+        return view('restaurant.home', compact( 'confirmed_menus','categoriesAll', 'categories_all','orders_confirmed', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'date'));
 
     }
 

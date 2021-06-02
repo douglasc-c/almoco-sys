@@ -613,21 +613,25 @@ section for modals
         </div>
     <!-- end modal category resume -->
     <input type="hidden" id="_token" value=" {{ csrf_token() }} ">
+    <input type="hidden" id="date_year" value=" {{ $date['year'] }} ">
+    <input type="hidden" id="date_month" value=" {{ $date['month']}} ">
+    <input type="hidden" id="date_day" value=" {{ $date['day'] }} ">
 @endsection
 
 @section('styles')
-<style type="text/css">
-  /* #date-2021-05-20{
-    background-color: green;
-  } */
 
-
-</style>
 @stop
 
 
 @section('scripts')
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+<script>
+    $(document).ready(function(){
+        var dates = 'date-'+$("#date-"+date_year).val();
+       alert('teste');
+    });
+    // $("#date-"+item).css("background-color", "#28B43C");
+</script>
 <script>
         $("#get_filter").on('click', function(){
             
