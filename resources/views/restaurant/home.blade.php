@@ -197,7 +197,6 @@ Home -
                         <input type="hidden" id="day_value" name="day_value">
                         <div class="row">
                             <div class="col-lg-12 text-center">
-                                <script src="https://vivirenremoto.github.io/doomcaptcha/script.js?version=16" countdown="on" label="Captcha" enemies="4"></script>
                                 <button type="submit" class="main-btn main-save-btn-green">Salvar Menu</button>
                             </div>
                         </div>
@@ -497,116 +496,102 @@ section for modals
             </div>
         </div>
 
-    <!-- modal category before tomorrow -->
-        <div class="modal fade" id="modal_monday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+<!-- modals -->
+    <!-- MONDAY modal add food  -->
+        <div class="modal fade" id="modal_monday" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="custom-modal-header">
-                        <h5></h5>
-                        <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-content radius-30">
+                    <div class="modal-header border-bottom-0" style="align-self: center;">
+                        <h3 class="text-center">{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - <small>Segunda</small></h3>
+                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </a>
                     </div>
-                    <div class="modal-body">
-
+                    <div class="modal-body modal-body-show-menu">
                         @foreach($categories_all as $category)
                             <h4>{{$category->name}}</h4>
                             <div id="result_body_monday_{{$category->id}}"></div>
                         @endforeach
-
-                    </div>
-                    <div class="modal-footer">
-
                     </div>
                 </div>
             </div>
         </div>
 
-    <!-- modal category tomorrow -->
-        <div class="modal fade" id="modal_tuesday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+    <!-- TUESDAY modal category -->
+        <div class="modal fade" id="modal_tuesday" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="custom-modal-header">
-                        <h5></h5>
-                        <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-content radius-30">
+                    <div class="modal-header border-bottom-0" style="align-self: center;">
+                        <h3 class="text-center">{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - <small>Terça</small></h3>
+                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </a>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body modal-body-show-menu">
                         @foreach($categories_all as $category)
                             <h4>{{$category->name}}</h4>
                             <div id="result_body_tuesday_{{$category->id}}"></div>
                         @endforeach
                     </div>
-                    <div class="modal-footer">
-
-                    </div>
                 </div>
             </div>
         </div>
 
-    <!-- modal category today -->
-        <div class="modal fade" id="modal_wednesday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+    <!-- WEEDNESDAY modal category -->
+        <div class="modal fade" id="modal_wednesday" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="custom-modal-header">
-                        <h5></h5>
-                        <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-content radius-30">
+                    <div class="modal-header border-bottom-0" style="align-self: center;">
+                        <h3 class="text-center">{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - <small>Quarta</small></h3>
+                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </a>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body modal-body-show-menu">
                         @foreach($categories_all as $category)
                             <h4>{{$category->name}}</h4>
                             <div id="result_body_wednesday_{{$category->id}}"></div>
                         @endforeach
                     </div>
-                    <div class="modal-footer">
-
-                    </div>
                 </div>
             </div>
         </div>
-    <!-- modal category yesterday -->
-        <div class="modal fade" id="modal_thursday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+
+    <!-- THURSDAY modal category  -->
+        <div class="modal fade" id="modal_thursday" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="custom-modal-header">
-                        <h5></h5>
-                        <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-content radius-30">
+                    <div class="modal-header border-bottom-0" style="align-self: center;">
+                        <h3 class="text-center">{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - <small>Quinta</small></h3>
+                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </a>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body modal-body-show-menu">
                         @foreach($categories_all as $category)
                             <h4>{{$category->name}}</h4>
                             <div id="result_body_thursday_{{$category->id}}"></div>
                         @endforeach
                     </div>
-                    <div class="modal-footer">
-
-                    </div>
                 </div>
             </div>
         </div>
-    <!-- modal category yesterday -->
-        <div class="modal fade" id="modal_friday" tabindex="-1" aria-labelledby="modal_add-menuLabel" aria-hidden="true">
+
+    <!-- FRIDAY modal category -->
+        <div class="modal fade" id="modal_friday" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="custom-modal-header">
-                        <h5></h5>
-                        <a class="close custom-modal-close" data-dismiss="modal" aria-label="Close">
+                <div class="modal-content radius-30">
+                    <div class="modal-header border-bottom-0" style="align-self: center;">
+                        <h3 class="text-center">{{Carbon\Carbon::now()->startOfWeek()->format('d/m/Y')}} - <small>Sexta</small></h3>
+                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </a>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body modal-body-show-menu">
                         @foreach($categories_all as $category)
                             <h4>{{$category->name}}</h4>
                             <div id="result_body_friday_{{$category->id}}"></div>
                         @endforeach
-                    </div>
-                    <div class="modal-footer">
-
                     </div>
                 </div>
             </div>

@@ -40,6 +40,9 @@ body {
   position: absolute;
   right: 13px;
 }
+.modal-body-show-menu { 
+  padding: 5% 10%;
+}
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
