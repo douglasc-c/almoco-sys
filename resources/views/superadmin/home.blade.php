@@ -16,7 +16,7 @@ Home -
                     <div class="custom-card dark-card-bg main-card-padding main-card-header">
                         <div class="row">
                             <div class="col-xl-12 custom-card-header-bloc">
-                                <h6>Selecione o dia que deseja acompanhar</h6>
+                                <h6 class="custom-card-header-title">Selecione o dia que deseja acompanhar</h6>
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,8 @@ Home -
                 </div>
             </div>
             <div class="col-xl-3">
-                <div class="main-card-wrapper">
+                @if(!$justifications->isEmpty())
+                <div class="main-card-wrapper" id="justifications">
                     <div class="justification-main-card">
                         <div class="custom-card dark-card-bg main-card-padding main-card-header">
                             <div class="row">
@@ -105,9 +106,10 @@ Home -
                                 </div>
                             </div>
                         </div>
+                  @foreach($justifications as $justification)
                         <div class="justification-header">
-                            <a class="" data-toggle="collapse" href="#justification-collapse" role="button" aria-expanded="false" aria-controls="justification-collapse">
-                                <h6 class="justification-email">gabriel@intergalaxy.sa</h6>
+                            <a class="" data-toggle="collapse" href="#justification-collapse-{{$justification['id']}}" role="button" aria-expanded="false" aria-controls="justification-collapse-{{$justification['id']}}">
+                                <h6 class="justification-email">{{$justification['user']['email']}}</h6>
                                 <div class="row" style="justify-content: center;">
                                     <div class="col-lg-2" style="padding-right: 0px; text-align: right;">
                                         <i class="fa fa-circle active">
@@ -120,10 +122,8 @@ Home -
                                 </div>
                             </a>
                         </div>
-                        <div class="collapse multi-collapse justification-collapse-body" id="justification-collapse">
-                            <p>Faltei pois fui ao médico, exame
-                                médico anexado junto a
-                                justificativa
+                        <div class="collapse multi-collapse justification-collapse-body" id="justification-collapse-{{$justification['id']}}">
+                            <p>{{$justification['description']}}
                             </p>
                             <div class="check-justification-bloc">
                                 <input type="checkbox" id="_checkbox" style="display: none;">
@@ -133,53 +133,20 @@ Home -
                             </div>
                         </div>
                     </div>
+                  @endforeach
                 </div>
-                <style type="text/css">
-                .justification-header {
-                    background-color: #6271A8;
-                    border-radius: 20px;
-                    padding: 5%;
-                }
-                .justification-email { 
-                    text-align: center;
-                }
-                .justification-collapse-body {
-                    border-radius: 20px;
-                    padding: 5%;
-                }
-                .justification-collapse-body p {
-                    color: #333F68;
-                }
-                .justification-main-card {
-                    background-color: #A5B2E1;
-                    border-radius: 20px;
-                }
-                </style>
-                <div id="justifications">
-        <!-- bloco de menu, pode ser adicionado através do modal -->
-                @foreach($justifications as $justification)
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="accordion custom-card main-card-bg custom-card-padding-1" id="accordion_add-acompanhamento">
-                            <a class="custom-card-header" data-toggle="collapse" data-target="#collapse_add-{{$justification['id']}}" aria-expanded="true" aria-controls="collapse_add-acompanhamento">
-                                <div class="custom-card-min-header" id="headingOne">
-                                    <h6>
-                                        {{$justification['user']['email']}}
-                                        <span class="custom-collapse-arrow"></span>
-                                    </h6>
-                                </div>
-                            </a>
-                            <div id="collapse_add-{{$justification['id']}}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion_add-acompanhamento">
-                                <div class="card-body">
-                                    <p>{{$justification['description']}}</p>
-                                </div>
+                @else
+                <div class="main-card-wrapper">
+                    <div class="custom-card dark-card-bg main-card-padding main-card-header">
+                        <div class="row">
+                            <div class="col-xl-12 custom-card-header-bloc">
+                                <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
                             </div>
                         </div>
                     </div>
+                    <h6 class="no-justification">Nenhuma justificativa a ser exibida.</h6>
                 </div>
-                <!--   -->
-                @endforeach
-                </div>
+                @endif
                 <input type="hidden" id="month_value" name="month_value">
                 <input type="hidden" id="day_value" name="day_value">
             </div>

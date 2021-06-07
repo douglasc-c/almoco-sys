@@ -870,6 +870,7 @@ Sidebar Page Navigations
 .main-footer {
   background-color: #BBC7EF;
   padding: 1.5%;
+  position: absolute;
 }
 /*status*/
 .status-yellow {
@@ -993,4 +994,27 @@ Sidebar Page Navigations
 {
     transform: translate(0);
     opacity: 1;
+}
+.justification-header {
+    background-color: #6271A8;
+    border-radius: 20px;
+    padding: 5%;
+}
+.justification-email { 
+    text-align: center;
+}
+.justification-collapse-body {
+    border-radius: 20px;
+    padding: 5%;
+}
+.justification-collapse-body p {
+    color: #333F68;
+}
+.justification-main-card {
+    background-color: #A5B2E1;
+    border-radius: 20px;
+}
+.no-justification {
+  text-align: center;
+  color: #333F68;
 }
