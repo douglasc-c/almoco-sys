@@ -19,6 +19,18 @@ class FoodOrder extends Model
         'menu_id',
     ];
 
+    public function user() {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function status() {
+        return $this->hasOne(Status::class, 'id', 'status_id');
+    }
+
+    public function justification() {
+        return $this->belongsTo(Justification::class, 'id', 'food_orders_id');
+    }
+
     public function menu() {
         return $this->hasOne(Menu::class, 'id', 'menu_id');
     }

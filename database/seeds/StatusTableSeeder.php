@@ -18,10 +18,22 @@ class StatusTableSeeder extends Seeder
             'name' => 'Confirmado',
         ]);
         App\Status::create([
+            'name' => 'Compareceu',
+        ]);
+        App\Status::create([
             'name' => 'Não solicitou',
         ]);
         App\Status::create([
             'name' => 'Faltou',
+        ]);
+        App\Status::create([
+            'name' => 'Justificativa em analise',
+        ]);
+        App\Status::create([
+            'name' => 'Justificativa rejeitada',
+        ]);
+        App\Status::create([
+            'name' => 'Justificativa aceita',
         ]);
     }
 }

@@ -32,6 +32,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'remember_tokem',
         'email_token',
         'first_access',
+        'token_push',
     ];
 
     /**
@@ -61,6 +62,48 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         }else{
             return false;
         }
+    }
+
+    public static function sendPush($text ,$token_push){
+        $data = array(
+           "to" => $token_push,
+           "notification" => [
+            "title" => 'Aviso',
+            "sound" => "default",
+            "body" => $text,
+            ],
+        );
+
+        $data = json_encode($data);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://fcm.googleapis.com/fcm/send",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => $data,
+            CURLOPT_HTTPHEADER => array(
+              "Authorization: key=AAAAsenbvAI:APA91bHEcLYHYp7QLRUPKkHTRbcJhrP_0JT4S9oh80PHuGTCjxqxucMtg1VXlRdn3_DNLFT8pRFxKJ5Z2a6RyipB_Rto6jflEUBi7q4AHm_xFXtRRAzFRD8RWGfj1w8UGRGCB5kjGErO",
+              "Content-Type: application/json",
+          ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $response = json_decode($response);
+
+        if($response && isset($response->success) && $response->success){
+            return true;
+        }
+        return false;
     }
 
     public function justifications() {

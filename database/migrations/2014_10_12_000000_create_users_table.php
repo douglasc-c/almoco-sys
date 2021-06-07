@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('email_token')->unique();
             $table->integer('arm_id')->unsigned()->nullable();
             $table->foreign('arm_id')->references('id')->on('users')->onDelete('SET NULL');
+            $table->boolean('first_access')->default(true);
+            $table->text('token_push')->nullable();
             $table->timestamps();
         });
     }

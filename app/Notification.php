@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Notification extends Model
 {
-    protected $table = 'foods';
+    protected $table = 'notifications';
         /**
      * The attributes that are mass assignable.
      *

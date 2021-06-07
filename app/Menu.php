@@ -14,6 +14,7 @@ class Menu extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'menu_day',
         'foods_id',
     ];

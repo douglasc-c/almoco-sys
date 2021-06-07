@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $client = new \GuzzleHttp\Client();
         $result = $client->post('http://67.207.95.144/api/mobile/v1/checkCode', [
             'json' => [
@@ -40,5 +41,15 @@ class UserController extends Controller
         } else {
             return response()->json(["error" => "Ops, algo de errado", "message" => "Código da conta e/ou CPF incorretos"], 401);
         }
+    }
+
+    public function changeToken(Request $request) {
+        $user = auth('api')->user();
+
+        $user->update([
+            'token_push' => $request->token_push
+        ]);
+
+        return response()->json([ 'user' => $user ]);
     }
 }
