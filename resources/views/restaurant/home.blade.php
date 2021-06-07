@@ -442,6 +442,7 @@ Home -
             </div>
         </div>
     </div>
+    <!-- graph tab -->
     <div class="tab-pane fade" id="main-graph" role="tabpanel" aria-labelledby="graph-menu-tab">
             <div class="row">
                 <div class="col-md-3">
@@ -502,7 +503,6 @@ section for modals
             </div>
         </div>
 
-<!-- modals -->
     <!-- MONDAY modal add food  -->
         <div class="modal fade" id="modal_monday" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
             <div class="modal-dialog">
