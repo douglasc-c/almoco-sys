@@ -155,40 +155,46 @@ Home -
                                             </div>
                                         </div>
                                     </div>
-                                                    <!-- modal add food  -->
-                                                    <div class="modal fade" id="newFood{{$category['name']}}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content radius-30">
-                                                                <div class="modal-header border-bottom-0" style="align-self: center;">
-                                                                    <h3 class="text-center">Cadastrar Novo Alimento</h3>
-                                                                    <a type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="modal-body p-5">
-                                                                    <form method="POST" id="createProduct{{$category['name']}}" action="{{URL::action('Restaurant\FoodController@createFood')}}">
-                                                                        {{ csrf_field() }}
-                                                                        <div class="form-group">
-                                                                            <label>Nome do alimento</label>
-                                                                            <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Descrição</label>
-                                                                            <input type="text" name="description" class="form-control form-control-lg radius-30" placeholder=""/>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <label>Categoria</label>
-                                                                            <input type="text" name="category" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
-                                                                        </div>
-                                                                        <div class="form-group">
-                                                                            <button type="button" class="btn btn-light radius-30 btn-lg btn-block" onclick="newProduct('{{$category['name']}}')">Cadastrar</button>
-                                                                        </div>
-                                                                        <hr/>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
+                                    <!-- modal add food  -->
+                                    <div class="modal fade" id="newFood{{$category['name']}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content radius-30">
+                                                <div class="modal-header border-bottom-0" style="align-self: center;">
+                                                    <h3 class="text-center">Cadastrar Novo Alimento</h3>
+                                                    <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </a>
+                                                </div>
+                                                <div class="alert alert-danger alert-dismissible fade show" role="alert" id="alertError_{{$category['name']}}" style="display: none;">
+                                                    Alimento já cadastrado
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body p-5">
+                                                    <form method="POST" id="createProduct{{$category['name']}}" action="{{URL::action('Restaurant\FoodController@createFood')}}">
+                                                        {{ csrf_field() }}
+                                                        <div class="form-group">
+                                                            <label>Nome do alimento</label>
+                                                            <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
                                                         </div>
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label>Descrição</label>
+                                                            <input type="text" name="description" class="form-control form-control-lg radius-30" placeholder=""/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Categoria</label>
+                                                            <input type="text" name="category" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <button type="button" class="btn btn-light radius-30 btn-lg btn-block" onclick="newProduct('{{$category['name']}}')">Cadastrar</button>
+                                                        </div>
+                                                        <hr/>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -688,6 +694,7 @@ section for modals
     function newProduct(category){
         var cat = category;
         var name = $('#name_'+category).val();
+        var description = $('#description_'+category).val();
         var _token = $('#_token').val();
 
         $.ajax({
@@ -696,10 +703,16 @@ section for modals
 		    data: {
                 _token: _token,
                 name: name,
+                description: description,
                 category: cat,
             },
-		    success: function (result) {
-                location.reload();
+		    success: function (data) {
+                if(data['status'] == true) location.reload();
+
+                if(data['status'] == false) {
+                    $('#alertError_'+category).show();
+                }
+                
 		    }
 		});
     }

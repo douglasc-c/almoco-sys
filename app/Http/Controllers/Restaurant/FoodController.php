@@ -59,11 +59,13 @@ class FoodController extends Controller
             $result = Food::createFood($request->name, $request->description, $cat->id);
 
             if($result['status'] == true){
-                return redirect()->back()->with('success', 'Alimento criado com sucesso!');
+                return ['status' => true];
             }
 
+            return ['status' => false, 'message' => 'Alimento já cadastrado!'];
+
         }
-        return redirect()->back()->with('danger', 'Erro ao criar usuário');
+        return ['status' => false, 'message' => 'Erro ao criar alimento!'];
     }
 
 }

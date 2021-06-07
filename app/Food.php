@@ -22,18 +22,17 @@ class Food extends Model
 
     public static function createFood($name, $description, $category){
 
-        $food = Food::create([
-            'name' => $name,
-            'description' => $description,
-            'food_category_id' => $category,
-        ]);
+        $found_food = Food::where('name', $name)->first();
 
-        if($category){
-            return ['status' => true, 'category' => $food];
-
-        }else{
-            return ['status' => false, 'message' => 'Erro ao criar alimento!'];
+        if(!$found_food){
+            $food = Food::create([
+                'name' => $name,
+                'description' => $description,
+                'food_category_id' => $category,
+            ]); 
+            return ['status' => true];
         }
+
         return ['status' => false, 'message' => 'Erro ao criar alimento!'];
     }
 }
