@@ -97,7 +97,7 @@ Home -
             </div>
             <div class="col-xl-3">
                 @if(!$justifications->isEmpty())
-                <div class="main-card-wrapper" id="justifications">
+                <div class="main-card-wrapper">
                     <div class="justification-main-card">
                         <div class="custom-card dark-card-bg main-card-padding main-card-header">
                             <div class="row">
@@ -106,6 +106,7 @@ Home -
                                 </div>
                             </div>
                         </div>
+                <div id="justifications">
                   @foreach($justifications as $justification)
                     <div class="mb-4">
                         <div class="justification-header">
@@ -135,6 +136,7 @@ Home -
                         </div>
                     </div>
                   @endforeach
+                </div>
                 </div>
                 </div>
                 @else
@@ -594,14 +596,47 @@ function select_day(day, month, year){
             date: date,
         },
         success: function (data) {
-            if(data.length > 0){
+          
+            if(data[0].length > 0){
                 $.each(data[0], function(index, item){
 
+                    // $('#justifications').append(
+                    //     "<div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div>" 
+                    // );
                     $('#justifications').append(
-                        "<div class='row'><div class='col-xl-12'><div class='accordion custom-card main-card-bg custom-card-padding-1' id='accordion_add-acompanhamento'><a class='custom-card-header' data-toggle='collapse' data-target='#collapse_add-"+item.id+"' aria-expanded='true' aria-controls='collapse_add-acompanhamento'><div class='custom-card-min-header' id='headingOne'><h6>"+item.user.email+"<span class='custom-collapse-arrow'></span></h6></div></a><div class='collapse_add-"+item.id+"' class='collapse' aria-labelledby='headingOne' data-parent='#accordion_add-acompanhamento'><div class='card-body'><p>"+item.description+"</p></div></div></div></div></div>" 
+                        "<div class='justification-main-card'><div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div></div>" 
                     );
 
                 });
+            }
+            else{
+                // <div class="main-card-wrapper">
+                //     <div class="custom-card dark-card-bg main-card-padding main-card-header">
+                //         <div class="row">
+                //             <div class="col-xl-12 custom-card-header-bloc">
+                //                 <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
+                //             </div>
+                //         </div>
+                //     </div>
+                //     <h6 class="no-justification">Nenhuma justificativa a ser exibida.</h6>
+                // </div>
+
+
+
+                //             <div class="col-xl-12 custom-card-header-bloc">
+                //                 <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
+                //             </div>
+
+
+
+
+                $('#justifications').append(
+                    "<h6 class='no-justification'>Nenhuma justificativa a ser exibida.</h6>"      
+                ); 
+
+                // $('#justifications').append(
+                //     "<div class='main-card-wrapper'><div class='custom-card dark-card-bg main-card-padding main-card-header'><div class='row'><div class='col-xl-12 custom-card-header-bloc'><h6 class='custom-card-header-title'>Acompanhar justificativa</h6></div></div></div><h6 class='no-justification'>Nenhuma justificativa a ser exibida.</h6></div>"      
+                // ); 
             }
         }
     });
