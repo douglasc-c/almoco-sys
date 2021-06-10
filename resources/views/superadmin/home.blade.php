@@ -107,6 +107,7 @@ Home -
                             </div>
                         </div>
                   @foreach($justifications as $justification)
+                    <div class="mb-4">
                         <div class="justification-header">
                             <a class="" data-toggle="collapse" href="#justification-collapse-{{$justification['id']}}" role="button" aria-expanded="false" aria-controls="justification-collapse-{{$justification['id']}}">
                                 <h6 class="justification-email">{{$justification['user']['email']}}</h6>
@@ -134,6 +135,7 @@ Home -
                         </div>
                     </div>
                   @endforeach
+                </div>
                 </div>
                 @else
                 <div class="main-card-wrapper">
