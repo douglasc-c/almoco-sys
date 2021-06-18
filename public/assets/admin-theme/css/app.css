@@ -494,6 +494,7 @@ a:hover {
 .page-wrapper {
   position: relative;
   transition: all .3s ease-out;
+  height: 100%;
 }
 
 .sidebar-wrapper {
@@ -528,7 +529,7 @@ a:hover {
 }
 
 .page-content {
-  padding: 2% 5%;
+  padding: 2% 5% 80px;
 }
 
 

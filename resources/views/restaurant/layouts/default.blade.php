@@ -3,7 +3,7 @@
 <head>
 	@include('restaurant/layouts/head', array('title'=>'Meu almoço'))
 </head>
-<body class="bg-theme main-bg">
+<body class="bg-theme main-bg main-body">
     @include('restaurant/layouts/header')
     <div class="page-wrapper">
         <div class="page-content">
