@@ -72,14 +72,6 @@ return [
             'region' => env('DO_SPACES_REGION'),
             'bucket' => env('DO_SPACES_BUCKET'),
         ],
-        'spaces1' => [
-            'driver' => 's3',
-            'key' => 'M56RSU55L63BKIB6Z27A',
-            'secret' => '+XNUF/k7MD2M/Xqg5UptB2GxS/3aa/1OFoIDqKgkph8',
-            'endpoint' => 'https://nyc3.digitaloceanspaces.com',
-            'region' => 'nyc3',
-            'bucket' => 'neeva',
-        ],
 
     ],
 

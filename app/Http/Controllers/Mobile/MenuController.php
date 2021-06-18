@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Justification;
+use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
 {
@@ -167,13 +168,42 @@ class MenuController extends Controller
 
 
         if (isset($food_order)) {
+            $file_url1 = null;
+            $file_url2 = null;
+
+            $imgs_link = [];
+
+            if ($request->file('img1') !== null) {
+                $file1 = $request->file('img1');
+                $filename1 = strtoupper(bin2hex(random_bytes(5))).'.png';
+                $file_path1 = "/justification/$food_order->id/$user->id/$filename1";
+                $storage1 = Storage::disk('spaces')->put($file_path1, $file1, 'public');
+                $file_url1 = 'https://lunch.nyc3.digitaloceanspaces.com/'.$storage1;
+            }
+            if ($request->file('img2') !== null) {
+                $file2 = $request->file('img2');
+                $filename2 = strtoupper(bin2hex(random_bytes(5))).'.png';
+                $file_path2 = "/justification/$food_order->id/$user->id/$filename2";
+                $storage2 = Storage::disk('spaces')->put($file_path2, $file2, 'public');
+                $file_url2 = 'https://lunch.nyc3.digitaloceanspaces.com/'.$storage2;
+            }
+
+            if ($file_url1 !== null) {
+                array_push($imgs_link, $file_url1);
+            }
+            if ($file_url2 !== null) {
+                array_push($imgs_link, $file_url2);
+            }
+
+            // dd(json_encode($imgs_link));
+
             $justification = Justification::create([
                 'status_id' => 6,
                 'user_id' => $user->id,
                 'arm_id' => $user->arm_id,
                 'food_orders_id' => $food_order->id,
                 'description' => $request->description,
-                // 'justification_img_link',
+                'justification_img_link' => json_encode($imgs_link),
             ]);
 
             return response()->json(['justification' => $justification]);
