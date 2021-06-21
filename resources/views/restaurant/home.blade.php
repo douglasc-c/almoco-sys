@@ -188,10 +188,10 @@ Home -
                                                             <label>Nome do alimento</label>
                                                             <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
                                                         </div>
-                                                        <div class="form-group">
+<!--                                                         <div class="form-group">
                                                             <label>Descrição</label>
                                                             <input type="text" name="description" class="form-control form-control-lg radius-30" placeholder=""/>
-                                                        </div>
+                                                        </div> -->
                                                         <div class="form-group">
                                                             <label>Categoria</label>
                                                             <input type="text" name="category" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
