@@ -139,10 +139,20 @@ Home -
                                                                         <label for="{{$item->name}}"></label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-xl-6 zeroed-col">
+                                                                <div class="col-xl-7 zeroed-col">
                                                                     <label for="{{$item->name}}" class="menu-list-title">{{$item->name}}</label>
                                                                     <p class="mb-0">{{$item->description}}</p>
                                                                 </div>
+                                                                <div class="col-xl-1 zeroed-col">
+                                                                    <a href="" class="menu-list-edit-item">
+                                                                       <i class="fa fa-pencil-square main-icon-size"></i>
+                                                                    </a>
+                                                                </div>
+<!--                                                                 <div class="col-xl-1 zeroed-col">
+                                                                    <a href="" class="menu-list-delete-item">
+                                                                       <i class="fa fa-trash-o main-icon-size"></i>
+                                                                    </a>
+                                                                </div> -->
                                                             </div>
                                                         </li>
                                                     @endforeach
