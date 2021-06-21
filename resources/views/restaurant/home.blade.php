@@ -457,27 +457,27 @@ Home -
             <div class="row">
                 <div class="col-md-3">
                     <div class="wd-200 mg-b-20" style="width: 100%">
-                        <p>Início</p>
+                        <h6 style="color: #333F68;">Data de Início:</h6>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                 </div>
                             </div>
-                            <input type="date" class="form-control fc-datepicker" id="from_date" name="from_date" autocomplete="off" placeholder="MM/DD/AAAA" style="border: 1px solid #93A8E5">
+                            <input type="date" class="form-control fc-datepicker datepicker-date" id="from_date" name="from_date" autocomplete="off" placeholder="MM/DD/AAAA" style="border: 1px solid #93A8E5">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="wd-200 mg-b-20" style="width: 100%">
-                        <p>Final</p>
+                        <h6 style="color: #333F68;">Data Final</h6>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">
                                     <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
                                 </div>
                             </div>
-                            <input type="date" class="form-control" id="to_date" name="to_date" autocomplete="off" placeholder="MM/DD/AAAA" style="border: 1px solid #93A8E5">
+                            <input type="date" class="form-control datepicker-date" id="to_date" name="to_date" autocomplete="off" placeholder="MM/DD/AAAA" style="border: 1px solid #93A8E5">
                         </div>
                     </div>
                 </div>
@@ -490,7 +490,11 @@ Home -
         </div>
     </div>
 </div>
-
+<style type="text/css">
+    .datepicker-date {
+        color: #333F68;
+    }
+</style>
 <!-- 
 section for modals 
 -->
