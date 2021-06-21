@@ -439,7 +439,7 @@ body {
 	-ms-transform: scale(1.01);
 	transform: scale(1.01);
 }
-.menu-list-row:hover:after { 
+/*.menu-list-row:hover:after { 
 	content: " ";
 	position:absolute;
 	left: 25%;
@@ -450,7 +450,7 @@ body {
 	-moz-box-shadow: 4px 2px -2px #4e5f9e;
 	-webkit-box-shadow: 4px 2px -2px #4e5f9e;
 	box-shadow: 0 4px 2px -2px #4e5f9e;
-}
+}*/
 .menu-ul li { margin-top: 2%; }
 /**/
 .calendar-card-wrapper {
