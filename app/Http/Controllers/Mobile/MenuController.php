@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Mobile;
 
 use App\Food;
-use App\FoodOrder;
 use App\Menu;
+use App\FoodOrder;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Justification;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class MenuController extends Controller
@@ -74,6 +75,8 @@ class MenuController extends Controller
                                     ->where('menu_id', $menu->id)
                                     ->first();
             if (isset($food_order)) {
+                Log::info('QRCODE_KEY');
+                Log::info(env('QRCODE_KEY'));
                 if (env('QRCODE_KEY') === $request->code) {
                     $food_order->update([
                         'status_id' => 3
