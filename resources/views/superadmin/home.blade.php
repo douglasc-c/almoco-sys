@@ -1,4 +1,4 @@
-@extends('superAdmin.layouts.default')
+@extends('superadmin.layouts.default')
 
 
 @section('title')
