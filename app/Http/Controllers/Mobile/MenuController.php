@@ -69,9 +69,7 @@ class MenuController extends Controller
         $user = auth('api')->user();
         $menu = Menu::whereDate('menu_day', now()->format('Y-m-d'))->first();
         $today = today()->addHours(15);
-        Log::info($today);
-        Log::info(now('America/Sao_Paulo'));
-        Log::info(now('America/Sao_Paulo')->isAfter($today));
+        
         if (now('America/Sao_Paulo')->isAfter($today)) {
             return response()->json(["error" => "Ops, algo de errado", "message" => "Horário de almoço acabou"], 401);
         }
