@@ -68,17 +68,20 @@ class MenuController extends Controller
     {
         $user = auth('api')->user();
         $menu = Menu::whereDate('menu_day', now()->format('Y-m-d'))->first();
-        Log::info('1------------');
+        $today = today()->addHours(15);
+        Log::info($today);
+        Log::info(now('America/Sao_Paulo'));
+        Log::info(now('America/Sao_Paulo')->isAfter($today));
+        if (now('America/Sao_Paulo')->isAfter($today)) {
+            return response()->json(["error" => "Ops, algo de errado", "message" => "Horário de almoço acabou"], 401);
+        }
+
         if (isset($menu)) {
-            Log::info('2------------');
             $food_order = FoodOrder::where('status_id', 2)
                                     ->where('user_id', $user->id)
                                     ->where('menu_id', $menu->id)
                                     ->first();
-            Log::info('3------------');
             if (isset($food_order)) {
-                Log::info('QRCODE_KEY');
-                Log::info(env('QRCODE_KEY'));
                 if (env('QRCODE_KEY') === $request->code) {
                     $food_order->update([
                         'status_id' => 3
