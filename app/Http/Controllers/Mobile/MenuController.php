@@ -68,12 +68,14 @@ class MenuController extends Controller
     {
         $user = auth('api')->user();
         $menu = Menu::whereDate('menu_day', now()->format('Y-m-d'))->first();
-
+        Log::info('1------------');
         if (isset($menu)) {
+            Log::info('2------------');
             $food_order = FoodOrder::where('status_id', 2)
                                     ->where('user_id', $user->id)
                                     ->where('menu_id', $menu->id)
                                     ->first();
+            Log::info('3------------');
             if (isset($food_order)) {
                 Log::info('QRCODE_KEY');
                 Log::info(env('QRCODE_KEY'));
