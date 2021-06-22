@@ -294,9 +294,10 @@ class MenuController extends Controller
             $currentFoods = collect([]);
 
             foreach ($all_foods as $item) {
-                $currentFoods->add($item);
+                if ($item["amount"] > 0) {
+                    $currentFoods->add($item);
+                }
             }
-
 
             $menu->all_foods = $currentFoods;
         }
