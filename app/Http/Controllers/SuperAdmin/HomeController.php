@@ -150,7 +150,7 @@ class HomeController extends Controller
             ->get();
         // dd($justifications);
 
-
+            dd('teste');
         // return view('superadmin.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all'));
         return view('superadmin.home', compact( 'confirmed_menus','categoriesAll', 'categories_all','orders_confirmed', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'justifications'));
     }
