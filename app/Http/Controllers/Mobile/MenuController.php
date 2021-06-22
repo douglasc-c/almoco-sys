@@ -27,7 +27,7 @@ class MenuController extends Controller
             $endOfWeek = now()->endOfWeek()->subDays(2)->format('Y-m-d');
         }
 
-        $week = Menu::whereBetween('menu_day', [$startOfWeek, $endOfWeek])->get();
+        $week = Menu::whereBetween('menu_day', [$startOfWeek, $endOfWeek])->orderBy('menu_day', 'ASC')->get();
 
         foreach ($week as $item) {
             $foods = Food::whereIn('id', json_decode($item->foods_id))->get();
