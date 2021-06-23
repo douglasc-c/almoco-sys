@@ -69,7 +69,7 @@ class MenuController extends Controller
     {
         $user = auth('api')->user();
         $menu = Menu::whereDate('menu_day', now()->format('Y-m-d'))->first();
-        $today = today()->addHours(15);
+        $today = today('America/Sao_Paulo')->addHours(15);
         
         if (now('America/Sao_Paulo')->isAfter($today)) {
             return response()->json(["error" => "Ops, algo de errado", "message" => "Horário de almoço acabou"], 401);
@@ -255,6 +255,11 @@ class MenuController extends Controller
                     'status_id' => 8,
                     'arm_id' => $user->id
                 ]);
+
+                $currentUser = User::find($food_order->user_id);
+                $menu = Menu::find($food_order->menu_id);
+
+                $currentUser->sendPush("A justificativa do dia ".Carbon::parse($menu->menu_day)->format('d/m/Y')." foi aceita.", $currentUser->token_push);
             }
         }
 
@@ -273,6 +278,12 @@ class MenuController extends Controller
                     'status_id' => 7,
                     'arm_id' => $user->id
                 ]);
+
+
+                $currentUser = User::find($food_order->user_id);
+                $menu = Menu::find($food_order->menu_id);
+
+                $currentUser->sendPush("A justificativa do dia ".Carbon::parse($menu->menu_day)->format('d/m/Y')." foi negada.", $currentUser->token_push);
             }
         }
 
