@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Food;
 use App\Menu;
+use App\User;
 use App\FoodOrder;
 use Carbon\Carbon;
 use App\Justification;
@@ -211,6 +212,10 @@ class MenuController extends Controller
                 'description' => $request->description,
                 'justification_img_link' => json_encode($imgs_link),
             ]);
+
+            $arm = User::find($user->arm_id);
+
+            $arm->sendPush("A justificativa de $user->name foi anexada.", $arm->token_push);
 
             return response()->json(['justification' => $justification]);
         } else {

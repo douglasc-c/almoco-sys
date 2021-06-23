@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Mobile;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -23,12 +24,28 @@ class UserController extends Controller
             if ($res->status) {
                 $user = auth('api')->user();
 
-                $user->update([
-                    'password' => bcrypt($request->password),
-                    'cpf' => $request->cpf,
-                    'billing_code' => $request->billing_code,
-                    'first_access' => 0,
-                ]);
+                if ($user->first_access == 1 || $user->first_access == true) {
+                    $user->update([
+                        'password' => bcrypt($request->password),
+                        'cpf' => $request->cpf,
+                        'billing_code' => $request->billing_code,
+                        'first_access' => 0,
+                    ]);
+                } else {
+                    if (!Hash::check($request->password, $user->password)) {
+                        return response()->json([
+                            "error" => "Ocorreu um erro", 
+                            "message" => 'Senha atual não confere',
+                            'pass' => $request->password,
+                            'u_pass' => $user->password,
+                            'hash' => Hash::check($request->password, $user->password)
+                        ], 400);
+                    }
+
+                    $user->update([
+                        'password' => bcrypt($request->newPassword),
+                    ]);
+                }
 
                 $user = auth('api')->user();
 
