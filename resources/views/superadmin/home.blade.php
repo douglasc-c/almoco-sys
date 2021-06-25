@@ -424,6 +424,46 @@ Home -
                 <canvas id="mycanvas" style="max-width: 800px;"></canvas>
         </div>
     </div>
+    <!-- user tab -->
+    <div class="tab-pane fade" id="user-graph" role="tabpanel" aria-labelledby="user-menu-tab">
+        <form method="POST" action="{{URL::action('SuperAdmin\UsersController@createUser')}}">
+            @csrf
+            <div class="row" style="width: 100%;">
+                <div class="col-md-3">
+                    <div class="wd-200 mg-b-20" style="width: 100%">
+                        <p>Email</p>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                </div>
+                            </div>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email dousuario" style="border: 1px solid #93A8E5; color: black;">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="wd-200 mg-b-20" style="width: 100%">
+                        <p>Arms</p>
+                        <div class="input-group">
+                            <select name="arm" id="arm">
+                                <option value="undefined">Indefinido</option>
+                                @foreach($arms as $arm)
+                                    <option value="{{$arm->id}}">{{$arm->name}}</option>
+                                @endforeach
+                                    
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button type="submit" class="main-btn main-btn-color main-btn-width" style="margin-top: 34px">Cadastrar</button>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+
 </div>
 <!-- 
 section for modals 

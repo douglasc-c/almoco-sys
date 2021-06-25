@@ -33,5 +33,9 @@
           <img class="tab-link-icon-2" src="assets/admin-theme/images/restaurant/home/graph-icon.svg">
           Relatório
       </a>
+      <a class="nav-link nav-link-tab" id="user-menu-tab" data-toggle="tab" href="#user-graph" role="tab" aria-controls="user-graph" aria-selected="false">
+          <img class="tab-link-icon-2" src="assets/admin-theme/images/restaurant/home/graph-icon.svg">
+          Novo usuário
+      </a>
     </nav>
 </header>

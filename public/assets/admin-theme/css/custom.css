@@ -201,6 +201,9 @@ body {
 .nav-link-tab:nth-child(2n) {
   margin-left: 10px;
 }
+.nav-link-tab:nth-child(3n) {
+  margin-left: 10px;
+}
 .nav-tabs { border-bottom: none; }
 /*content*/
 .main-bg { background-color: #fff; }

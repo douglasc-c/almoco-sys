@@ -33,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail, JWTSubject
         'email_token',
         'first_access',
         'token_push',
+        'arm_id',
     ];
 
     /**

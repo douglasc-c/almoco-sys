@@ -56,13 +56,20 @@ class UsersController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         );
         $email_token = str_random(15);
-
+        
         if ($request->validate($rules)){
             $random_password = str_random(8);
+            $arm = User::find($request->arm);
+            if($arm){
+                $arm_id = $arm->id;
+            }else{
+                $arm_id = null;
+            }
             $user = User::create([
                 'email' => $request->email,
                 'password' => Hash::make($random_password),
-                'email_token' => $email_token
+                'email_token' => $email_token,
+                'arm_id' => $arm_id,
             ]);
 
             if($user){

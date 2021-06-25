@@ -135,7 +135,7 @@ class HomeController extends Controller
         $confirmed_menus = Menu::pluck('menu_day');
 
         #Justificativas
-        // $justifications = Justification::join('users', 'users.id', '=', 'justifications.user_id')->join('menus', 'menus.id', '=', 'justifications.menu_id')->whereDate('menus.menu_day', Carbon::today())->select('users.name', 'users.email', 'justifications.*')->get();
+        
         $justifications = Justification::with([
             'user:id,name,email',
             'food_order' => function($q) {
@@ -148,11 +148,17 @@ class HomeController extends Controller
                 });
             })
             ->get();
-        // dd($justifications);
 
-
-        // return view('superadmin.home', compact('orders', 'all_category', 'all_category_next_day', 'categoriesAll', 'all_category_next_two_day', 'all_category_yesterday', 'all_category_before_yesterday', 'confirmed_menus', 'categories_all'));
-        return view('superadmin.home', compact( 'confirmed_menus','categoriesAll', 'categories_all','orders_confirmed', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'justifications'));
+        #Arms
+        $arms = User::join('role_user', 'users.id', '=', 'role_user.user_id')
+        ->where('role_user.role_id', 3)
+        ->select([
+            'users.id',
+            'users.name',
+        ])->get();
+        // dd($arms);
+        
+        return view('superadmin.home', compact( 'confirmed_menus','categoriesAll', 'categories_all','orders_confirmed', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'justifications', 'arms'));
     }
 
     public function dataDetailMenu(Request $request){
