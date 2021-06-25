@@ -268,7 +268,8 @@ class HomeController extends Controller
         //                     ->whereDate('menus.menu_day', $date)
         //                     ->select('users.name', 'users.email', 'justifications.*')
         //                     ->get();
-
+        // $teste = 'teste';
+        // return response()->json( [$teste] );
         $justifications = Justification::with([
             'user:id,name,email',
             'food_order' => function($q) use ($date) {

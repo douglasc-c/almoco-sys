@@ -95,61 +95,72 @@ Home -
                     </div>
                 </div>
             </div>
-            <div class="col-xl-3">
+                <div class="col-xl-3">
                 @if(!$justifications->isEmpty())
+                    <div class="main-card-wrapper">
+                        <div class="justification-main-card">
+                            <div class="custom-card dark-card-bg main-card-padding main-card-header">
+                                <div class="row">
+                                    <div class="col-xl-12 custom-card-header-bloc">
+                                        <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="justifications">
+                                @foreach($justifications as $justification)
+                                    <div class="mb-4">
+                                        <div class="justification-header">
+                                            <a class="" data-toggle="collapse" href="#justification-collapse-{{$justification['id']}}" role="button" aria-expanded="false" aria-controls="justification-collapse-{{$justification['id']}}">
+                                                <h6 class="justification-email">{{$justification['user']['email']}}</h6>
+                                                <div class="row" style="justify-content: center;">
+                                                    <div class="col-lg-2" style="padding-right: 0px; text-align: right;">
+                                                        <i class="fa fa-circle active">
+                                                        </i>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <p>justificativa aceita<br>
+                                                        por (Nome Arms)</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="collapse multi-collapse justification-collapse-body" id="justification-collapse-{{$justification['id']}}">
+                                            <p>{{$justification['description']}}
+                                            </p>
+                                            <div class="check-justification-bloc">
+                                                <input type="checkbox" id="_checkbox" style="display: none;">
+                                                <label for="_checkbox">
+                                                <div id="tick_mark"></div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                @else
+                
                 <div class="main-card-wrapper">
-                    <div class="justification-main-card">
                         <div class="custom-card dark-card-bg main-card-padding main-card-header">
+                                <div class="row">
+                                    <div class="col-xl-12 custom-card-header-bloc">
+                                        <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
+                                    </div>
+                                </div>
+                            </div>
+                    <div id="justifications">
+                        {{-- <div class="custom-card dark-card-bg main-card-padding main-card-header">
                             <div class="row">
                                 <div class="col-xl-12 custom-card-header-bloc">
                                     <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
                                 </div>
                             </div>
-                        </div>
-                <div id="justifications">
-                  @foreach($justifications as $justification)
-                    <div class="mb-4">
-                        <div class="justification-header">
-                            <a class="" data-toggle="collapse" href="#justification-collapse-{{$justification['id']}}" role="button" aria-expanded="false" aria-controls="justification-collapse-{{$justification['id']}}">
-                                <h6 class="justification-email">{{$justification['user']['email']}}</h6>
-                                <div class="row" style="justify-content: center;">
-                                    <div class="col-lg-2" style="padding-right: 0px; text-align: right;">
-                                        <i class="fa fa-circle active">
-                                        </i>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <p>justificativa aceita<br>
-                                        por (Nome Arms)</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="collapse multi-collapse justification-collapse-body" id="justification-collapse-{{$justification['id']}}">
-                            <p>{{$justification['description']}}
-                            </p>
-                            <div class="check-justification-bloc">
-                                <input type="checkbox" id="_checkbox" style="display: none;">
-                                <label for="_checkbox">
-                                  <div id="tick_mark"></div>
-                                </label>
-                            </div>
-                        </div>
+                        </div> --}}
+                        <h6 class="no-justification">Nenhuma justificativa a ser exibida.</h6>
                     </div>
-                  @endforeach
                 </div>
-                </div>
-                </div>
-                @else
-                <div class="main-card-wrapper">
-                    <div class="custom-card dark-card-bg main-card-padding main-card-header">
-                        <div class="row">
-                            <div class="col-xl-12 custom-card-header-bloc">
-                                <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <h6 class="no-justification">Nenhuma justificativa a ser exibida.</h6>
-                </div>
+
                 @endif
                 <input type="hidden" id="month_value" name="month_value">
                 <input type="hidden" id="day_value" name="day_value">
@@ -629,6 +640,7 @@ function select_day(day, month, year){
     // $( "#date-"+year+"-"+month+"-"+day ).addClass( "menu-selected" );
     var date = year+'-'+month+'-'+day;
     $('#justifications').empty();
+
     $.ajax({
         type: "GET",
         url: "{{URL::action('SuperAdmin\HomeController@getJustifications')}}",
@@ -636,16 +648,19 @@ function select_day(day, month, year){
             date: date,
         },
         success: function (data) {
-          
+            // console.log(data[0]);
             if(data[0].length > 0){
+
                 $.each(data[0], function(index, item){
 
+                  
                     // $('#justifications').append(
-                    //     "<div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div>" 
+                    //     "<div class='justification-main-card'><div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div></div>" 
                     // );
                     $('#justifications').append(
                         "<div class='justification-main-card'><div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div></div>" 
                     );
+                
 
                 });
             }
@@ -670,13 +685,14 @@ function select_day(day, month, year){
 
 
 
-                $('#justifications').append(
-                    "<h6 class='no-justification'>Nenhuma justificativa a ser exibida.</h6>"      
-                ); 
+            
 
                 // $('#justifications').append(
                 //     "<div class='main-card-wrapper'><div class='custom-card dark-card-bg main-card-padding main-card-header'><div class='row'><div class='col-xl-12 custom-card-header-bloc'><h6 class='custom-card-header-title'>Acompanhar justificativa</h6></div></div></div><h6 class='no-justification'>Nenhuma justificativa a ser exibida.</h6></div>"      
                 // ); 
+                $('#justifications').append(
+                    "<div class='col-xl-12 custom-card-header-bloc'><h6 class='custom-card-header-title'>Acompanhar justificativa</h6></div></div></div><h6 class='no-justification'>Nenhuma justificativa a ser exibida.</h6></div>"      
+                ); 
             }
         }
     });

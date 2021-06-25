@@ -47,7 +47,6 @@ class FoodController extends Controller
     }
 
     public function createFood(Request $request){
-        // dd('over here');
 
         $rules = array(
             'name' => ['required', 'string'],
@@ -66,6 +65,27 @@ class FoodController extends Controller
 
         }
         return ['status' => false, 'message' => 'Erro ao criar alimento!'];
+    }
+
+    public function editFood(Request $request){
+        $rules = array(
+            'name' => ['required', 'string'],
+            'category' => ['required'],
+            'item_id' => ['required'],
+        );
+
+        if ($request->validate($rules)){
+
+            $food_name = Food::where('name', $request->name)->first();
+            if($food_name) return redirect()->back()->with('danger', 'Alimento já cadastrado!');
+
+            $food = Food::find($request->item_id)->update([
+                'name' => $request->name,
+            ]);
+            return ['status' => true];
+        }
+        return ['status' => false, 'message' => 'Erro ao alterar alimento!'];
+
     }
 
 }

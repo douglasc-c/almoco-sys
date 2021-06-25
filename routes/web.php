@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth', 'needsRole:restaurantuser'], 'prefix' => 
         Route::get('/foods', 'Restaurant\FoodController@foodIndex')->name('foods');
         Route::get('/food-categories/data/', 'Restaurant\FoodController@dataFoods')->name('foods-data');
         Route::post('/foods/new/', 'Restaurant\FoodController@createFood');
+        Route::post('/foods/edit', 'Restaurant\FoodController@editFood');
 
         #Menus
         Route::get('/menus', 'Restaurant\MenuController@index');

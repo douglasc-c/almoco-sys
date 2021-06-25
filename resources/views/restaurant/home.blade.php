@@ -144,17 +144,43 @@ Home -
                                                                     <p class="mb-0">{{$item->description}}</p>
                                                                 </div>
                                                                 <div class="col-xl-1 zeroed-col">
-                                                                    <a href="" class="menu-list-edit-item">
+                                                                    <a href="#" class="menu-list-edit-item" data-toggle="modal" data-target="#editFood{{$item->id}}">
                                                                        <i class="fa fa-pencil-square main-icon-size"></i>
                                                                     </a>
                                                                 </div>
-<!--                                                                 <div class="col-xl-1 zeroed-col">
-                                                                    <a href="" class="menu-list-delete-item">
-                                                                       <i class="fa fa-trash-o main-icon-size"></i>
-                                                                    </a>
-                                                                </div> -->
+                                                                  
                                                             </div>
                                                         </li>
+                                                          <!-- Modal edit -->
+                                                          <div class="modal fade" id="editFood{{$item->id}}" role="dialog" aria-hidden="true" style="position: absolute;">
+                                                            <div class="modal-dialog modal-dialog-centered">
+                                                                <div class="modal-content radius-30">
+                                                                    <div class="modal-header border-bottom-0" style="align-self: center;">
+                                                                    <h3 class="text-center">Editar {{$item->name}}</h3>
+                                                                        <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="modal-body p-5">
+                                                                        <form method="POST" action="{{URL::action('Restaurant\FoodController@editFood', $item->id)}}">
+                                                                            {{ csrf_field() }}
+                                                                            <div class="form-group">
+                                                                                <label>Nome do alimento</label>
+                                                                            <input type="text" name="name" id="edit_name{{$item->id}}" class="form-control form-control-lg radius-30" value="{{$item->name}}"/>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label>Categoria</label>
+                                                                                <input type="text" name="category" id="edit_category{{$item->id}}" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <button type="button" class="btn btn-light radius-30 btn-lg btn-block btn-edit" onclick="editFood('{{$item->id}}')">Alterar</button>
+                                                                            </div>
+                                                                            <hr/>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -188,10 +214,6 @@ Home -
                                                             <label>Nome do alimento</label>
                                                             <input type="text" name="name" id="name_{{$category['name']}}" class="form-control form-control-lg radius-30" placeholder="Digite o nome do alimento"/>
                                                         </div>
-<!--                                                         <div class="form-group">
-                                                            <label>Descrição</label>
-                                                            <input type="text" name="description" class="form-control form-control-lg radius-30" placeholder=""/>
-                                                        </div> -->
                                                         <div class="form-group">
                                                             <label>Categoria</label>
                                                             <input type="text" name="category" class="form-control form-control-lg radius-30" value="{{$category['name']}}" readonly/>
@@ -624,7 +646,11 @@ section for modals
 @endsection
 
 @section('styles')
-
+    <style>
+        .modal-backdrop.show{
+            display: none;
+        }
+    </style>
 @stop
 
 
@@ -719,6 +745,35 @@ section for modals
                 name: name,
                 description: description,
                 category: cat,
+            },
+		    success: function (data) {
+                if(data['status'] == true) location.reload();
+
+                if(data['status'] == false) {
+                    $('#alertError_'+category).show();
+                }
+                
+		    }
+		});
+    }
+
+</script>
+<script>
+    function editFood(id){
+        // alert(id);
+        var name = $('#edit_name'+id).val();
+        var category = $('#edit_category'+id).val();
+        var _token = $('#_token').val();
+        var item_id = id;
+
+        $.ajax({
+		    type: "POST",
+		    url: "{{URL::action('Restaurant\FoodController@editFood',)}}",
+		    data: {
+                _token: _token,
+                name: name,
+                category: category,
+                item_id: item_id,
             },
 		    success: function (data) {
                 if(data['status'] == true) location.reload();
@@ -895,6 +950,12 @@ $('[data-toggle="collapse"]').on('click',function(e){
     }
 });
 
+</script>
+
+<script>
+    $(".btn-edit").click(function() {
+        
+    });
 </script>
 
 
