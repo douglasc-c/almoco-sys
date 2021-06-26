@@ -118,8 +118,13 @@ Home -
                                                         </i>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <p>justificativa aceita<br>
-                                                        por (Nome Arms)</p>
+                                                        @if($justification->status_id == 6)
+                                                            <p>justificativa em analise ({{$justification->arm->name}})</p>
+                                                        @elseif($justification->status_id == 7)
+                                                            <p>justificativa rejeitada<br>por ({{$justification->arm->name}})</p>
+                                                        @elseif($justification->status_id == 8)
+                                                            <p>justificativa aceita<br>por ({{$justification->arm->name}})</p>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </a>
@@ -128,10 +133,9 @@ Home -
                                             <p>{{$justification['description']}}
                                             </p>
                                             <div class="check-justification-bloc">
-                                                <input type="checkbox" id="_checkbox" style="display: none;">
-                                                <label for="_checkbox">
-                                                <div id="tick_mark"></div>
-                                                </label>
+                                                @foreach(json_decode($justification->justification_img_link) as $img_link)
+                                                    <a href="{{$img_link}}" target="_blank"><img src="{{$img_link}}" style="width: 100px; height: 100px;"/></a>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -633,11 +637,9 @@ function select_day(day, month, year){
         $('#text_month').text('Maio 2021');
     }
 
-    
-    // alert(day);
     if(month < 10) month = '0'+month;
     if(day < 10) day = '0'+day; 
-    // $( "#date-"+year+"-"+month+"-"+day ).addClass( "menu-selected" );
+
     var date = year+'-'+month+'-'+day;
     $('#justifications').empty();
 

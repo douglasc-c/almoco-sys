@@ -639,6 +639,41 @@ section for modals
             </div>
         </div>
     <!-- end modal category resume -->
+
+    <!-- FRIDAY modal category -->
+    <div class="modal fade" id="modal_edit_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content radius-30">
+                <div class="modal-header border-bottom-0" style="align-self: center;">
+                    <h3 class="text-center">Editar cardápio do dia <span id="edit_day"></span></h3>
+                    <a type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </a>
+                </div>
+                <div class="modal-body modal-body-show-menu">
+                    {{-- @foreach($categories_all as $category)
+                        <h4>{{$category->name}}</h4>
+                        <div id="foods">
+
+                        </div>
+                    @endforeach --}}
+                    <form method="POST" action="{{URL::action('Restaurant\MenuController@editMenu')}}">
+                        <div id="foods">
+                            {{-- @foreach($categories as $category)
+                                <h3>{{$category->name}}</h3>
+                                @foreach($foods as $food)
+                                    @if($foods->food_category_id == $category->id)
+                                        <input type="checkbox" id="{{$food->name}}" name="checkbox[{{$food->name}}]"/>
+                                    @endif
+                                @endforeach
+                            @endforeach --}}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal category resume -->
     <input type="hidden" id="_token" value=" {{ csrf_token() }} ">
     <input type="hidden" id="date_year" value=" {{ $date['year'] }} ">
     <input type="hidden" id="date_month" value=" {{ $date['month']}} ">
@@ -756,7 +791,6 @@ section for modals
 		    }
 		});
     }
-
 </script>
 <script>
     function editFood(id){
@@ -785,7 +819,6 @@ section for modals
 		    }
 		});
     }
-
 </script>
 <script>
 function select_day(day, month, year){
@@ -797,6 +830,54 @@ function select_day(day, month, year){
         $('#text_month').text('Maio 2021');
     }
     $('#date-'+year+'-'+month+'-'+day).addClass("menu-selected");
+    if(month < 10) month = '0'+month;
+    if(day < 10) day = '0'+day; 
+
+    var date = year+'-'+month+'-'+day;
+    $.ajax({
+        type: "GET",
+        url: "{{URL::action('Restaurant\MenuController@getMenuEdit')}}",
+        data: {
+            date: date,
+        },
+        success: function (data) {
+            console.log(data);
+            
+            // console.log(data['menu_day']['menu_day']);
+            if(data['menu_day']){
+                
+                $('#edit_day').append(
+                data['menu_day']['menu_day'] 
+                );
+                $('#modal_edit_day').modal('show');  
+             
+                $.each(data['categories'], function(index, category){
+                    console.log(category);
+                    $('#foods').append(
+                        category['name']+"<br>"
+                    );
+                    $.each(data['foods'], function(index, food){
+                        
+                        if(food.food_category_id == category['id']){
+                            $('#foods').append(
+                               
+                                "<input class='ml-4' type='checkbox' id='"+food.name+"' name='checkbox["+food.name+"]'>"+food.name+"<br>"
+                            );
+                        }
+
+                        // $('#justifications').append(
+                        //     "<div class='justification-main-card'><div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div></div>" 
+                        // );
+
+                    });
+                });
+
+            }
+
+            
+          
+        }
+    });
 }
 
 function selectBubble(id) {

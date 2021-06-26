@@ -138,6 +138,7 @@ class HomeController extends Controller
         
         $justifications = Justification::with([
             'user:id,name,email',
+            'arm:id,name,email',
             'food_order' => function($q) {
                 return $q->with(['menu:id'])->select('id', 'menu_id');
             }
@@ -148,6 +149,8 @@ class HomeController extends Controller
                 });
             })
             ->get();
+            // dd($justifications);
+
 
         #Arms
         $arms = User::join('role_user', 'users.id', '=', 'role_user.user_id')

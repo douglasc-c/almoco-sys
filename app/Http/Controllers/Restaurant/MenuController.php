@@ -62,7 +62,7 @@ class MenuController extends Controller
     }
 
     public function createMenu(Request $request){
-        // dd($request);
+
         $rules = array(
             'day_value' => ['required'],
             'month_value' => ['required'],
@@ -73,7 +73,11 @@ class MenuController extends Controller
         $month_value = str_pad($request->month_value, 2, 0, STR_PAD_LEFT);
 
         $menu_day = $year.'-'.$month_value.'-'.$request->day_value;
-        // dd($menu_day);
+
+        if($menu_day < Carbon::today()){
+            return redirect()->back()->with('danger', 'Não é possível cadstar cardapios para data inferiores.');
+        }
+
         if ($request->validate($rules)){
 
             $foods_ids = [];
@@ -286,6 +290,29 @@ class MenuController extends Controller
         }
         
         return response()->json( [$dates, $amount] );
+    }
+
+    public function getMenuEdit(Request $request){
+        $menu_day = Menu::whereDate('menu_day', $request->date)->first();
+
+        if($menu_day){
+            if($menu_day->menu_day <= Carbon::today()){
+                return ['status' => false];
+            }
+            $categories = FoodCategory::all();
+            $itens_selected = $menu_day->foods_id;
+            $foods = Food::all();
+
+            return ['menu_day' => $menu_day, 'categories' => $categories, 'foods' => $foods];
+            // return ['itens_selected' => $itens_selected, 'categories' => $categories];
+        }
+        return ['status' => false];
+
+    }
+
+    public function editMenu(){
+        $teste = 'ok';
+        return $teste;
     }
 
 }

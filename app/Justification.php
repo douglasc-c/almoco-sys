@@ -25,6 +25,10 @@ class Justification extends Model
         return $this->hasOne(User::class, 'id', 'user_id');
     }
 
+    public function arm() {
+        return $this->hasOne(User::class, 'id', 'arm_id');
+    }
+
     public function status() {
         return $this->hasOne(Status::class, 'id', 'status_id');
     }
