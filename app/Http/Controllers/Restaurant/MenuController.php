@@ -318,19 +318,15 @@ class MenuController extends Controller
             if(isset($request->checkbox[$food->name]) && $request->checkbox[$food->name])array_push($foods_ids, $food->id);
         }
 
-        if(sizeof($foods_ids) == 0)   return redirect()->back()->with('danger', 'Não foi possível criar o menu');
-        // dd($menu_day);
-        $menu_find = Menu::where('menu_day', 'LIKE', '%'.$menu_day.'%')->first();
+        if(sizeof($foods_ids) == 0)   return redirect()->back()->with('danger', 'Não foi possível alterar o menu!');
 
-        if(!$menu_find){
-            $menu = Menu::create([
-                'menu_day' => $menu_day,
-                'foods_id' => json_encode($foods_ids)
-            ]);
+        $menu->foods_id = json_encode($foods_ids);
 
-            return redirect()->back()->with('success', 'Menu criado com sucesso!');
+
+        if($menu->save()){
+            return redirect()->back()->with('success', 'Menu alterado com sucesso!');
         }else {
-            return redirect()->back()->with('danger', 'Cardapio já cadastrado para essa data!');
+            return redirect()->back()->with('danger', 'Não foi possível alterar o menu!');
         }
     }
 

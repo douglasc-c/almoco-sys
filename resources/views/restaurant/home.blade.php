@@ -662,7 +662,7 @@ section for modals
                         <div id="foods">
                           
                         </div>
-                        <button type="submit">Alterar</button>
+                        <button type="submit" class="main-btn main-save-btn-green">Alterar Menu</button>
                     </form>
                 </div>
             </div>
