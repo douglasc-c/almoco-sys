@@ -658,16 +658,11 @@ section for modals
                         </div>
                     @endforeach --}}
                     <form method="POST" action="{{URL::action('Restaurant\MenuController@editMenu')}}">
+                        {{ csrf_field() }}
                         <div id="foods">
-                            {{-- @foreach($categories as $category)
-                                <h3>{{$category->name}}</h3>
-                                @foreach($foods as $food)
-                                    @if($foods->food_category_id == $category->id)
-                                        <input type="checkbox" id="{{$food->name}}" name="checkbox[{{$food->name}}]"/>
-                                    @endif
-                                @endforeach
-                            @endforeach --}}
+                          
                         </div>
+                        <button type="submit">Alterar</button>
                     </form>
                 </div>
             </div>
@@ -832,7 +827,8 @@ function select_day(day, month, year){
     $('#date-'+year+'-'+month+'-'+day).addClass("menu-selected");
     if(month < 10) month = '0'+month;
     if(day < 10) day = '0'+day; 
-
+    // 
+    $('#justifications').empty();
     var date = year+'-'+month+'-'+day;
     $.ajax({
         type: "GET",
@@ -841,18 +837,21 @@ function select_day(day, month, year){
             date: date,
         },
         success: function (data) {
-            console.log(data);
-            
-            // console.log(data['menu_day']['menu_day']);
+            // console.log(data);
             if(data['menu_day']){
                 
                 $('#edit_day').append(
-                data['menu_day']['menu_day'] 
+                    data['menu_day']['menu_day'] 
                 );
+
+                $('#foods').append(
+                    "<input type='hidden' name='menu_day' value='"+data['menu_day']['menu_day']+"'>"
+                );
+
                 $('#modal_edit_day').modal('show');  
              
                 $.each(data['categories'], function(index, category){
-                    console.log(category);
+                    // console.log(category);
                     $('#foods').append(
                         category['name']+"<br>"
                     );
@@ -860,18 +859,15 @@ function select_day(day, month, year){
                         
                         if(food.food_category_id == category['id']){
                             $('#foods').append(
-                               
-                                "<input class='ml-4' type='checkbox' id='"+food.name+"' name='checkbox["+food.name+"]'>"+food.name+"<br>"
+                                "<input class='ml-4' type='checkbox' id='edit_"+food.id+"' name='checkbox["+food.name+"]'>"+food.name+"<br>"
                             );
                         }
 
-                        // $('#justifications').append(
-                        //     "<div class='justification-main-card'><div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div></div>" 
-                        // );
-
                     });
                 });
-
+                $.each(data['itens_select'], function(index, food){
+                    $( "#edit_"+food ).prop( "checked", true );
+                });
             }
 
             

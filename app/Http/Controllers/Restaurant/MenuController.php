@@ -300,19 +300,38 @@ class MenuController extends Controller
                 return ['status' => false];
             }
             $categories = FoodCategory::all();
-            $itens_selected = $menu_day->foods_id;
+            $itens_selected = json_decode($menu_day->foods_id);
             $foods = Food::all();
 
-            return ['menu_day' => $menu_day, 'categories' => $categories, 'foods' => $foods];
+            return ['menu_day' => $menu_day, 'categories' => $categories, 'foods' => $foods, 'itens_select' => $itens_selected];
             // return ['itens_selected' => $itens_selected, 'categories' => $categories];
         }
         return ['status' => false];
 
     }
 
-    public function editMenu(){
-        $teste = 'ok';
-        return $teste;
+    public function editMenu(Request $request){
+        $menu = Menu::whereDate('menu_day', $request->menu_day)->first();
+        
+        $foods_ids = [];
+        foreach(Food::get() as $food){
+            if(isset($request->checkbox[$food->name]) && $request->checkbox[$food->name])array_push($foods_ids, $food->id);
+        }
+
+        if(sizeof($foods_ids) == 0)   return redirect()->back()->with('danger', 'Não foi possível criar o menu');
+        // dd($menu_day);
+        $menu_find = Menu::where('menu_day', 'LIKE', '%'.$menu_day.'%')->first();
+
+        if(!$menu_find){
+            $menu = Menu::create([
+                'menu_day' => $menu_day,
+                'foods_id' => json_encode($foods_ids)
+            ]);
+
+            return redirect()->back()->with('success', 'Menu criado com sucesso!');
+        }else {
+            return redirect()->back()->with('danger', 'Cardapio já cadastrado para essa data!');
+        }
     }
 
 }

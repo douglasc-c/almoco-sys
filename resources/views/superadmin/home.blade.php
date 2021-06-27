@@ -655,43 +655,13 @@ function select_day(day, month, year){
 
                 $.each(data[0], function(index, item){
 
-                  
-                    // $('#justifications').append(
-                    //     "<div class='justification-main-card'><div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div></div>" 
-                    // );
                     $('#justifications').append(
                         "<div class='justification-main-card'><div class='mb-4'><div class='justification-header'><a data-toggle='collapse' href='#justification-collapse-"+item.id+"' role='button' aria-expanded='false' aria-controls='justification-collapse-"+item.id+"'><h6 class='justification-email'>"+item.user.email+"</h6><div class='row' style='justify-content: center;'><div class='col-lg-2' style='padding-right: 0px; text-align: right;'><i class='fa fa-circle active'></i></div><div class='col-lg-6'><p>justificativa aceita<br>por (Nome Arms)</p></div></div></a></div><div class='collapse multi-collapse justification-collapse-body' id='justification-collapse-"+item.id+"'><p>"+item.description+"</p><div class='check-justification-bloc'><input type='checkbox' id='_checkbox' style='display: none;'><label for='_checkbox'><div id='tick_mark'></div></label></div></div></div></div>" 
                     );
-                
 
                 });
             }
             else{
-                // <div class="main-card-wrapper">
-                //     <div class="custom-card dark-card-bg main-card-padding main-card-header">
-                //         <div class="row">
-                //             <div class="col-xl-12 custom-card-header-bloc">
-                //                 <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
-                //             </div>
-                //         </div>
-                //     </div>
-                //     <h6 class="no-justification">Nenhuma justificativa a ser exibida.</h6>
-                // </div>
-
-
-
-                //             <div class="col-xl-12 custom-card-header-bloc">
-                //                 <h6 class="custom-card-header-title">Acompanhar justificativa</h6>
-                //             </div>
-
-
-
-
-            
-
-                // $('#justifications').append(
-                //     "<div class='main-card-wrapper'><div class='custom-card dark-card-bg main-card-padding main-card-header'><div class='row'><div class='col-xl-12 custom-card-header-bloc'><h6 class='custom-card-header-title'>Acompanhar justificativa</h6></div></div></div><h6 class='no-justification'>Nenhuma justificativa a ser exibida.</h6></div>"      
-                // ); 
                 $('#justifications').append(
                     "<div class='col-xl-12 custom-card-header-bloc'><h6 class='custom-card-header-title'>Acompanhar justificativa</h6></div></div></div><h6 class='no-justification'>Nenhuma justificativa a ser exibida.</h6></div>"      
                 ); 
