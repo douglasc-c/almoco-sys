@@ -39,7 +39,6 @@ class CheckFoodOrders extends Command
     public function handle()
     {
         $foodOrders = FoodOrder::join('menus', 'menus.id', '=', 'food_orders.menu_id')
-                        ->whereDate('menus.menu_day', today())
                         ->where('food_orders.status_id', 2)
                         ->update([
                             'food_orders.status_id' => 5
