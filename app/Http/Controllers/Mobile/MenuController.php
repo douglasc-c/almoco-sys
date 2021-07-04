@@ -70,16 +70,16 @@ class MenuController extends Controller
         $user = auth('api')->user();
         $menu = Menu::whereDate('menu_day', now()->format('Y-m-d'))->first();
         $today = today('America/Sao_Paulo')->addHours(15);
-        
+
         if (now('America/Sao_Paulo')->isAfter($today)) {
             return response()->json(["error" => "Ops, algo de errado", "message" => "Horário de almoço acabou"], 401);
         }
 
         if (isset($menu)) {
             $food_order = FoodOrder::where('status_id', 2)
-                                    ->where('user_id', $user->id)
-                                    ->where('menu_id', $menu->id)
-                                    ->first();
+                ->where('user_id', $user->id)
+                ->where('menu_id', $menu->id)
+                ->first();
             if (isset($food_order)) {
                 if (env('QRCODE_KEY') === $request->code) {
                     $food_order->update([
@@ -182,17 +182,17 @@ class MenuController extends Controller
 
             if ($request->file('img1') !== null) {
                 $file1 = $request->file('img1');
-                $filename1 = strtoupper(bin2hex(random_bytes(5))).'.png';
+                $filename1 = strtoupper(bin2hex(random_bytes(5))) . '.png';
                 $file_path1 = "/justification/$food_order->id/$user->id/$filename1";
                 $storage1 = Storage::disk('spaces')->put($file_path1, $file1, 'public');
-                $file_url1 = 'https://lunch.nyc3.digitaloceanspaces.com/'.$storage1;
+                $file_url1 = 'https://lunch.nyc3.digitaloceanspaces.com/' . $storage1;
             }
             if ($request->file('img2') !== null) {
                 $file2 = $request->file('img2');
-                $filename2 = strtoupper(bin2hex(random_bytes(5))).'.png';
+                $filename2 = strtoupper(bin2hex(random_bytes(5))) . '.png';
                 $file_path2 = "/justification/$food_order->id/$user->id/$filename2";
                 $storage2 = Storage::disk('spaces')->put($file_path2, $file2, 'public');
-                $file_url2 = 'https://lunch.nyc3.digitaloceanspaces.com/'.$storage2;
+                $file_url2 = 'https://lunch.nyc3.digitaloceanspaces.com/' . $storage2;
             }
 
             if ($file_url1 !== null) {
@@ -259,13 +259,13 @@ class MenuController extends Controller
                 $currentUser = User::find($food_order->user_id);
                 $menu = Menu::find($food_order->menu_id);
 
-                $currentUser->sendPush("A justificativa do dia ".Carbon::parse($menu->menu_day)->format('d/m/Y')." foi aceita.", $currentUser->token_push);
+                $currentUser->sendPush("A justificativa do dia " . Carbon::parse($menu->menu_day)->format('d/m/Y') . " foi aceita.", $currentUser->token_push);
             }
         }
 
         return response()->json(['message' => 'Ordens atualizadas com sucesso']);
     }
-    
+
     public function denyJustification(Request $request)
     {
         $user = auth('api')->user();
@@ -283,7 +283,7 @@ class MenuController extends Controller
                 $currentUser = User::find($food_order->user_id);
                 $menu = Menu::find($food_order->menu_id);
 
-                $currentUser->sendPush("A justificativa do dia ".Carbon::parse($menu->menu_day)->format('d/m/Y')." foi negada.", $currentUser->token_push);
+                $currentUser->sendPush("A justificativa do dia " . Carbon::parse($menu->menu_day)->format('d/m/Y') . " foi negada.", $currentUser->token_push);
             }
         }
 
@@ -294,29 +294,33 @@ class MenuController extends Controller
     {
         $menus = Menu::orderBy('menu_day', 'DESC')->get();
         $foods = Food::get();
-        
+
         foreach ($menus as $menu) {
-            foreach($foods as $food){
+            $menu->foods_id = json_decode($menu->foods_id);
+            foreach ($foods as $food) {
+                $all_foods[$food->id]['id'] = $food->id;
                 $all_foods[$food->id]['name'] = $food->name;
                 $all_foods[$food->id]['category_id'] = $food->food_category_id;
-                $all_foods[$food->id]['amount']= 0;
+                $all_foods[$food->id]['amount'] = 0;
             }
 
-            $food_orders = FoodOrder::where('menu_id', $menu->id)->where('status_id', 2)->get();
+            $food_orders = FoodOrder::where('menu_id', $menu->id)->get();
             $menu->count_orders = count($food_orders);
-            
-            foreach($food_orders as $order){
-                 $itens = json_decode($order->itens_selected);
-                 foreach($itens as $item){
-                     $food = Food::find($item);
-                     $all_foods[$food->id]['amount'] += 1;
-                 }
+
+            foreach ($food_orders as $order) {
+                $itens = json_decode($order->itens_selected);
+                foreach ($itens as $item) {
+                    $food = Food::find($item);
+                    $all_foods[$food->id]['amount'] += 1;
+                }
             }
-            
+
+            // dd($all_foods);
+
             $currentFoods = collect([]);
 
             foreach ($all_foods as $item) {
-                if ($item["amount"] > 0) {
+                if (in_array($item['id'], $menu->foods_id)) {
                     $currentFoods->add($item);
                 }
             }
