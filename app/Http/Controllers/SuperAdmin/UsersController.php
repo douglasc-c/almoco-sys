@@ -17,10 +17,10 @@ class UsersController extends Controller
     public function index(){
         // $user = new User;
         $user_id = 6;
-        $name = 'william moraes';
-        $password = '654321';
-        $cpf = '07552897902';
-        $billing_code = 'B45HDF67';
+        $name = '';
+        $password = '';
+        $cpf = '';
+        $billing_code = '';
         $new_user = User::completeRegister($user_id, $name, $password, $cpf, $billing_code);
 
         $title = 'Usuários';
@@ -58,7 +58,7 @@ class UsersController extends Controller
         $email_token = str_random(15);
         
         if ($request->validate($rules)){
-            $random_password = str_random(8);
+            $random_password = '123456';
             $arm = User::find($request->arm);
             if($arm){
                 $arm_id = $arm->id;
@@ -76,7 +76,7 @@ class UsersController extends Controller
                 $role = Defender::findRole('user');
                 $user->attachRole($role);
 
-                Mail::to($user->email)->send(new UserRegister($user, $random_password));
+                // Mail::to($user->email)->send(new UserRegister($user, $random_password));
 
                 return redirect()->back()->with('success', 'Usuário criado com sucesso!');
             }else{
