@@ -27,6 +27,7 @@ class UserController extends Controller
                 if ($user->first_access == 1 || $user->first_access == true) {
                     $user->update([
                         'password' => bcrypt($request->password),
+                        'name' => $request->name,
                         'cpf' => $request->cpf,
                         'billing_code' => $request->billing_code,
                         'first_access' => 0,
