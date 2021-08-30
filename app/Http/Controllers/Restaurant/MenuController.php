@@ -73,6 +73,14 @@ class MenuController extends Controller
         $month_value = str_pad($request->month_value, 2, 0, STR_PAD_LEFT);
 
         $menu_day = $year.'-'.$month_value.'-'.$request->day_value;
+        if($request->day_value < 10){
+            $day = '0'.$request->day_value;
+        }else{
+            $day = $request->day_value;
+        }
+        $menu_day_verify = $year.'-'.$month_value.'-'. $day;
+        
+        if($menu_day_verify <= today()) return redirect()->back()->with('danger', 'Não é possivel inserir o cardápio para esse dia!');
 
         if($menu_day < Carbon::today()){
             return redirect()->back()->with('danger', 'Não é possível cadstar cardapios para data inferiores.');
@@ -86,7 +94,7 @@ class MenuController extends Controller
             }
 
             if(sizeof($foods_ids) == 0)   return redirect()->back()->with('danger', 'Não foi possível criar o menu');
-            // dd($menu_day);
+
             $menu_find = Menu::where('menu_day', 'LIKE', '%'.$menu_day.'%')->first();
 
             if(!$menu_find){
