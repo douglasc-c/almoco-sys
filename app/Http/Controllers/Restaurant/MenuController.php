@@ -75,6 +75,8 @@ class MenuController extends Controller
         $menu_day = $year.'-'.$month_value.'-'.$request->day_value;
         if($request->day_value < 10){
             $day = '0'.$request->day_value;
+        }else{
+            $day = $request->day_value;
         }
         $menu_day_verify = $year.'-'.$month_value.'-'. $day;
         
