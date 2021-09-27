@@ -33,6 +33,14 @@ body {
 .main-body {
   height: 81.6vh;
 }
+.custom-close-btn {
+    position: absolute;
+    right: 20px;
+    top: 25px;
+}
+.modal-editday-header {
+    padding-top: 20px;
+}
 /*auth page*/
 .auth-bg {
   background: linear-gradient(45deg, rgba(187,199,239,1) 35%, rgba(255,255,255,1) 65%);
@@ -295,7 +303,7 @@ body {
 .custom-collapse-arrow {
 	font-size: 28px;
     position: absolute;
-    right: 3.3%;
+    right: 7.3%;
     top: 10.5px;
 }
 .custom-collapse-arrow::after {
@@ -310,7 +318,7 @@ body {
 .custom-collapse-arrow-2 {
   font-size: 28px;
     position: absolute;
-    right: 7.3%;
+    right: 9.3%;
 }
 .custom-collapse-arrow-2::after {
     content: "\f106";
@@ -563,6 +571,42 @@ body {
     font-family: raleway-bold, sans-serif;
     font-size: 22px;
 }
+/*editday modal*/
+.modal_edit_day_category_title { font-weight: bold; }
+.modal_edit_day_food_label {
+    display: block;
+    margin-left: 1rem;
+    margin-top: .5rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+.modal_edit_day_food_label:hover {
+    -webkit-transform: scale(1.01);
+    -ms-transform: scale(1.01);
+    transform: scale(1.01);
+}
+.modal_edit_day_food_checkbox {
+    width: 1.3em;
+    height: 1.3em;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+.modal_edit_day_food_checkbox:checked {
+    background-color: #28B43C;
+}
+.modal_edit_day_food_name {
+    text-transform: capitalize;
+    margin-left: 15px;
+    font-weight: 500;
+}
+
+/*end*/
 /*.active { color: #28B43C; }
 .inative { color: #FF5448; }
 .pending { color: #ECCC77; }*/

@@ -641,14 +641,15 @@ section for modals
     <!-- end modal category resume -->
 
     <!-- FRIDAY modal category -->
-    <div class="modal fade" id="modal_edit_day" tabindex="-1" aria-labelledby="modal_add-menuLabel" role="dialog" aria-hidden="true">
+    <div class="modal fade" id="modal_edit_day" tabindex="-1" aria-labelledby="modal_edit_day-menuLabel" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content radius-30">
-                <div class="modal-header border-bottom-0" style="align-self: center;">
-                    <h3 class="text-center">Editar cardápio do dia <span id="edit_day"></span></h3>
-                    <a type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </a>
+                <a type="button" class="close custom-close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+                <div class="modal-editday-header">
+                    <h3 class="text-center">Editar cardápio do dia</h3>
+                    <h4 class="text-center"><span id="edit_day"></span></h4>
                 </div>
                 <div class="modal-body modal-body-show-menu">
                     {{-- @foreach($categories_all as $category)
@@ -662,7 +663,11 @@ section for modals
                         <div id="foods">
                           
                         </div>
-                        <button type="submit" class="main-btn main-save-btn-green">Alterar Menu</button>
+                        <div class="row mt-5">
+                            <div class="col-xl-12 text-center">
+                                <button type="submit" class="main-btn main-save-btn-green">Alterar Menu</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -853,17 +858,24 @@ function select_day(day, month, year){
                 $.each(data['categories'], function(index, category){
                     // console.log(category);
                     $('#foods').append(
-                        category['name']+"<br>"
+                        "<h6 class='modal_edit_day_category_title'>"+category['name']+"</h6>"
                     );
+                    let existFoodCategory = false;
+
                     $.each(data['foods'], function(index, food){
-                        
                         if(food.food_category_id == category['id']){
+                            existFoodCategory = true;
                             $('#foods').append(
-                                "<input class='ml-4' type='checkbox' id='edit_"+food.id+"' name='checkbox["+food.name+"]'>"+food.name+"<br>"
+                                "<label for='edit_"+food.id+"' class='modal_edit_day_food_label'>"+"<input class='modal_edit_day_food_checkbox' type='checkbox' id='edit_"+food.id+"' name='checkbox["+food.name+"]'>"+"<span class='modal_edit_day_food_name'>"+food.name+"</span>"+"</label>"
                             );
                         }
-
                     });
+                    if (!existFoodCategory) {
+                        $('#foods').append(
+                            "<p>Nenhum item selecionado.</p>"
+                        );
+                    }
+
                 });
                 $.each(data['itens_select'], function(index, food){
                     $( "#edit_"+food ).prop( "checked", true );
